@@ -25,606 +25,199 @@
     }
 
     :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8f9fa;
-      --bg-card: #ffffff;
-      --bg-input: #f1f3f5;
-      --text-primary: #1a1a1a;
-      --text-secondary: #6b7280;
-      --text-muted: #9ca3af;
+      /* Premium Dark Palette */
+      --bg-primary: #0f1115;
+      --bg-surface: #181b21;
+      --bg-surface-hover: #22262e;
+      --bg-glass: rgba(24, 27, 33, 0.7);
+
+      --text-primary: #ffffff;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+
       --accent: #ec4899;
-      --accent-hover: #db2777;
-      --accent-glow: rgba(236, 72, 153, 0.2);
+      --accent-gradient: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+      --accent-glow: rgba(236, 72, 153, 0.3);
+
       --success: #10b981;
-      --border: #e5e7eb;
-      --border-light: #f3f4f6;
-      --gradient-primary: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
-      --gradient-card: linear-gradient(135deg, #fdf2f8 0%, #ffffff 100%);
+      --danger: #ef4444;
+
+      --border: #2d313a;
+      --border-light: #374151;
+
+      /* Spacing & Radius */
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+
+      --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.3);
+      --shadow-surface: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
     }
 
     html,
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
     }
 
     .container {
-      max-width: 440px;
+      max-width: 480px;
       margin: 0 auto;
-      padding: 24px 20px;
+      padding: 20px 16px;
       padding-bottom: 120px;
     }
 
-    /* Header */
+    /* --- Typography --- */
+    h1,
+    h2,
+    h3 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .info-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* --- Header (Welcome) --- */
     .header {
       text-align: center;
-      padding: 32px 0 40px;
+      padding: 40px 0 48px;
     }
 
     .header .logo {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 3px;
+      font-size: 11px;
       text-transform: uppercase;
+      letter-spacing: 4px;
       color: var(--accent);
-      margin-bottom: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
     }
 
     .header h1 {
       font-size: 32px;
-      font-weight: 800;
       color: var(--text-primary);
-      letter-spacing: -0.5px;
     }
 
     .header p {
-      font-size: 15px;
-      color: var(--text-secondary);
       margin-top: 8px;
     }
 
-    /* Compact App Bar */
-    .app-bar {
-      position: sticky;
-      top: 0;
-      z-index: 90;
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-    }
-
-    .app-bar-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .hamburger-btn {
-      width: 40px;
-      height: 40px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      padding: 0;
-    }
-
-    .hamburger-btn span {
-      width: 20px;
-      height: 2px;
-      background: var(--text-primary);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
-    .app-bar-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .app-bar-subtitle {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .app-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .app-bar-progress {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    /* Drawer */
-    .drawer {
-      position: fixed;
-      top: 0;
-      left: -280px;
-      width: 280px;
-      height: 100vh;
-      background: var(--bg-card);
-      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
-      z-index: 100;
-      transition: left 0.3s ease-out;
-      overflow-y: auto;
-    }
-
-    .drawer.open {
-      left: 0;
-    }
-
-    .drawer-backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 99;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
-    .drawer-backdrop.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .drawer-header {
-      padding: 24px 20px;
-      border-bottom: 1px solid var(--border);
-      background: var(--gradient-primary);
-      color: white;
-    }
-
-    .drawer-header h2 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .drawer-header p {
-      font-size: 13px;
-      opacity: 0.9;
-    }
-
-    .drawer-menu {
-      padding: 16px 0;
-    }
-
-    .drawer-menu-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 20px;
-      cursor: pointer;
-      transition: background 0.2s;
-      border-left: 3px solid transparent;
-    }
-
-    .drawer-menu-item:hover,
-    .drawer-menu-item.active {
-      background: var(--bg-secondary);
-      border-left-color: var(--accent);
-    }
-
-    .drawer-menu-icon {
-      font-size: 20px;
-      width: 24px;
-      text-align: center;
-    }
-
-    .drawer-menu-label {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-
-    .drawer-section-title {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-muted);
-      padding: 16px 20px 8px;
-    }
-
-    /* History View */
-    .history-week-group {
-      margin-bottom: 24px;
-    }
-
-    .history-week-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
-      padding-left: 4px;
-    }
-
-    .history-item {
-      padding: 12px 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 8px;
-    }
-
-    /* Weight View */
-    .weight-item {
-      padding: 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 12px;
-    }
-
-    .weight-history-list {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px dashed var(--border-light);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .weight-entry {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .trend-up {
-      color: var(--success);
-    }
-
-    .trend-down {
-      color: #ef4444;
-    }
-
-    /* Projects View */
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 12px;
-      position: relative;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .project-card.active-project {
-      border: 2px solid var(--primary);
-      background: linear-gradient(to right, rgba(255, 107, 107, 0.05), rgba(255, 255, 255, 0));
-    }
-
-    .project-card:active {
-      transform: scale(0.98);
-    }
-
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .project-name {
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--text-primary);
-    }
-
-    .project-meta {
-      font-size: 13px;
-      color: var(--text-secondary);
-      display: flex;
-      gap: 12px;
-    }
-
-    .project-active-badge {
-      font-size: 11px;
-      background: var(--primary);
-      color: white;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-weight: 600;
-    }
-
-    .fab-add {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 56px;
-      height: 56px;
-      background: var(--primary);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
-      z-index: 90;
-      cursor: pointer;
-    }
-
-    /* Modal */
-    .modal-backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-backdrop.active {
-      display: flex;
-    }
-
-    .modal-content {
-      background: var(--bg-card);
-      width: 90%;
-      max-width: 400px;
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .modal-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 15px;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .btn-secondary {
-      background: var(--bg-alt);
-      color: var(--text-primary);
-    }
-
-    /* Cards */
+    /* --- Components: Cards --- */
     .card {
-      background: var(--bg-card);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px;
+      border-radius: var(--radius-md);
+      padding: 20px;
       margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      box-shadow: var(--shadow-surface);
+      /* Glassmorphism hint */
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:active {
+      transform: scale(0.995);
     }
 
     .card-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      font-size: 11px;
       text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .card-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-    }
-
-    /* Input Fields */
-    .input-group {
-      position: relative;
-    }
-
-    .input-group input {
-      width: 100%;
-      font-family: 'Inter', sans-serif;
-      font-size: 36px;
-      font-weight: 700;
-      text-align: center;
-      padding: 20px;
-      background: var(--bg-input);
-      border: 2px solid transparent;
-      border-radius: 12px;
-      color: var(--text-primary);
-      outline: none;
-      transition: all 0.2s;
-    }
-
-    .input-group input::placeholder {
-      color: var(--text-muted);
-    }
-
-    .input-group input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-glow);
-    }
-
-    .input-group .unit {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
       font-size: 16px;
       font-weight: 600;
-      color: var(--text-muted);
+      margin-bottom: 16px;
+      color: var(--text-primary);
     }
 
-    /* Goal Buttons */
-    .goal-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .goal-btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      background: transparent;
+    /* --- Components: Buttons --- */
+    button {
+      font-family: inherit;
+      border: none;
       cursor: pointer;
-      transition: all 0.2s;
-      text-align: left;
+      user-select: none;
     }
 
-    .goal-btn:active {
-      transform: scale(0.98);
-    }
-
-    .goal-btn.selected {
-      border-color: var(--accent);
-      background: rgba(59, 130, 246, 0.1);
-    }
-
-    .goal-btn .icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .goal-btn[data-goal="kilo_verme"] .icon {
-      background: linear-gradient(135deg, #f97316, #ea580c);
-    }
-
-    .goal-btn[data-goal="sikilasma"] .icon {
-      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    }
-
-    .goal-btn[data-goal="kas"] .icon {
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-    }
-
-    .goal-btn[data-goal="kol"] .icon {
-      background: linear-gradient(135deg, #06b6d4, #0891b2);
-    }
-
-    .goal-btn[data-goal="karin"] .icon {
-      background: linear-gradient(135deg, #10b981, #059669);
-    }
-
-    .goal-btn[data-goal="bacak"] .icon {
-      background: linear-gradient(135deg, #ec4899, #db2777);
-    }
-
-    .goal-btn .label {
-      font-size: 14px;
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      font-size: 15px;
       font-weight: 600;
-      color: var(--text-primary);
-      line-height: 1.3;
-    }
-
-    .goal-btn .check {
-      display: none;
-      margin-left: auto;
-      width: 20px;
-      height: 20px;
-      background: var(--accent);
-      border-radius: 50%;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .goal-btn .check svg {
-      width: 12px;
-      height: 12px;
-      stroke: white;
-      stroke-width: 3;
-    }
-
-    .goal-btn.selected .check {
-      display: flex;
-    }
-
-    .goal-btn * {
-      pointer-events: none;
-    }
-
-    /* Day Buttons */
-    .day-grid {
-      display: flex;
-      gap: 10px;
-    }
-
-    .day-btn {
-      flex: 1;
-      padding: 20px 0;
-      font-family: 'Inter', sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      background: transparent;
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .day-btn:active {
-      transform: scale(0.98);
-    }
-
-    .day-btn.selected {
-      border-color: var(--accent);
-      background: var(--accent);
+      background: var(--accent-gradient);
       color: white;
+      box-shadow: 0 4px 15px var(--accent-glow);
+      transition: all 0.2s ease;
     }
+
+    .btn:active {
+      transform: scale(0.98);
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      box-shadow: none;
+    }
+
+    .btn-reset {
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 20px;
+      text-decoration: underline;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* --- App Bar (Hidden here, defined below) --- */
+    .app-bar {
+      display: none;
+    }
+
 
     /* Fixed Bottom Button */
     .fixed-bottom {
@@ -1072,31 +665,37 @@
       text-align: center;
     }
 
-    /* Timer (Floating) */
+    /* --- Timer Float --- */
     .timer-float {
       position: fixed;
-      bottom: 80px;
+      bottom: 100px;
       right: 20px;
-      background: var(--bg-card);
-      border: 2px solid var(--border);
-      border-radius: 16px;
+      background: rgba(15, 17, 21, 0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
       padding: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      z-index: 99;
-      min-width: 140px;
-      display: none;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      z-index: 80;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transform: translateY(200px);
+      transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     }
 
     .timer-float.active {
-      display: block;
+      transform: translateY(0);
+      display: flex;
     }
 
     .timer-display {
+      font-family: monospace;
       font-size: 24px;
       font-weight: 700;
-      color: var(--accent);
-      text-align: center;
-      margin-bottom: 8px;
+      color: var(--text-primary);
+      letter-spacing: 2px;
     }
 
     .timer-controls {
@@ -1105,25 +704,189 @@
     }
 
     .timer-btn {
-      flex: 1;
-      padding: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      border: 1px solid var(--border);
+      padding: 6px 12px;
       border-radius: 8px;
-      background: var(--bg-input);
-      color: var(--text-primary);
-      cursor: pointer;
-    }
-
-    .timer-btn:active {
-      transform: scale(0.95);
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--bg-surface-hover);
+      color: var(--text-secondary);
     }
 
     .timer-btn.primary {
       background: var(--accent);
-      border-color: var(--accent);
       color: white;
+    }
+
+    /* --- History & Weight Views --- */
+    .history-week-group {
+      margin-bottom: 24px;
+    }
+
+    .history-week-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .history-date {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .history-info {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* --- Projects View --- */
+    .project-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .project-card.active-project {
+      border: 1px solid var(--accent);
+      background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.1), transparent);
+    }
+
+    .project-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .project-meta {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .project-active-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Fab Add Button */
+    .fab-add {
+      position: fixed;
+      bottom: 32px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      box-shadow: 0 4px 20px var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      z-index: 90;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    .fab-add:active {
+      transform: scale(0.9);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      width: 90%;
+      max-width: 400px;
+      background: #181b21;
+      border: 1px solid var(--border);
+      padding: 32px;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: white;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      background: #22262e;
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 12px;
+      color: white;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .modal-actions .btn {
+      flex: 1;
+    }
+
+    /* Summary Badge */
+    .summary-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      margin-right: 8px;
     }
 
     /* Today Button */
@@ -1279,444 +1042,457 @@
         <div class="card-label">4 / 5</div>
         <div class="card-title">Ne istiyorsun?</div>
         <p class="info-text">Birden fazla seçebilirsin</p>
-        <div class="goal-grid">
-          <button class="goal-btn" data-goal="kilo_verme">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                stroke-linecap="round">
-                <path d="M12 2v20M2 12h20" />
-              </svg>
-            </div>
-            <span class="label">Kilo Vermek</span>
-            <span class="check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12l5 5L20 7" stroke="currentColor" />
-              </svg>
-            </span>
-          </button>
-          <button class="goal-btn" data-goal="sikilasma">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                stroke-linecap="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6v6l4 2" />
-              </svg>
-            </div>
-            <span class="label">Sıkılaşmak</span>
-            <span class="check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12l5 5L20 7" stroke="currentColor" />
-              </svg>
-            </span>
-          </button>
-          <button class="goal-btn" data-goal="kas">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                stroke-linecap="round">
-                <path d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </div>
-            <span class="label">Kas Yapmak</span>
-            <span class="check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12l5 5L20 7" stroke="currentColor" />
-              </svg>
-            </span>
-          </button>
-          <button class="goal-btn" data-goal="kol">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                stroke-linecap="round">
-                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-                <line x1="4" y1="22" x2="4" y2="15" />
-              </svg>
-            </div>
-            <span class="label">Kol</span>
-            <span class="check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12l5 5L20 7" stroke="currentColor" />
-              </svg>
-            </span>
-          </button>
-          <button class="goal-btn" data-goal="karin">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                stroke-linecap="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <line x1="3" y1="9" x2="21" y2="9" />
-                <line x1="9" y1="21" x2="9" y2="9" />
-              </svg>
-            </div>
-            <span class="label">Karın</span>
-            <span class="check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12l5 5L20 7" stroke="currentColor" />
-              </svg>
-            </span>
-          </button>
-          <button class="goal-btn" data-goal="bacak">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                stroke-linecap="round">
-                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z" />
-              </svg>
-            </div>
-            <span class="label">Bacak & Kalça</span>
-            <span class="check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12l5 5L20 7" stroke="currentColor" />
-              </svg>
-            </span>
-          </button>
-          <button class="goal-btn" data-goal="kondisyon">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                stroke-linecap="round">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-              </svg>
-            </div>
-            <span class="label">Kondisyon</span>
-            <span class="check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12l5 5L20 7" stroke="currentColor" />
-              </svg>
-            </span>
-          </button>
-          <button class="goal-btn" data-goal="esneklik">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                stroke-linecap="round">
-                <circle cx="12" cy="7" r="4" />
-                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
-              </svg>
-            </div>
-            <span class="label">Esneklik</span>
-            <span class="check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12l5 5L20 7" stroke="currentColor" />
-              </svg>
-            </span>
-          </button>
-          <button class="goal-btn" data-goal="dayaniklilik">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                stroke-linecap="round">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
-            </div>
-            <span class="label">Dayanıklılık</span>
-            <span class="check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12l5 5L20 7" stroke="currentColor" />
-              </svg>
-            </span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Days per Week -->
-      <div class="card">
-        <div class="card-label">5 / 5</div>
-        <div class="card-title">Haftada kaç gün?</div>
-        <div class="day-grid">
-          <button class="day-btn" data-days="2">2</button>
-          <button class="day-btn" data-days="3">3</button>
-          <button class="day-btn" data-days="4">4</button>
-          <button class="day-btn" data-days="5">5</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Program Section -->
-    <div id="program-section">
-      <div class="program-header">
-        <h2>Senin Programın</h2>
-        <div class="program-summary" id="program-summary"></div>
-      </div>
-      <div id="days-container"></div>
-
-      <div class="motivation-box">
-        <h3>Hazırsın!</h3>
-        <p>Bugün harika iş çıkaracaksın. Başarılar!</p>
-      </div>
-
-      <button class="btn-reset" onclick="resetApp()">Baştan Başla</button>
-    </div>
-  </div>
-
-  <!-- Fixed Bottom Button -->
-  <div class="fixed-bottom" id="fixed-bottom">
-    <button class="btn-primary" id="show-program-btn" onclick="showProgram()">
-      Programımı Göster
-    </button>
-  </div>
-
-  <!-- Floating Timer -->
-  <div class="timer-float" id="timer-widget">
-    <div class="timer-display" id="timer-display">00:00</div>
-    <div class="timer-controls">
-      <button class="timer-btn primary" id="timer-start" onclick="startTimer()">Başlat</button>
-      <button class="timer-btn" id="timer-stop" onclick="stopTimer()">Durdur</button>
-      <button class="timer-btn" id="timer-reset" onclick="resetTimer()">Sıfırla</button>
-    </div>
-  </div>
-
-  <!-- History Section -->
-  <!-- History Section -->
-  <div id="history-section" style="display: none;" class="container">
-    <div class="card">
-      <div class="card-title">Antrenman Geçmişi</div>
-      <div id="history-container">
-        <!-- History items will be rendered here -->
-        <p style="text-align: center; color: var(--text-secondary); padding: 20px;">Henüz geçmiş kaydı yok.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Weights Section -->
-  <div id="weights-section" style="display: none;" class="container">
-    <div class="card">
-      <div class="card-title">Ağırlık Geçmişi</div>
-      <div id="weights-container">
-        <!-- Weight items will be rendered here -->
-        <p style="text-align: center; color: var(--text-secondary); padding: 20px;">Henüz ağırlık kaydı yok.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Projects Section -->
-  <div id="projects-section" style="display: none; padding-top: 60px; padding-bottom: 100px;">
-    <div class="card-title">Projelerim</div>
-    <div id="projects-container" style="padding: 0 20px;">
-      <!-- Projects rendered here -->
-    </div>
-    <div class="fab-add" onclick="openProjectModal()">+</div>
-  </div>
-
-  <!-- CREATE PROJECT MODAL -->
-  <div id="project-modal" class="modal-backdrop">
-    <div class="modal-content">
-      <div class="modal-title">Yeni Proje Oluştur</div>
-      <div class="form-group">
-        <label>Proje Adı</label>
-        <input type="text" id="project-name" class="form-input" placeholder="Örn: Yaz Hazırlık">
-      </div>
-      <div class="form-group">
-        <label>Açıklama / Not</label>
-        <input type="text" id="project-note" class="form-input" placeholder="Örn: Bulk dönemi">
-      </div>
-      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">
-        ⚠️ Şu anki program ayarların (seçili hedefler, gün sayısı) bu projeye kaydedilecek.
-      </p>
-      <div class="modal-actions">
-        <button class="btn btn-secondary" onclick="closeProjectModal()">İptal</button>
-        <button class="btn" onclick="saveProject()">Kaydet</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ============================================
-    // EXERCISE DATA
-    // ============================================
-    const exercises = [
-      // GÖĞÜS
-      { id: "bench_press", name: "Barbell Bench Press", goals: ["kas", "sikilasma", "guc"], target: "Göğüs, Ön Omuz", region: "chest", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "cHwutxa3XLY", howToLink: "https://www.youtube.com/watch?v=cHwutxa3XLY", tip: "Barı göğüs hizasından yukarı it" },
-      { id: "incline_press", name: "Incline Bench Press", goals: ["kas", "guc"], target: "Üst Göğüs, Ön Omuz", region: "chest", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "3upIH4tyAQE", howToLink: "https://www.youtube.com/watch?v=3upIH4tyAQE", tip: "Üst göğüsü hedefle" },
-      { id: "dumbbell_fly", name: "Dumbbell Fly", goals: ["sikilasma", "kas"], target: "Göğüs İzolasyon", region: "chest", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "Gth_I4CEAB0", howToLink: "https://www.youtube.com/watch?v=Gth_I4CEAB0", tip: "Göğsü esnet ve sıkıştır" },
-      { id: "cable_crossover", name: "Cable Crossover", goals: ["sikilasma"], target: "Göğüs İç", region: "chest", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "2E1x1MvR9qo", howToLink: "https://www.youtube.com/watch?v=2E1x1MvR9qo", tip: "Sürekli gerginlik altında tut" },
-      { id: "chest_press_machine", name: "Chest Press Makinesi", goals: ["kas", "sikilasma"], target: "Göğüs", region: "chest", type: "machine", sets: 3, reps: "10-12", rest: 60, videoId: "2wFMkurVmrQ", howToLink: "https://www.youtube.com/watch?v=2wFMkurVmrQ", tip: "Güvenli ve kontrollü hareket" },
-      { id: "pushup", name: "Push-Up", goals: ["kilo_verme", "sikilasma", "kas", "kol"], target: "Göğüs & Kol", region: "chest", type: "body_weight", sets: 3, reps: "15-20", rest: 60, videoId: "RyzxRrBHn7k", howToLink: "https://www.youtube.com/watch?v=RyzxRrBHn7k", tip: "Vücudun düz bir çizgi olmalı" },
-      { id: "dips", name: "Dips", goals: ["kas", "sikilasma", "kol"], target: "Alt Göğüs & Triceps", region: "chest", type: "body_weight", sets: 3, reps: "8-12", rest: 90, videoId: "H9G1wL4yujU", howToLink: "https://www.youtube.com/watch?v=H9G1wL4yujU", tip: "Paralel barlarda kontrollü in-çık" },
-      { id: "decline_bench", name: "Decline Bench Press", goals: ["kas"], target: "Alt Göğüs", region: "chest", type: "free_weight", sets: 3, reps: "8-12", rest: 90, videoId: "0xRvl4Qv3ZY", howToLink: "https://www.youtube.com/watch?v=0xRvl4Qv3ZY", tip: "Alt göğüsü doldurmak için" },
-      { id: "machine_pec_deck", name: "Machine Pec Deck", goals: ["sikilasma"], target: "Göğüs İzolasyon", region: "chest", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "eGjt4lk6g34", howToLink: "https://www.youtube.com/watch?v=eGjt4lk6g34", tip: "İzole sıkıştırma hareketi" },
-      { id: "incline_dumbbell_fly", name: "Incline Dumbbell Fly", goals: ["sikilasma"], target: "Üst Göğüs", region: "chest", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "ajdFwa-qM98", howToLink: "https://www.youtube.com/watch?v=ajdFwa-qM98", tip: "Üst göğsü şekillendir" },
-      { id: "smith_bench", name: "Smith Machine Bench Press", goals: ["kas"], target: "Göğüs", region: "chest", type: "machine", sets: 4, reps: "8-12", rest: 90, videoId: "5p2J6oKJ2iw", howToLink: "https://www.youtube.com/watch?v=5p2J6oKJ2iw", tip: "Güvenli press" },
-
-      // SIRT
-      { id: "pullup", name: "Pull-Up", goals: ["kas", "kilo_verme", "sikilasma"], target: "Sırt & Biceps", region: "back", type: "body_weight", sets: 3, reps: "6-10", rest: 90, videoId: "eu3pSe55-Qg", howToLink: "https://www.youtube.com/watch?v=eu3pSe55-Qg", tip: "Üst vücut çekiş gücü" },
-      { id: "lat_pulldown", name: "Lat Pulldown", goals: ["kas", "sikilasma"], target: "Kanat Kasları", region: "back", type: "machine", sets: 4, reps: "10-12", rest: 60, videoId: "hEt8rkd7-Gk", howToLink: "https://www.youtube.com/watch?v=hEt8rkd7-Gk", tip: "Barfiks alternatifi" },
-      { id: "barbell_row", name: "Barbell Row", goals: ["kas", "sikilasma", "guc"], target: "Orta Sırt", region: "back", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "-lGIRM-tbDk", howToLink: "https://www.youtube.com/watch?v=-lGIRM-tbDk", tip: "Sırt kalınlığı ve güç" },
-      { id: "seated_cable_row", name: "Seated Cable Row", goals: ["sikilasma", "kas"], target: "Orta Sırt", region: "back", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "DOlLdf20xf0", howToLink: "https://www.youtube.com/watch?v=DOlLdf20xf0", tip: "Oturarak çekiş hareketi" },
-      { id: "hyperextension", name: "Hyperextension", goals: ["sikilasma", "karin", "guc"], target: "Alt Sırt & Bel", region: "back", type: "body_weight", sets: 3, reps: "12-15", rest: 45, videoId: "cfdi2mTOv6Q", howToLink: "https://www.youtube.com/watch?v=cfdi2mTOv6Q", tip: "Bel kaslarını güçlendir" },
-      { id: "assisted_pullup", name: "Assisted Pull-Up", goals: ["kas", "sikilasma"], target: "Sırt", region: "back", type: "machine", sets: 3, reps: "8-12", rest: 90, videoId: "Z2n58m2i4jg", howToLink: "https://www.youtube.com/watch?v=Z2n58m2i4jg", tip: "Makine destekli barfiks" },
-      { id: "single_arm_row", name: "Single Arm Dumbbell Row", goals: ["kas", "sikilasma"], target: "Kanat", region: "back", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "pYcpY20QaE8", howToLink: "https://www.youtube.com/watch?v=pYcpY20QaE8", tip: "Tek taraflı güç ve denge" },
-      { id: "wide_grip_lat", name: "Wide Grip Lat Pulldown", goals: ["sikilasma"], target: "Kanat", region: "back", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "lueEJGjTuPQ", howToLink: "https://www.youtube.com/watch?v=lueEJGjTuPQ", tip: "Sırt genişliği için" },
-      { id: "reverse_grip_lat", name: "Reverse Grip Lat Pulldown", goals: ["kas"], target: "Alt Kanat", region: "back", type: "machine", sets: 3, reps: "10-12", rest: 60, videoId: "7oQX5nVJjIg", howToLink: "https://www.youtube.com/watch?v=7oQX5nVJjIg", tip: "Alt kanat ve biceps" },
-
-      // OMUZ
-      { id: "overhead_press", name: "Overhead Press", goals: ["kas", "kol", "guc"], target: "Ön & Orta Omuz", region: "shoulder", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "13YElyAtd84", howToLink: "https://www.youtube.com/watch?v=13YElyAtd84", tip: "Temel dikey itiş" },
-      { id: "lateral_raise", name: "Lateral Raise", goals: ["sikilasma", "kol"], target: "Orta Omuz", region: "shoulder", type: "free_weight", sets: 3, reps: "12-15", rest: 45, videoId: "weDBwj9Kuaw", howToLink: "https://www.youtube.com/watch?v=weDBwj9Kuaw", tip: "Omuz genişliği kazandırır" },
-      { id: "face_pull", name: "Face Pull", goals: ["sikilasma"], target: "Arka Omuz", region: "shoulder", type: "machine", sets: 3, reps: "15-20", rest: 45, videoId: "vuDO21_zqbQ", howToLink: "https://www.youtube.com/watch?v=vuDO21_zqbQ", tip: "Postür düzeltici" },
-      { id: "arnold_press", name: "Arnold Press", goals: ["kas"], target: "Ön Omuz", region: "shoulder", type: "free_weight", sets: 3, reps: "10-12", rest: 90, videoId: "6Z15_WdXmVw", howToLink: "https://www.youtube.com/watch?v=6Z15_WdXmVw", tip: "Omuz hacmi ve şekli" },
-      { id: "cable_lateral", name: "Cable Lateral Raise", goals: ["sikilasma"], target: "Orta Omuz", region: "shoulder", type: "machine", sets: 3, reps: "15-20", rest: 45, videoId: "0Z6zKqH2G9g", howToLink: "https://www.youtube.com/watch?v=0Z6zKqH2G9g", tip: "Sürekli gerginlik" },
-      { id: "rear_delt_raise", name: "Rear Delt Dumbbell Raise", goals: ["sikilasma"], target: "Arka Omuz", region: "shoulder", type: "free_weight", sets: 3, reps: "15-20", rest: 45, videoId: "eaXq7UjE5A0", howToLink: "https://www.youtube.com/watch?v=eaXq7UjE5A0", tip: "Omuz dengesi" },
-
-      // KOL
-      { id: "barbell_curl", name: "Barbell Curl", goals: ["kas", "kol"], target: "Biceps", region: "arm", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "M3qQOkiJfoU", howToLink: "https://www.youtube.com/watch?v=M3qQOkiJfoU", tip: "Temel biceps hacmi" },
-      { id: "hammer_curl", name: "Hammer Curl", goals: ["kas", "kol"], target: "Biceps & Ön Kol", region: "arm", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "X98pBvg1mJ8", howToLink: "https://www.youtube.com/watch?v=X98pBvg1mJ8", tip: "Biceps kalınlığı" },
-      { id: "triceps_pushdown", name: "Triceps Pushdown", goals: ["kas", "sikilasma", "kol"], target: "Triceps", region: "arm", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "YsirG0x9Pf4", howToLink: "https://www.youtube.com/watch?v=YsirG0x9Pf4", tip: "Arka kol izolasyon" },
-      { id: "concentration_curl", name: "Concentration Curl", goals: ["sikilasma", "kol"], target: "Biceps", region: "arm", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "0AUGkch3tzc", howToLink: "https://www.youtube.com/watch?v=0AUGkch3tzc", tip: "Biceps tepe noktası" },
-      { id: "preacher_curl", name: "Preacher Curl Machine", goals: ["kas", "kol"], target: "Biceps", region: "arm", type: "machine", sets: 3, reps: "10-12", rest: 60, videoId: "DoCWeUBA0Gs", howToLink: "https://www.youtube.com/watch?v=DoCWeUBA0Gs", tip: "İzole biceps" },
-      { id: "overhead_triceps", name: "Overhead Triceps Ext", goals: ["kas", "kol"], target: "Triceps", region: "arm", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "_gsUck-7M74", howToLink: "https://www.youtube.com/watch?v=_gsUck-7M74", tip: "Triceps uzun başı" },
-      { id: "triceps_kickback", name: "Triceps Kickback", goals: ["sikilasma", "kol"], target: "Triceps", region: "arm", type: "free_weight", sets: 3, reps: "15-20", rest: 45, videoId: "6SS6K3lAwZ8", howToLink: "https://www.youtube.com/watch?v=6SS6K3lAwZ8", tip: "Sıkılaştırma" },
-
-      // BACAK & KALÇA
-      { id: "squat", name: "Squat", goals: ["kas", "kilo_verme", "sikilasma", "bacak", "guc"], target: "Bacak & Kalça", region: "leg", type: "free_weight", sets: 4, reps: "8-12", rest: 120, videoId: "WZRJW4UpkkE", howToLink: "https://www.youtube.com/watch?v=WZRJW4UpkkE", tip: "Temel alt vücut" },
-      { id: "leg_press", name: "Leg Press", goals: ["kas", "bacak"], target: "Quadriceps", region: "leg", type: "machine", sets: 4, reps: "10-12", rest: 90, videoId: "2q7kXFKsIwY", howToLink: "https://www.youtube.com/watch?v=2q7kXFKsIwY", tip: "Bacak hacmi" },
-      { id: "leg_curl", name: "Leg Curl", goals: ["sikilasma", "bacak"], target: "Hamstring", region: "leg", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "69_4qE2o-9A", howToLink: "https://www.youtube.com/watch?v=69_4qE2o-9A", tip: "Arka bacak izolasyonu" },
-      { id: "hip_thrust", name: "Hip Thrust", goals: ["kas", "sikilasma", "bacak"], target: "Kalça", region: "leg", type: "free_weight", sets: 4, reps: "10-15", rest: 90, videoId: "u-lCNOsSGnc", howToLink: "https://www.youtube.com/watch?v=u-lCNOsSGnc", tip: "Kalça için en etkili" },
-      { id: "calf_raise", name: "Standing Calf Raise", goals: ["kas", "bacak"], target: "Baldır", region: "leg", type: "machine", sets: 4, reps: "15-20", rest: 45, videoId: "n4czfyhJZXM", howToLink: "https://www.youtube.com/watch?v=n4czfyhJZXM", tip: "Baldır hacmi" },
-      { id: "walking_lunge", name: "Walking Lunge", goals: ["sikilasma", "bacak", "kilo_verme"], target: "Bacak & Kalça", region: "leg", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "wrwwXE_x-pQ", howToLink: "https://www.youtube.com/watch?v=wrwwXE_x-pQ", tip: "Dinamik bacak hareketi" },
-      { id: "split_squat", name: "Bulgarian Split Squat", goals: ["kas", "sikilasma", "bacak"], target: "Kalça & Bacak", region: "leg", type: "free_weight", sets: 3, reps: "10-12", rest: 90, videoId: "2C-uNgKwPLE", howToLink: "https://www.youtube.com/watch?v=2C-uNgKwPLE", tip: "Tek bacak kuvveti" },
-      { id: "glute_kickback", name: "Glute Kickback Machine", goals: ["sikilasma", "bacak"], target: "Kalça", region: "leg", type: "machine", sets: 3, reps: "15-20", rest: 60, videoId: "SJ1Xuz9D-ZQ", howToLink: "https://www.youtube.com/watch?v=SJ1Xuz9D-ZQ", tip: "Kalça izolasyonu" },
-      { id: "sumo_squat", name: "Sumo Squat", goals: ["sikilasma", "bacak"], target: "İç Bacak & Kalça", region: "leg", type: "free_weight", sets: 3, reps: "12-15", rest: 90, videoId: "GZbfZ033f74", howToLink: "https://www.youtube.com/watch?v=GZbfZ033f74", tip: "İç bacak odaklı" },
-
-      // KARIN / CORE
-      { id: "crunch", name: "Crunch", goals: ["sikilasma", "karin"], target: "Karın", region: "core", type: "body_weight", sets: 3, reps: "20-25", rest: 45, videoId: "Xyd_fa5zoEU", howToLink: "https://www.youtube.com/watch?v=Xyd_fa5zoEU", tip: "Mide kaslarını sıkıştır" },
-      { id: "leg_raise", name: "Leg Raise", goals: ["sikilasma", "karin"], target: "Alt Karın", region: "core", type: "body_weight", sets: 3, reps: "15-20", rest: 45, videoId: "JB2oyawG9KI", howToLink: "https://www.youtube.com/watch?v=JB2oyawG9KI", tip: "Alt karın düzleştirme" },
-      { id: "plank", name: "Plank", goals: ["sikilasma", "karin", "guc"], target: "Core & Bel", region: "core", type: "body_weight", sets: 3, reps: "45-60sn", rest: 60, videoId: "ASdvN_XEl_c", howToLink: "https://www.youtube.com/watch?v=ASdvN_XEl_c", tip: "Statik dayanıklılık" }
-    ];
-
-
-    // APP STATE
-    let selectedGoals = [];
-    let selectedDays = null;
-
-    // GOAL BUTTONS
-    document.querySelectorAll('.goal-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
-        const goal = this.dataset.goal;
-        if (selectedGoals.includes(goal)) {
-          selectedGoals = selectedGoals.filter(g => g !== goal);
-          this.classList.remove('selected');
-        } else {
-          selectedGoals.push(goal);
-          this.classList.add('selected');
+        /* --- Goal Grid --- */
+        .goal-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
         }
-      });
-    });
 
-    // DAY BUTTONS
-    document.querySelectorAll('.day-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('selected'));
-        this.classList.add('selected');
-        selectedDays = parseInt(this.dataset.days);
-      });
-    });
+        .goal-btn {
+        background: var(--bg-surface-hover);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+        /* Fix for legacy styles overriding */
+        text-align: center;
+        cursor: pointer;
+        }
 
-    // GENERATE PROGRAM
-    function generateProgram() {
-      // 1. Filter and Score Exercises
-      let activeExercises = exercises.map(ex => {
-        let score = 0;
-        let matchCount = 0;
+        .goal-btn .icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+        /* Remove potential gradient overrides */
+        margin: 0 auto;
+        }
 
-        // Score by Goal Match
-        selectedGoals.forEach(g => {
-          if (ex.goals.includes(g)) {
-            score += 10;
-            matchCount++;
-          }
+        .goal-btn .icon svg {
+        stroke: var(--text-primary);
+        width: 20px;
+        height: 20px;
+        }
+
+        /* Fix for svg clicks */
+        .goal-btn * {
+        pointer-events: none;
+        }
+
+        .goal-btn .label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        line-height: 1.3;
+        }
+
+        .goal-btn .check {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        .goal-btn .check svg {
+        width: 14px;
+        height: 14px;
+        stroke: white;
+        stroke-width: 3;
+        }
+
+        .goal-btn.selected {
+        background: rgba(236, 72, 153, 0.08); /* Transparent accent */
+        border-color: var(--accent);
+        }
+
+        .goal-btn.selected .icon {
+        background: var(--accent);
+        opacity: 1;
+        }
+
+        .goal-btn.selected .icon svg {
+        stroke: white;
+        }
+
+        .goal-btn.selected .label {
+        color: var(--text-primary);
+        }
+
+        .goal-btn.selected .check {
+        opacity: 1;
+        transform: scale(1);
+        }
+
+        /* --- Day Grid --- */
+        .day-grid {
+        display: flex;
+        gap: 12px;
+        }
+
+        .day-btn {
+        flex: 1;
+        height: 50px;
+        border-radius: var(--radius-sm);
+        background: var(--bg-surface-hover);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.2s;
+        /* Fix for legacy overrides */
+        padding: 0;
+        cursor: pointer;
+        }
+
+        .day-btn:active {
+        transform: scale(0.96);
+        }
+
+        .day-btn.selected {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+        border-color: var(--text-primary);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- Hamburger Button Fix --- */
+        .hamburger-btn {
+        width: 44px;
+        height: 44px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 0;
+        border-radius: 8px;
+        }
+
+        .hamburger-btn:active {
+        background: rgba(255,255,255,0.05);
+        }
+
+        .hamburger-btn span {
+        width: 22px;
+        height: 2px;
+        background: var(--text-primary);
+        border-radius: 2px;
+        transition: all 0.3s;
+        }
+
+
+        <!-- Program Section -->
+        <div id="program-section">
+          <div class="program-header">
+            <h2>Senin Programın</h2>
+            <div class="program-summary" id="program-summary"></div>
+          </div>
+          <div id="days-container"></div>
+
+          <div class="motivation-box">
+            <h3>Hazırsın!</h3>
+            <p>Bugün harika iş çıkaracaksın. Başarılar!</p>
+          </div>
+
+          <button class="btn-reset" onclick="resetApp()">Baştan Başla</button>
+        </div>
+      </div>
+
+      <!-- Fixed Bottom Button -->
+      <div class="fixed-bottom" id="fixed-bottom">
+        <button class="btn-primary" id="show-program-btn" onclick="showProgram()">
+          Programımı Göster
+        </button>
+      </div>
+
+      <!-- Floating Timer -->
+      <div class="timer-float" id="timer-widget">
+        <div class="timer-display" id="timer-display">00:00</div>
+        <div class="timer-controls">
+          <button class="timer-btn primary" id="timer-start" onclick="startTimer()">Başlat</button>
+          <button class="timer-btn" id="timer-stop" onclick="stopTimer()">Durdur</button>
+          <button class="timer-btn" id="timer-reset" onclick="resetTimer()">Sıfırla</button>
+        </div>
+      </div>
+
+      <!-- History Section -->
+      <!-- History Section -->
+      <div id="history-section" style="display: none;" class="container">
+        <div class="card">
+          <div class="card-title">Antrenman Geçmişi</div>
+          <div id="history-container">
+            <!-- History items will be rendered here -->
+            <p style="text-align: center; color: var(--text-secondary); padding: 20px;">Henüz geçmiş kaydı yok.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weights Section -->
+      <div id="weights-section" style="display: none;" class="container">
+        <div class="card">
+          <div class="card-title">Ağırlık Geçmişi</div>
+          <div id="weights-container">
+            <!-- Weight items will be rendered here -->
+            <p style="text-align: center; color: var(--text-secondary); padding: 20px;">Henüz ağırlık kaydı yok.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects Section -->
+      <div id="projects-section" style="display: none; padding-top: 60px; padding-bottom: 100px;">
+        <div class="card-title">Projelerim</div>
+        <div id="projects-container" style="padding: 0 20px;">
+          <!-- Projects rendered here -->
+        </div>
+        <div class="fab-add" onclick="openProjectModal()">+</div>
+      </div>
+
+      <!-- CREATE PROJECT MODAL -->
+      <div id="project-modal" class="modal-backdrop">
+        <div class="modal-content">
+          <div class="modal-title">Yeni Proje Oluştur</div>
+          <div class="form-group">
+            <label>Proje Adı</label>
+            <input type="text" id="project-name" class="form-input" placeholder="Örn: Yaz Hazırlık">
+          </div>
+          <div class="form-group">
+            <label>Açıklama / Not</label>
+            <input type="text" id="project-note" class="form-input" placeholder="Örn: Bulk dönemi">
+          </div>
+          <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">
+            ⚠️ Şu anki program ayarların (seçili hedefler, gün sayısı) bu projeye kaydedilecek.
+          </p>
+          <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeProjectModal()">İptal</button>
+            <button class="btn" onclick="saveProject()">Kaydet</button>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // ============================================
+        // EXERCISE DATA
+        // ============================================
+        const exercises = [
+          // GÖĞÜS
+          { id: "bench_press", name: "Barbell Bench Press", goals: ["kas", "sikilasma", "guc"], target: "Göğüs, Ön Omuz", region: "chest", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "cHwutxa3XLY", howToLink: "https://www.youtube.com/watch?v=cHwutxa3XLY", tip: "Barı göğüs hizasından yukarı it" },
+          { id: "incline_press", name: "Incline Bench Press", goals: ["kas", "guc"], target: "Üst Göğüs, Ön Omuz", region: "chest", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "3upIH4tyAQE", howToLink: "https://www.youtube.com/watch?v=3upIH4tyAQE", tip: "Üst göğüsü hedefle" },
+          { id: "dumbbell_fly", name: "Dumbbell Fly", goals: ["sikilasma", "kas"], target: "Göğüs İzolasyon", region: "chest", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "Gth_I4CEAB0", howToLink: "https://www.youtube.com/watch?v=Gth_I4CEAB0", tip: "Göğsü esnet ve sıkıştır" },
+          { id: "cable_crossover", name: "Cable Crossover", goals: ["sikilasma"], target: "Göğüs İç", region: "chest", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "2E1x1MvR9qo", howToLink: "https://www.youtube.com/watch?v=2E1x1MvR9qo", tip: "Sürekli gerginlik altında tut" },
+          { id: "chest_press_machine", name: "Chest Press Makinesi", goals: ["kas", "sikilasma"], target: "Göğüs", region: "chest", type: "machine", sets: 3, reps: "10-12", rest: 60, videoId: "2wFMkurVmrQ", howToLink: "https://www.youtube.com/watch?v=2wFMkurVmrQ", tip: "Güvenli ve kontrollü hareket" },
+          { id: "pushup", name: "Push-Up", goals: ["kilo_verme", "sikilasma", "kas", "kol"], target: "Göğüs & Kol", region: "chest", type: "body_weight", sets: 3, reps: "15-20", rest: 60, videoId: "RyzxRrBHn7k", howToLink: "https://www.youtube.com/watch?v=RyzxRrBHn7k", tip: "Vücudun düz bir çizgi olmalı" },
+          { id: "dips", name: "Dips", goals: ["kas", "sikilasma", "kol"], target: "Alt Göğüs & Triceps", region: "chest", type: "body_weight", sets: 3, reps: "8-12", rest: 90, videoId: "H9G1wL4yujU", howToLink: "https://www.youtube.com/watch?v=H9G1wL4yujU", tip: "Paralel barlarda kontrollü in-çık" },
+          { id: "decline_bench", name: "Decline Bench Press", goals: ["kas"], target: "Alt Göğüs", region: "chest", type: "free_weight", sets: 3, reps: "8-12", rest: 90, videoId: "0xRvl4Qv3ZY", howToLink: "https://www.youtube.com/watch?v=0xRvl4Qv3ZY", tip: "Alt göğüsü doldurmak için" },
+          { id: "machine_pec_deck", name: "Machine Pec Deck", goals: ["sikilasma"], target: "Göğüs İzolasyon", region: "chest", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "eGjt4lk6g34", howToLink: "https://www.youtube.com/watch?v=eGjt4lk6g34", tip: "İzole sıkıştırma hareketi" },
+          { id: "incline_dumbbell_fly", name: "Incline Dumbbell Fly", goals: ["sikilasma"], target: "Üst Göğüs", region: "chest", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "ajdFwa-qM98", howToLink: "https://www.youtube.com/watch?v=ajdFwa-qM98", tip: "Üst göğsü şekillendir" },
+          { id: "smith_bench", name: "Smith Machine Bench Press", goals: ["kas"], target: "Göğüs", region: "chest", type: "machine", sets: 4, reps: "8-12", rest: 90, videoId: "5p2J6oKJ2iw", howToLink: "https://www.youtube.com/watch?v=5p2J6oKJ2iw", tip: "Güvenli press" },
+
+          // SIRT
+          { id: "pullup", name: "Pull-Up", goals: ["kas", "kilo_verme", "sikilasma"], target: "Sırt & Biceps", region: "back", type: "body_weight", sets: 3, reps: "6-10", rest: 90, videoId: "eu3pSe55-Qg", howToLink: "https://www.youtube.com/watch?v=eu3pSe55-Qg", tip: "Üst vücut çekiş gücü" },
+          { id: "lat_pulldown", name: "Lat Pulldown", goals: ["kas", "sikilasma"], target: "Kanat Kasları", region: "back", type: "machine", sets: 4, reps: "10-12", rest: 60, videoId: "hEt8rkd7-Gk", howToLink: "https://www.youtube.com/watch?v=hEt8rkd7-Gk", tip: "Barfiks alternatifi" },
+          { id: "barbell_row", name: "Barbell Row", goals: ["kas", "sikilasma", "guc"], target: "Orta Sırt", region: "back", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "-lGIRM-tbDk", howToLink: "https://www.youtube.com/watch?v=-lGIRM-tbDk", tip: "Sırt kalınlığı ve güç" },
+          { id: "seated_cable_row", name: "Seated Cable Row", goals: ["sikilasma", "kas"], target: "Orta Sırt", region: "back", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "DOlLdf20xf0", howToLink: "https://www.youtube.com/watch?v=DOlLdf20xf0", tip: "Oturarak çekiş hareketi" },
+          { id: "hyperextension", name: "Hyperextension", goals: ["sikilasma", "karin", "guc"], target: "Alt Sırt & Bel", region: "back", type: "body_weight", sets: 3, reps: "12-15", rest: 45, videoId: "cfdi2mTOv6Q", howToLink: "https://www.youtube.com/watch?v=cfdi2mTOv6Q", tip: "Bel kaslarını güçlendir" },
+          { id: "assisted_pullup", name: "Assisted Pull-Up", goals: ["kas", "sikilasma"], target: "Sırt", region: "back", type: "machine", sets: 3, reps: "8-12", rest: 90, videoId: "Z2n58m2i4jg", howToLink: "https://www.youtube.com/watch?v=Z2n58m2i4jg", tip: "Makine destekli barfiks" },
+          { id: "single_arm_row", name: "Single Arm Dumbbell Row", goals: ["kas", "sikilasma"], target: "Kanat", region: "back", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "pYcpY20QaE8", howToLink: "https://www.youtube.com/watch?v=pYcpY20QaE8", tip: "Tek taraflı güç ve denge" },
+          { id: "wide_grip_lat", name: "Wide Grip Lat Pulldown", goals: ["sikilasma"], target: "Kanat", region: "back", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "lueEJGjTuPQ", howToLink: "https://www.youtube.com/watch?v=lueEJGjTuPQ", tip: "Sırt genişliği için" },
+          { id: "reverse_grip_lat", name: "Reverse Grip Lat Pulldown", goals: ["kas"], target: "Alt Kanat", region: "back", type: "machine", sets: 3, reps: "10-12", rest: 60, videoId: "7oQX5nVJjIg", howToLink: "https://www.youtube.com/watch?v=7oQX5nVJjIg", tip: "Alt kanat ve biceps" },
+
+          // OMUZ
+          { id: "overhead_press", name: "Overhead Press", goals: ["kas", "kol", "guc"], target: "Ön & Orta Omuz", region: "shoulder", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "13YElyAtd84", howToLink: "https://www.youtube.com/watch?v=13YElyAtd84", tip: "Temel dikey itiş" },
+          { id: "lateral_raise", name: "Lateral Raise", goals: ["sikilasma", "kol"], target: "Orta Omuz", region: "shoulder", type: "free_weight", sets: 3, reps: "12-15", rest: 45, videoId: "weDBwj9Kuaw", howToLink: "https://www.youtube.com/watch?v=weDBwj9Kuaw", tip: "Omuz genişliği kazandırır" },
+          { id: "face_pull", name: "Face Pull", goals: ["sikilasma"], target: "Arka Omuz", region: "shoulder", type: "machine", sets: 3, reps: "15-20", rest: 45, videoId: "vuDO21_zqbQ", howToLink: "https://www.youtube.com/watch?v=vuDO21_zqbQ", tip: "Postür düzeltici" },
+          { id: "arnold_press", name: "Arnold Press", goals: ["kas"], target: "Ön Omuz", region: "shoulder", type: "free_weight", sets: 3, reps: "10-12", rest: 90, videoId: "6Z15_WdXmVw", howToLink: "https://www.youtube.com/watch?v=6Z15_WdXmVw", tip: "Omuz hacmi ve şekli" },
+          { id: "cable_lateral", name: "Cable Lateral Raise", goals: ["sikilasma"], target: "Orta Omuz", region: "shoulder", type: "machine", sets: 3, reps: "15-20", rest: 45, videoId: "0Z6zKqH2G9g", howToLink: "https://www.youtube.com/watch?v=0Z6zKqH2G9g", tip: "Sürekli gerginlik" },
+          { id: "rear_delt_raise", name: "Rear Delt Dumbbell Raise", goals: ["sikilasma"], target: "Arka Omuz", region: "shoulder", type: "free_weight", sets: 3, reps: "15-20", rest: 45, videoId: "eaXq7UjE5A0", howToLink: "https://www.youtube.com/watch?v=eaXq7UjE5A0", tip: "Omuz dengesi" },
+
+          // KOL
+          { id: "barbell_curl", name: "Barbell Curl", goals: ["kas", "kol"], target: "Biceps", region: "arm", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "M3qQOkiJfoU", howToLink: "https://www.youtube.com/watch?v=M3qQOkiJfoU", tip: "Temel biceps hacmi" },
+          { id: "hammer_curl", name: "Hammer Curl", goals: ["kas", "kol"], target: "Biceps & Ön Kol", region: "arm", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "X98pBvg1mJ8", howToLink: "https://www.youtube.com/watch?v=X98pBvg1mJ8", tip: "Biceps kalınlığı" },
+          { id: "triceps_pushdown", name: "Triceps Pushdown", goals: ["kas", "sikilasma", "kol"], target: "Triceps", region: "arm", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "YsirG0x9Pf4", howToLink: "https://www.youtube.com/watch?v=YsirG0x9Pf4", tip: "Arka kol izolasyon" },
+          { id: "concentration_curl", name: "Concentration Curl", goals: ["sikilasma", "kol"], target: "Biceps", region: "arm", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "0AUGkch3tzc", howToLink: "https://www.youtube.com/watch?v=0AUGkch3tzc", tip: "Biceps tepe noktası" },
+          { id: "preacher_curl", name: "Preacher Curl Machine", goals: ["kas", "kol"], target: "Biceps", region: "arm", type: "machine", sets: 3, reps: "10-12", rest: 60, videoId: "DoCWeUBA0Gs", howToLink: "https://www.youtube.com/watch?v=DoCWeUBA0Gs", tip: "İzole biceps" },
+          { id: "overhead_triceps", name: "Overhead Triceps Ext", goals: ["kas", "kol"], target: "Triceps", region: "arm", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "_gsUck-7M74", howToLink: "https://www.youtube.com/watch?v=_gsUck-7M74", tip: "Triceps uzun başı" },
+          { id: "triceps_kickback", name: "Triceps Kickback", goals: ["sikilasma", "kol"], target: "Triceps", region: "arm", type: "free_weight", sets: 3, reps: "15-20", rest: 45, videoId: "6SS6K3lAwZ8", howToLink: "https://www.youtube.com/watch?v=6SS6K3lAwZ8", tip: "Sıkılaştırma" },
+
+          // BACAK & KALÇA
+          { id: "squat", name: "Squat", goals: ["kas", "kilo_verme", "sikilasma", "bacak", "guc"], target: "Bacak & Kalça", region: "leg", type: "free_weight", sets: 4, reps: "8-12", rest: 120, videoId: "WZRJW4UpkkE", howToLink: "https://www.youtube.com/watch?v=WZRJW4UpkkE", tip: "Temel alt vücut" },
+          { id: "leg_press", name: "Leg Press", goals: ["kas", "bacak"], target: "Quadriceps", region: "leg", type: "machine", sets: 4, reps: "10-12", rest: 90, videoId: "2q7kXFKsIwY", howToLink: "https://www.youtube.com/watch?v=2q7kXFKsIwY", tip: "Bacak hacmi" },
+          { id: "leg_curl", name: "Leg Curl", goals: ["sikilasma", "bacak"], target: "Hamstring", region: "leg", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "69_4qE2o-9A", howToLink: "https://www.youtube.com/watch?v=69_4qE2o-9A", tip: "Arka bacak izolasyonu" },
+          { id: "hip_thrust", name: "Hip Thrust", goals: ["kas", "sikilasma", "bacak"], target: "Kalça", region: "leg", type: "free_weight", sets: 4, reps: "10-15", rest: 90, videoId: "u-lCNOsSGnc", howToLink: "https://www.youtube.com/watch?v=u-lCNOsSGnc", tip: "Kalça için en etkili" },
+          { id: "calf_raise", name: "Standing Calf Raise", goals: ["kas", "bacak"], target: "Baldır", region: "leg", type: "machine", sets: 4, reps: "15-20", rest: 45, videoId: "n4czfyhJZXM", howToLink: "https://www.youtube.com/watch?v=n4czfyhJZXM", tip: "Baldır hacmi" },
+          { id: "walking_lunge", name: "Walking Lunge", goals: ["sikilasma", "bacak", "kilo_verme"], target: "Bacak & Kalça", region: "leg", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "wrwwXE_x-pQ", howToLink: "https://www.youtube.com/watch?v=wrwwXE_x-pQ", tip: "Dinamik bacak hareketi" },
+          { id: "split_squat", name: "Bulgarian Split Squat", goals: ["kas", "sikilasma", "bacak"], target: "Kalça & Bacak", region: "leg", type: "free_weight", sets: 3, reps: "10-12", rest: 90, videoId: "2C-uNgKwPLE", howToLink: "https://www.youtube.com/watch?v=2C-uNgKwPLE", tip: "Tek bacak kuvveti" },
+          { id: "glute_kickback", name: "Glute Kickback Machine", goals: ["sikilasma", "bacak"], target: "Kalça", region: "leg", type: "machine", sets: 3, reps: "15-20", rest: 60, videoId: "SJ1Xuz9D-ZQ", howToLink: "https://www.youtube.com/watch?v=SJ1Xuz9D-ZQ", tip: "Kalça izolasyonu" },
+          { id: "sumo_squat", name: "Sumo Squat", goals: ["sikilasma", "bacak"], target: "İç Bacak & Kalça", region: "leg", type: "free_weight", sets: 3, reps: "12-15", rest: 90, videoId: "GZbfZ033f74", howToLink: "https://www.youtube.com/watch?v=GZbfZ033f74", tip: "İç bacak odaklı" },
+
+          // KARIN / CORE
+          { id: "crunch", name: "Crunch", goals: ["sikilasma", "karin"], target: "Karın", region: "core", type: "body_weight", sets: 3, reps: "20-25", rest: 45, videoId: "Xyd_fa5zoEU", howToLink: "https://www.youtube.com/watch?v=Xyd_fa5zoEU", tip: "Mide kaslarını sıkıştır" },
+          { id: "leg_raise", name: "Leg Raise", goals: ["sikilasma", "karin"], target: "Alt Karın", region: "core", type: "body_weight", sets: 3, reps: "15-20", rest: 45, videoId: "JB2oyawG9KI", howToLink: "https://www.youtube.com/watch?v=JB2oyawG9KI", tip: "Alt karın düzleştirme" },
+          { id: "plank", name: "Plank", goals: ["sikilasma", "karin", "guc"], target: "Core & Bel", region: "core", type: "body_weight", sets: 3, reps: "45-60sn", rest: 60, videoId: "ASdvN_XEl_c", howToLink: "https://www.youtube.com/watch?v=ASdvN_XEl_c", tip: "Statik dayanıklılık" }
+        ];
+
+
+        // APP STATE
+        let selectedGoals = [];
+        let selectedDays = null;
+
+        // GOAL BUTTONS
+        document.querySelectorAll('.goal-btn').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const goal = this.dataset.goal;
+            if (selectedGoals.includes(goal)) {
+              selectedGoals = selectedGoals.filter(g => g !== goal);
+              this.classList.remove('selected');
+            } else {
+              selectedGoals.push(goal);
+              this.classList.add('selected');
+            }
+          });
         });
 
-        // Bonus for Compound Movements (Free Weight)
-        if (ex.type === 'free_weight') score += 2;
+        // DAY BUTTONS
+        document.querySelectorAll('.day-btn').forEach(btn => {
+          btn.addEventListener('click', function () {
+            document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedDays = parseInt(this.dataset.days);
+          });
+        });
 
-        return { exercise: ex, score: score, matchCount: matchCount };
-      }).filter(item => item.matchCount > 0);
+        // GENERATE PROGRAM
+        function generateProgram() {
+          // 1. Filter and Score Exercises
+          let activeExercises = exercises.map(ex => {
+            let score = 0;
+            let matchCount = 0;
 
-      // Fallback if no specific matches (shouldn't happen usually)
-      if (activeExercises.length === 0) {
-        activeExercises = exercises.map(ex => ({ exercise: ex, score: 1, matchCount: 1 }));
-      }
+            // Score by Goal Match
+            selectedGoals.forEach(g => {
+              if (ex.goals.includes(g)) {
+                score += 10;
+                matchCount++;
+              }
+            });
 
-      // 2. Shuffle within Score Tiers (to keep it fresh but relevant)
-      activeExercises = shuffleArray(activeExercises).sort((a, b) => b.score - a.score);
+            // Bonus for Compound Movements (Free Weight)
+            if (ex.type === 'free_weight') score += 2;
 
-      const days = [];
-      const exercisesPerDay = 6;
-      let availableExercises = activeExercises.map(item => item.exercise);
+            return { exercise: ex, score: score, matchCount: matchCount };
+          }).filter(item => item.matchCount > 0);
 
-      // 3. Distribute across days with Region Balance
-      for (let d = 0; d < selectedDays; d++) {
-        const dayExercises = [];
-        const usedRegions = new Set();
-
-        // Try to pick exercises with distinct regions per day if possible (full body feel)
-        // OR just fill efficiently
-        for (let i = 0; i < exercisesPerDay; i++) {
-          // Find next best unused exercise
-          const nextIndex = availableExercises.findIndex(ex =>
-            !dayExercises.includes(ex) // Simple duplicate check
-          );
-
-          if (nextIndex >= 0) {
-            dayExercises.push(availableExercises[nextIndex]);
-            availableExercises.splice(nextIndex, 1); // Remove used to avoid repeating in same cycle
-          } else {
-            // Reset available if run out (for high frequency days)
-            availableExercises = shuffleArray(exercises.filter(ex => ex.goals.some(g => selectedGoals.includes(g))));
-            i--; // Retry slot
+          // Fallback if no specific matches (shouldn't happen usually)
+          if (activeExercises.length === 0) {
+            activeExercises = exercises.map(ex => ({ exercise: ex, score: 1, matchCount: 1 }));
           }
+
+          // 2. Shuffle within Score Tiers (to keep it fresh but relevant)
+          activeExercises = shuffleArray(activeExercises).sort((a, b) => b.score - a.score);
+
+          const days = [];
+          const exercisesPerDay = 6;
+          let availableExercises = activeExercises.map(item => item.exercise);
+
+          // 3. Distribute across days with Region Balance
+          for (let d = 0; d < selectedDays; d++) {
+            const dayExercises = [];
+            const usedRegions = new Set();
+
+            // Try to pick exercises with distinct regions per day if possible (full body feel)
+            // OR just fill efficiently
+            for (let i = 0; i < exercisesPerDay; i++) {
+              // Find next best unused exercise
+              const nextIndex = availableExercises.findIndex(ex =>
+                !dayExercises.includes(ex) // Simple duplicate check
+              );
+
+              if (nextIndex >= 0) {
+                dayExercises.push(availableExercises[nextIndex]);
+                availableExercises.splice(nextIndex, 1); // Remove used to avoid repeating in same cycle
+              } else {
+                // Reset available if run out (for high frequency days)
+                availableExercises = shuffleArray(exercises.filter(ex => ex.goals.some(g => selectedGoals.includes(g))));
+                i--; // Retry slot
+              }
+            }
+            days.push(dayExercises);
+          }
+          return days;
         }
-        days.push(dayExercises);
-      }
-      return days;
-    }
 
-    function shuffleArray(array) {
-      const arr = [...array];
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
+        function shuffleArray(array) {
+          const arr = [...array];
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+          }
+          return arr;
+        }
 
-    // SHOW PROGRAM
-    function showProgram() {
-      const height = document.getElementById('height').value;
-      const weight = document.getElementById('weight').value;
-      const age = document.getElementById('age').value;
+        // SHOW PROGRAM
+        function showProgram() {
+          const height = document.getElementById('height').value;
+          const weight = document.getElementById('weight').value;
+          const age = document.getElementById('age').value;
 
-      if (!height || !weight || !age) {
-        alert('Lütfen boy, kilo ve yaşını gir');
-        return;
-      }
-      if (selectedGoals.length === 0) {
-        alert('Lütfen en az bir hedef seç');
-        return;
-      }
-      if (!selectedDays) {
-        alert('Haftada kaç gün spor yapacağını seç');
-        return;
-      }
+          if (!height || !weight || !age) {
+            alert('Lütfen boy, kilo ve yaşını gir');
+            return;
+          }
+          if (selectedGoals.length === 0) {
+            alert('Lütfen en az bir hedef seç');
+            return;
+          }
+          if (!selectedDays) {
+            alert('Haftada kaç gün spor yapacağını seç');
+            return;
+          }
 
-      const program = generateProgram();
-      const goalLabels = {
-        'kilo_verme': 'Kilo Verme',
-        'sikilasma': 'Sıkılaşma',
-        'kas': 'Kas Yapma',
-        'kol': 'Kol',
-        'karin': 'Karın',
-        'bacak': 'Bacak'
-      };
+          const program = generateProgram();
+          const goalLabels = {
+            'kilo_verme': 'Kilo Verme',
+            'sikilasma': 'Sıkılaşma',
+            'kas': 'Kas Yapma',
+            'kol': 'Kol',
+            'karin': 'Karın',
+            'bacak': 'Bacak'
+          };
 
-      const summaryHtml = `
+          const summaryHtml = `
         <span class="summary-badge">${selectedGoals.map(g => goalLabels[g] || g).join(', ')}</span>
         <span class="summary-badge">Haftada ${selectedDays} gün</span>
         `;
-      document.getElementById('program-summary').innerHTML = summaryHtml;
+          document.getElementById('program-summary').innerHTML = summaryHtml;
 
-      const container = document.getElementById('days-container');
-      container.innerHTML = '';
+          const container = document.getElementById('days-container');
+          container.innerHTML = '';
 
-      program.forEach((dayExercises, index) => {
-        const dayNum = index + 1;
-        const dayHtml = `
+          program.forEach((dayExercises, index) => {
+            const dayNum = index + 1;
+            const dayHtml = `
         <div class="day-section">
           <div class="day-header ${dayNum === 1 ? 'active' : ''}" onclick="toggleDay(this)">
             <h3>Gün ${dayNum}</h3>
@@ -1734,38 +1510,38 @@
           </div>
         </div>
         `;
-        container.innerHTML += dayHtml;
-      });
+            container.innerHTML += dayHtml;
+          });
 
-      // Save user answers for "Today" button
-      localStorage.setItem('fitplanUserAnswers', JSON.stringify({
-        daysPerWeek: selectedDays,
-        goals: selectedGoals
-      }));
+          // Save user answers for "Today" button
+          localStorage.setItem('fitplanUserAnswers', JSON.stringify({
+            daysPerWeek: selectedDays,
+            goals: selectedGoals
+          }));
 
-      loadProgress();
-      updateProgressBars();
-      showTodayButton();
+          loadProgress();
+          updateProgressBars();
+          showTodayButton();
 
-      document.getElementById('questions-section').style.display = 'none';
-      document.getElementById('program-section').style.display = 'block';
-      document.getElementById('fixed-bottom').style.display = 'none';
-      document.getElementById('welcome-header').style.display = 'none';
-      const appBar = document.getElementById('app-bar');
-      if (appBar) appBar.style.display = 'flex';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+          document.getElementById('questions-section').style.display = 'none';
+          document.getElementById('program-section').style.display = 'block';
+          document.getElementById('fixed-bottom').style.display = 'none';
+          document.getElementById('welcome-header').style.display = 'none';
+          const appBar = document.getElementById('app-bar');
+          if (appBar) appBar.style.display = 'flex';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-    // RENDER EXERCISE CARD
-    function renderExerciseCard(exercise, dayNum) {
-      const checkboxId = `check_${dayNum}_${exercise.id}`;
-      const lastWeight = getLastWeight(dayNum, exercise.id);
-      const weightInputId = `weight_${dayNum}_${exercise.id}`;
+        // RENDER EXERCISE CARD
+        function renderExerciseCard(exercise, dayNum) {
+          const checkboxId = `check_${dayNum}_${exercise.id}`;
+          const lastWeight = getLastWeight(dayNum, exercise.id);
+          const weightInputId = `weight_${dayNum}_${exercise.id}`;
 
-      const typeLabels = { 'free_weight': 'Serbest Ağırlık', 'machine': 'Makine', 'body_weight': 'Vücut Ağırlığı' };
-      const regionLabels = { 'chest': 'Göğüs', 'back': 'Sırt', 'shoulder': 'Omuz', 'arm': 'Kol', 'leg': 'Bacak', 'core': 'Karın' };
+          const typeLabels = { 'free_weight': 'Serbest Ağırlık', 'machine': 'Makine', 'body_weight': 'Vücut Ağırlığı' };
+          const regionLabels = { 'chest': 'Göğüs', 'back': 'Sırt', 'shoulder': 'Omuz', 'arm': 'Kol', 'leg': 'Bacak', 'core': 'Karın' };
 
-      return `
+          return `
         <div class="exercise-card" id="card_${dayNum}_${exercise.id}">
           <div class="exercise-header">
             <div>
@@ -1826,414 +1602,414 @@
           ` : ''}
         </div>
         `;
-    }
+        }
 
-    // VIDEO
-    function loadVideo(dayNum, exerciseId, videoId) {
-      const container = document.getElementById(`video_${dayNum}_${exerciseId}`);
-      container.innerHTML = `<iframe
+        // VIDEO
+        function loadVideo(dayNum, exerciseId, videoId) {
+          const container = document.getElementById(`video_${dayNum}_${exerciseId}`);
+          container.innerHTML = `<iframe
           src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1" title="Video"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>`;
-    }
-
-    // ACCORDION
-    function toggleDay(header) {
-      const wasActive = header.classList.contains('active');
-      document.querySelectorAll('.day-header').forEach(h => h.classList.remove('active'));
-      document.querySelectorAll('.day-content').forEach(c => c.classList.remove('active'));
-      if (!wasActive) {
-        header.classList.add('active');
-        header.nextElementSibling.classList.add('active');
-      }
-    }
-
-    // CHECKBOX
-    function toggleCheckbox(checkboxId) {
-      const checkbox = document.getElementById(checkboxId);
-      checkbox.checked = !checkbox.checked;
-      const parts = checkboxId.split('_');
-      const dayNum = parts[1];
-      const exerciseId = parts.slice(2).join('_');
-      toggleComplete(dayNum, exerciseId);
-    }
-
-    function toggleComplete(dayNum, exerciseId) {
-      const card = document.getElementById(`card_${dayNum}_${exerciseId}`);
-      const checkbox = document.getElementById(`check_${dayNum}_${exerciseId}`);
-      card.classList.toggle('completed', checkbox.checked);
-      saveProgress();
-    }
-
-    function saveProgress() {
-      const progress = {};
-      document.querySelectorAll('.exercise-card input[type="checkbox"]').forEach(cb => {
-        progress[cb.id] = cb.checked;
-      });
-      localStorage.setItem('fitplanProgress', JSON.stringify(progress));
-    }
-
-    function loadProgress() {
-      try {
-        const saved = localStorage.getItem('fitplanProgress');
-        if (saved) {
-          const progress = JSON.parse(saved);
-          Object.keys(progress).forEach(id => {
-            const checkbox = document.getElementById(id);
-            if (checkbox && progress[id]) {
-              checkbox.checked = true;
-              const card = checkbox.closest('.exercise-card');
-              if (card) card.classList.add('completed');
-            }
-          });
         }
-      } catch (e) { }
-    }
 
-    function resetApp() {
-      if (confirm('Baştan başlamak istediğine emin misin?')) {
-        localStorage.removeItem('fitplanProgress');
-        localStorage.removeItem('fitplanWeights');
-        localStorage.removeItem('fitplanTimer');
-        localStorage.removeItem('fitplanWeekly');
-        localStorage.removeItem('fitplanUserAnswers');
-        localStorage.removeItem('fitplanHistory'); // Optional: keep history?
-        location.reload();
-      }
-    }
+        // ACCORDION
+        function toggleDay(header) {
+          const wasActive = header.classList.contains('active');
+          document.querySelectorAll('.day-header').forEach(h => h.classList.remove('active'));
+          document.querySelectorAll('.day-content').forEach(c => c.classList.remove('active'));
+          if (!wasActive) {
+            header.classList.add('active');
+            header.nextElementSibling.classList.add('active');
+          }
+        }
 
-    // ============================================
-    // TIMER FUNCTIONALITY
-    // ============================================
-    let timerInterval = null;
-    let timerSeconds = 0;
-    let timerRunning = false;
+        // CHECKBOX
+        function toggleCheckbox(checkboxId) {
+          const checkbox = document.getElementById(checkboxId);
+          checkbox.checked = !checkbox.checked;
+          const parts = checkboxId.split('_');
+          const dayNum = parts[1];
+          const exerciseId = parts.slice(2).join('_');
+          toggleComplete(dayNum, exerciseId);
+        }
 
-    function startTimer() {
-      if (!timerRunning) {
-        timerRunning = true;
-        const startTime = Date.now() - (timerSeconds * 1000);
-        localStorage.setItem('fitplanTimer', JSON.stringify({ startTime, running: true }));
+        function toggleComplete(dayNum, exerciseId) {
+          const card = document.getElementById(`card_${dayNum}_${exerciseId}`);
+          const checkbox = document.getElementById(`check_${dayNum}_${exerciseId}`);
+          card.classList.toggle('completed', checkbox.checked);
+          saveProgress();
+        }
 
-        timerInterval = setInterval(() => {
-          timerSeconds = Math.floor((Date.now() - startTime) / 1000);
-          updateTimerDisplay();
-        }, 100);
+        function saveProgress() {
+          const progress = {};
+          document.querySelectorAll('.exercise-card input[type="checkbox"]').forEach(cb => {
+            progress[cb.id] = cb.checked;
+          });
+          localStorage.setItem('fitplanProgress', JSON.stringify(progress));
+        }
 
-        document.getElementById('timer-widget').classList.add('active');
-      }
-    }
+        function loadProgress() {
+          try {
+            const saved = localStorage.getItem('fitplanProgress');
+            if (saved) {
+              const progress = JSON.parse(saved);
+              Object.keys(progress).forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox && progress[id]) {
+                  checkbox.checked = true;
+                  const card = checkbox.closest('.exercise-card');
+                  if (card) card.classList.add('completed');
+                }
+              });
+            }
+          } catch (e) { }
+        }
 
-    function stopTimer() {
-      if (timerRunning) {
-        timerRunning = false;
-        clearInterval(timerInterval);
-        localStorage.setItem('fitplanTimer', JSON.stringify({ seconds: timerSeconds, running: false }));
-      }
-    }
+        function resetApp() {
+          if (confirm('Baştan başlamak istediğine emin misin?')) {
+            localStorage.removeItem('fitplanProgress');
+            localStorage.removeItem('fitplanWeights');
+            localStorage.removeItem('fitplanTimer');
+            localStorage.removeItem('fitplanWeekly');
+            localStorage.removeItem('fitplanUserAnswers');
+            localStorage.removeItem('fitplanHistory'); // Optional: keep history?
+            location.reload();
+          }
+        }
 
-    function resetTimer() {
-      stopTimer();
-      timerSeconds = 0;
-      updateTimerDisplay();
-      localStorage.removeItem('fitplanTimer');
-    }
+        // ============================================
+        // TIMER FUNCTIONALITY
+        // ============================================
+        let timerInterval = null;
+        let timerSeconds = 0;
+        let timerRunning = false;
 
-    function updateTimerDisplay() {
-      const mins = Math.floor(timerSeconds / 60);
-      const secs = timerSeconds % 60;
-      document.getElementById('timer-display').textContent =
-        `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-    }
+        function startTimer() {
+          if (!timerRunning) {
+            timerRunning = true;
+            const startTime = Date.now() - (timerSeconds * 1000);
+            localStorage.setItem('fitplanTimer', JSON.stringify({ startTime, running: true }));
 
-    function loadTimer() {
-      try {
-        const saved = localStorage.getItem('fitplanTimer');
-        if (saved) {
-          const data = JSON.parse(saved);
-          if (data.running && data.startTime) {
-            timerSeconds = Math.floor((Date.now() - data.startTime) / 1000);
-            startTimer();
-          } else if (data.seconds) {
-            timerSeconds = data.seconds;
-            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+              timerSeconds = Math.floor((Date.now() - startTime) / 1000);
+              updateTimerDisplay();
+            }, 100);
+
             document.getElementById('timer-widget').classList.add('active');
           }
         }
-      } catch (e) { }
-    }
 
-    // ============================================
-    // WEIGHT TRACKING
-    // ============================================
-    function saveWeight(dayNum, exerciseId, weight) {
-      try {
-        const weights = JSON.parse(localStorage.getItem('fitplanWeights') || '{}');
-        const today = new Date().toISOString().split('T')[0];
-        const key = `${dayNum}_${exerciseId}`;
-
-        if (!weights[key]) weights[key] = [];
-        weights[key].push({ date: today, weight: parseFloat(weight) });
-
-        // Keep last 30 entries
-        if (weights[key].length > 30) weights[key] = weights[key].slice(-30);
-
-        localStorage.setItem('fitplanWeights', JSON.stringify(weights));
-      } catch (e) { }
-    }
-
-    function getLastWeight(dayNum, exerciseId) {
-      try {
-        const weights = JSON.parse(localStorage.getItem('fitplanWeights') || '{}');
-        const key = `${dayNum}_${exerciseId}`;
-        const history = weights[key];
-        if (history && history.length > 0) {
-          return history[history.length - 1].weight;
+        function stopTimer() {
+          if (timerRunning) {
+            timerRunning = false;
+            clearInterval(timerInterval);
+            localStorage.setItem('fitplanTimer', JSON.stringify({ seconds: timerSeconds, running: false }));
+          }
         }
-      } catch (e) { }
-      return null;
-    }
 
-    // ============================================
-    // HISTORY PERSISTENCE
-    // ============================================
-    function saveWorkoutHistory(dayNum) {
-      try {
-        const history = JSON.parse(localStorage.getItem('fitplanHistory') || '{}');
-        const today = new Date().toISOString().split('T')[0];
-
-        // Calculate progress for the day
-        const progress = calculateDayProgress(dayNum);
-
-        // Get completed exercises
-        const prefix = `check_${dayNum}_`;
-        const checkboxes = Array.from(document.querySelectorAll(`input[id^="${prefix}"]`));
-        const completedExercises = checkboxes
-          .filter(cb => cb.checked)
-          .map(cb => cb.id.replace(prefix, ''));
-
-        // Save entry
-        history[today] = {
-          date: today,
-          dayNum: dayNum,
-          progress: progress,
-          completedExercises: completedExercises,
-          timestamp: Date.now()
-        };
-
-        localStorage.setItem('fitplanHistory', JSON.stringify(history));
-      } catch (e) {
-        console.error('Error saving history:', e);
-      }
-    }
-
-    // ============================================
-    // PROGRESS CALCULATION
-    // ============================================
-    function calculateDayProgress(dayNum) {
-      const prefix = `check_${dayNum}_`;
-      const checkboxes = Array.from(document.querySelectorAll(`input[id^="${prefix}"]`));
-      if (checkboxes.length === 0) return 0;
-      const completed = checkboxes.filter(cb => cb.checked).length;
-      return Math.round((completed / checkboxes.length) * 100);
-    }
-
-    function updateProgressBars() {
-      document.querySelectorAll('.progress-container').forEach(container => {
-        const dayNum = container.dataset.day;
-        const progress = calculateDayProgress(dayNum);
-        const fill = container.querySelector('.progress-fill');
-        const text = container.querySelector('.progress-text');
-        if (fill) fill.style.width = `${progress}%`;
-        if (text) text.textContent = `${progress}% tamamlandı`;
-      });
-    }
-
-    // ============================================
-    // "TODAY" BUTTON LOGIC
-    // ============================================
-    function getTodayWorkoutDay() {
-      try {
-        const userAnswers = JSON.parse(localStorage.getItem('fitplanUserAnswers') || '{}');
-        if (!userAnswers.daysPerWeek) return null;
-
-        const daysPerWeek = userAnswers.daysPerWeek;
-        const today = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
-
-        // Map days based on frequency
-        const workoutDays = {
-          2: [1, 4], // Mon, Thu
-          3: [1, 3, 5], // Mon, Wed, Fri
-          4: [1, 2, 4, 5], // Mon, Tue, Thu, Fri
-          5: [1, 2, 3, 4, 5] // Mon-Fri
-        };
-
-        const scheduledDays = workoutDays[daysPerWeek] || [];
-        const dayIndex = scheduledDays.indexOf(today);
-
-        if (dayIndex >= 0) {
-          return dayIndex + 1; // Return workout day number (1-indexed)
+        function resetTimer() {
+          stopTimer();
+          timerSeconds = 0;
+          updateTimerDisplay();
+          localStorage.removeItem('fitplanTimer');
         }
-        return 0; // Rest day
-      } catch (e) {
-        return null;
-      }
-    }
 
-    function showTodayButton() {
-      const todayDay = getTodayWorkoutDay();
-      if (todayDay && todayDay > 0) {
-        const button = document.createElement('button');
-        button.className = 'today-btn';
-        button.innerHTML = `
+        function updateTimerDisplay() {
+          const mins = Math.floor(timerSeconds / 60);
+          const secs = timerSeconds % 60;
+          document.getElementById('timer-display').textContent =
+            `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function loadTimer() {
+          try {
+            const saved = localStorage.getItem('fitplanTimer');
+            if (saved) {
+              const data = JSON.parse(saved);
+              if (data.running && data.startTime) {
+                timerSeconds = Math.floor((Date.now() - data.startTime) / 1000);
+                startTimer();
+              } else if (data.seconds) {
+                timerSeconds = data.seconds;
+                updateTimerDisplay();
+                document.getElementById('timer-widget').classList.add('active');
+              }
+            }
+          } catch (e) { }
+        }
+
+        // ============================================
+        // WEIGHT TRACKING
+        // ============================================
+        function saveWeight(dayNum, exerciseId, weight) {
+          try {
+            const weights = JSON.parse(localStorage.getItem('fitplanWeights') || '{}');
+            const today = new Date().toISOString().split('T')[0];
+            const key = `${dayNum}_${exerciseId}`;
+
+            if (!weights[key]) weights[key] = [];
+            weights[key].push({ date: today, weight: parseFloat(weight) });
+
+            // Keep last 30 entries
+            if (weights[key].length > 30) weights[key] = weights[key].slice(-30);
+
+            localStorage.setItem('fitplanWeights', JSON.stringify(weights));
+          } catch (e) { }
+        }
+
+        function getLastWeight(dayNum, exerciseId) {
+          try {
+            const weights = JSON.parse(localStorage.getItem('fitplanWeights') || '{}');
+            const key = `${dayNum}_${exerciseId}`;
+            const history = weights[key];
+            if (history && history.length > 0) {
+              return history[history.length - 1].weight;
+            }
+          } catch (e) { }
+          return null;
+        }
+
+        // ============================================
+        // HISTORY PERSISTENCE
+        // ============================================
+        function saveWorkoutHistory(dayNum) {
+          try {
+            const history = JSON.parse(localStorage.getItem('fitplanHistory') || '{}');
+            const today = new Date().toISOString().split('T')[0];
+
+            // Calculate progress for the day
+            const progress = calculateDayProgress(dayNum);
+
+            // Get completed exercises
+            const prefix = `check_${dayNum}_`;
+            const checkboxes = Array.from(document.querySelectorAll(`input[id^="${prefix}"]`));
+            const completedExercises = checkboxes
+              .filter(cb => cb.checked)
+              .map(cb => cb.id.replace(prefix, ''));
+
+            // Save entry
+            history[today] = {
+              date: today,
+              dayNum: dayNum,
+              progress: progress,
+              completedExercises: completedExercises,
+              timestamp: Date.now()
+            };
+
+            localStorage.setItem('fitplanHistory', JSON.stringify(history));
+          } catch (e) {
+            console.error('Error saving history:', e);
+          }
+        }
+
+        // ============================================
+        // PROGRESS CALCULATION
+        // ============================================
+        function calculateDayProgress(dayNum) {
+          const prefix = `check_${dayNum}_`;
+          const checkboxes = Array.from(document.querySelectorAll(`input[id^="${prefix}"]`));
+          if (checkboxes.length === 0) return 0;
+          const completed = checkboxes.filter(cb => cb.checked).length;
+          return Math.round((completed / checkboxes.length) * 100);
+        }
+
+        function updateProgressBars() {
+          document.querySelectorAll('.progress-container').forEach(container => {
+            const dayNum = container.dataset.day;
+            const progress = calculateDayProgress(dayNum);
+            const fill = container.querySelector('.progress-fill');
+            const text = container.querySelector('.progress-text');
+            if (fill) fill.style.width = `${progress}%`;
+            if (text) text.textContent = `${progress}% tamamlandı`;
+          });
+        }
+
+        // ============================================
+        // "TODAY" BUTTON LOGIC
+        // ============================================
+        function getTodayWorkoutDay() {
+          try {
+            const userAnswers = JSON.parse(localStorage.getItem('fitplanUserAnswers') || '{}');
+            if (!userAnswers.daysPerWeek) return null;
+
+            const daysPerWeek = userAnswers.daysPerWeek;
+            const today = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
+
+            // Map days based on frequency
+            const workoutDays = {
+              2: [1, 4], // Mon, Thu
+              3: [1, 3, 5], // Mon, Wed, Fri
+              4: [1, 2, 4, 5], // Mon, Tue, Thu, Fri
+              5: [1, 2, 3, 4, 5] // Mon-Fri
+            };
+
+            const scheduledDays = workoutDays[daysPerWeek] || [];
+            const dayIndex = scheduledDays.indexOf(today);
+
+            if (dayIndex >= 0) {
+              return dayIndex + 1; // Return workout day number (1-indexed)
+            }
+            return 0; // Rest day
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function showTodayButton() {
+          const todayDay = getTodayWorkoutDay();
+          if (todayDay && todayDay > 0) {
+            const button = document.createElement('button');
+            button.className = 'today-btn';
+            button.innerHTML = `
         Bugünkü Antrenman: Gün ${todayDay}
         <div class="subtitle">Başlamak için tıkla</div>
         `;
-        button.onclick = () => scrollToDay(todayDay);
+            button.onclick = () => scrollToDay(todayDay);
 
-        const programHeader = document.querySelector('.program-header');
-        if (programHeader) {
-          programHeader.insertAdjacentElement('afterend', button);
-        }
-      } else if (todayDay === 0) {
-        const button = document.createElement('button');
-        button.className = 'today-btn';
-        button.style.background = 'var(--bg-secondary)';
-        button.innerHTML = `
+            const programHeader = document.querySelector('.program-header');
+            if (programHeader) {
+              programHeader.insertAdjacentElement('afterend', button);
+            }
+          } else if (todayDay === 0) {
+            const button = document.createElement('button');
+            button.className = 'today-btn';
+            button.style.background = 'var(--bg-secondary)';
+            button.innerHTML = `
         Bugün Dinlenme Günü
         <div class="subtitle">Yarın devam edelim!</div>
         `;
-        button.disabled = true;
+            button.disabled = true;
 
-        const programHeader = document.querySelector('.program-header');
-        if (programHeader) {
-          programHeader.insertAdjacentElement('afterend', button);
-        }
-      }
-    }
-
-    function scrollToDay(dayNum) {
-      const headers = document.querySelectorAll('.day-header');
-      if (headers[dayNum - 1]) {
-        headers[dayNum - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(() => {
-          if (!headers[dayNum - 1].classList.contains('active')) {
-            headers[dayNum - 1].click();
+            const programHeader = document.querySelector('.program-header');
+            if (programHeader) {
+              programHeader.insertAdjacentElement('afterend', button);
+            }
           }
-        }, 500);
-      }
-    }
-
-    // ============================================
-    // WEEKLY ADAPTATION ENGINE
-    // ============================================
-    function saveWeeklyCompletion() {
-      try {
-        const weekStart = getWeekStart();
-        const weekly = JSON.parse(localStorage.getItem('fitplanWeekly') || '{}');
-
-        if (!weekly[weekStart]) {
-          weekly[weekStart] = { days: {}, totalCompletion: 0 };
         }
 
-        // Calculate completion for each day
-        for (let d = 1; d <= selectedDays; d++) {
-          weekly[weekStart].days[d] = calculateDayProgress(d);
+        function scrollToDay(dayNum) {
+          const headers = document.querySelectorAll('.day-header');
+          if (headers[dayNum - 1]) {
+            headers[dayNum - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => {
+              if (!headers[dayNum - 1].classList.contains('active')) {
+                headers[dayNum - 1].click();
+              }
+            }, 500);
+          }
         }
 
-        // Calculate average completion
-        const completionValues = Object.values(weekly[weekStart].days);
-        const avgCompletion = completionValues.reduce((a, b) => a + b, 0) / completionValues.length;
-        weekly[weekStart].totalCompletion = avgCompletion;
+        // ============================================
+        // WEEKLY ADAPTATION ENGINE
+        // ============================================
+        function saveWeeklyCompletion() {
+          try {
+            const weekStart = getWeekStart();
+            const weekly = JSON.parse(localStorage.getItem('fitplanWeekly') || '{}');
 
-        localStorage.setItem('fitplanWeekly', JSON.stringify(weekly));
-      } catch (e) { }
-    }
+            if (!weekly[weekStart]) {
+              weekly[weekStart] = { days: {}, totalCompletion: 0 };
+            }
 
-    function getWeekStart() {
-      const now = new Date();
-      const day = now.getDay();
-      const diff = now.getDate() - day + (day === 0 ? -6 : 1); // Monday
-      const monday = new Date(now.setDate(diff));
-      return monday.toISOString().split('T')[0];
-    }
+            // Calculate completion for each day
+            for (let d = 1; d <= selectedDays; d++) {
+              weekly[weekStart].days[d] = calculateDayProgress(d);
+            }
 
-    function getProgressionMultiplier() {
-      try {
-        const weekly = JSON.parse(localStorage.getItem('fitplanWeekly') || '{}');
-        const weeks = Object.keys(weekly).sort().reverse();
-        if (weeks.length === 0) return 1.0;
+            // Calculate average completion
+            const completionValues = Object.values(weekly[weekStart].days);
+            const avgCompletion = completionValues.reduce((a, b) => a + b, 0) / completionValues.length;
+            weekly[weekStart].totalCompletion = avgCompletion;
 
-        const lastWeek = weekly[weeks[0]];
-        if (!lastWeek) return 1.0;
+            localStorage.setItem('fitplanWeekly', JSON.stringify(weekly));
+          } catch (e) { }
+        }
 
-        const completion = lastWeek.totalCompletion;
+        function getWeekStart() {
+          const now = new Date();
+          const day = now.getDay();
+          const diff = now.getDate() - day + (day === 0 ? -6 : 1); // Monday
+          const monday = new Date(now.setDate(diff));
+          return monday.toISOString().split('T')[0];
+        }
 
-        // Progression rules
-        if (completion >= 90) return 1.05; // 5% increase
-        if (completion >= 70) return 1.0; // Maintain
-        return 0.95; // 5% decrease
-      } catch (e) {
-        return 1.0;
-      }
-    }
+        function getProgressionMultiplier() {
+          try {
+            const weekly = JSON.parse(localStorage.getItem('fitplanWeekly') || '{}');
+            const weeks = Object.keys(weekly).sort().reverse();
+            if (weeks.length === 0) return 1.0;
 
-    // ============================================
-    // INITIALIZATION
-    // ============================================
-    window.addEventListener('load', () => {
-      loadTimer();
+            const lastWeek = weekly[weeks[0]];
+            if (!lastWeek) return 1.0;
 
-      // Register Service Worker for PWA
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js')
-          .then(registration => console.log('SW registered:', registration.scope))
-          .catch(err => console.log('SW registration failed:', err));
-      }
+            const completion = lastWeek.totalCompletion;
 
-      // Check if user has previously created a program
-      const savedAnswers = localStorage.getItem('fitplanUserAnswers');
-      if (savedAnswers) {
-        try {
-          const answers = JSON.parse(savedAnswers);
-          if (answers.daysPerWeek && answers.goals && answers.goals.length > 0) {
-            // Restore state
-            selectedDays = answers.daysPerWeek;
-            selectedGoals = answers.goals;
+            // Progression rules
+            if (completion >= 90) return 1.05; // 5% increase
+            if (completion >= 70) return 1.0; // Maintain
+            return 0.95; // 5% decrease
+          } catch (e) {
+            return 1.0;
+          }
+        }
 
-            // Regenerate program
-            const program = generateProgram();
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        window.addEventListener('load', () => {
+          loadTimer();
 
-            // Hide questions, show program
-            document.getElementById('questions-section').style.display = 'none';
-            document.getElementById('program-section').style.display = 'block';
-            document.getElementById('fixed-bottom').style.display = 'none';
+          // Register Service Worker for PWA
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+              .then(registration => console.log('SW registered:', registration.scope))
+              .catch(err => console.log('SW registration failed:', err));
+          }
 
-            // Rebuild UI
-            const goalLabels = {
-              'kilo_verme': 'Kilo Verme',
-              'sikilasma': 'Sıkılaşma',
-              'kas': 'Kas Yapma',
-              'kol': 'Kol',
-              'karin': 'Karın',
-              'bacak': 'Bacak/Kalça',
-              'kondisyon': 'Kondisyon',
-              'esneklik': 'Esneklik',
-              'dayaniklilik': 'Dayanıklılık'
-            };
+          // Check if user has previously created a program
+          const savedAnswers = localStorage.getItem('fitplanUserAnswers');
+          if (savedAnswers) {
+            try {
+              const answers = JSON.parse(savedAnswers);
+              if (answers.daysPerWeek && answers.goals && answers.goals.length > 0) {
+                // Restore state
+                selectedDays = answers.daysPerWeek;
+                selectedGoals = answers.goals;
 
-            const summaryHtml = `
+                // Regenerate program
+                const program = generateProgram();
+
+                // Hide questions, show program
+                document.getElementById('questions-section').style.display = 'none';
+                document.getElementById('program-section').style.display = 'block';
+                document.getElementById('fixed-bottom').style.display = 'none';
+
+                // Rebuild UI
+                const goalLabels = {
+                  'kilo_verme': 'Kilo Verme',
+                  'sikilasma': 'Sıkılaşma',
+                  'kas': 'Kas Yapma',
+                  'kol': 'Kol',
+                  'karin': 'Karın',
+                  'bacak': 'Bacak/Kalça',
+                  'kondisyon': 'Kondisyon',
+                  'esneklik': 'Esneklik',
+                  'dayaniklilik': 'Dayanıklılık'
+                };
+
+                const summaryHtml = `
           <span class="summary-badge">${selectedGoals.map(g => goalLabels[g]).join(', ')}</span>
           <span class="summary-badge">Haftada ${selectedDays} gün</span>
           `;
-            document.getElementById('program-summary').innerHTML = summaryHtml;
+                document.getElementById('program-summary').innerHTML = summaryHtml;
 
-            const container = document.getElementById('days-container');
-            container.innerHTML = '';
+                const container = document.getElementById('days-container');
+                container.innerHTML = '';
 
-            program.forEach((dayExercises, index) => {
-              const dayNum = index + 1;
-              const dayHtml = `
+                program.forEach((dayExercises, index) => {
+                  const dayNum = index + 1;
+                  const dayHtml = `
           <div class="day-section">
             <div class="day-header ${dayNum === 1 ? 'active' : ''}" onclick="toggleDay(this)">
               <h3>Gün ${dayNum}</h3>
@@ -2251,135 +2027,135 @@
             </div>
           </div>
           `;
-              container.innerHTML += dayHtml;
-            });
+                  container.innerHTML += dayHtml;
+                });
 
-            // Restore progress and UI state
-            loadProgress();
-            updateProgressBars();
-            showTodayButton();
+                // Restore progress and UI state
+                loadProgress();
+                updateProgressBars();
+                showTodayButton();
+              }
+            } catch (e) {
+              console.error('Error restoring program:', e);
+            }
           }
-        } catch (e) {
-          console.error('Error restoring program:', e);
+        });
+
+        // Update progress bars whenever checkbox changes
+        const originalToggleComplete = toggleComplete;
+        toggleComplete = function (dayNum, exerciseId) {
+          originalToggleComplete(dayNum, exerciseId);
+          updateProgressBars();
+          saveWeeklyCompletion();
+          saveWorkoutHistory(dayNum);
+        };
+
+        // ============================================
+        // DRAWER NAVIGATION
+        // ============================================
+        function openDrawer() {
+          document.getElementById('drawer').classList.add('open');
+          document.getElementById('drawer-backdrop').classList.add('active');
         }
-      }
-    });
 
-    // Update progress bars whenever checkbox changes
-    const originalToggleComplete = toggleComplete;
-    toggleComplete = function (dayNum, exerciseId) {
-      originalToggleComplete(dayNum, exerciseId);
-      updateProgressBars();
-      saveWeeklyCompletion();
-      saveWorkoutHistory(dayNum);
-    };
+        function closeDrawer() {
+          document.getElementById('drawer').classList.remove('open');
+          document.getElementById('drawer-backdrop').classList.remove('active');
+        }
 
-    // ============================================
-    // DRAWER NAVIGATION
-    // ============================================
-    function openDrawer() {
-      document.getElementById('drawer').classList.add('open');
-      document.getElementById('drawer-backdrop').classList.add('active');
-    }
+        function navigateTo(section) {
+          closeDrawer();
 
-    function closeDrawer() {
-      document.getElementById('drawer').classList.remove('open');
-      document.getElementById('drawer-backdrop').classList.remove('active');
-    }
+          // Update active state
+          document.querySelectorAll('.drawer-menu-item').forEach(item => {
+            item.classList.remove('active');
+          });
+          const activeItem = document.querySelector(`.drawer-menu-item[onclick="navigateTo('${section}')"]`);
+          if (activeItem) activeItem.classList.add('active');
 
-    function navigateTo(section) {
-      closeDrawer();
+          // Hide all main sections
+          const sections = ['program-section', 'questions-section', 'history-section', 'weights-section', 'projects-section', 'fixed-bottom', 'welcome-header'];
+          sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+          });
 
-      // Update active state
-      document.querySelectorAll('.drawer-menu-item').forEach(item => {
-        item.classList.remove('active');
-      });
-      const activeItem = document.querySelector(`.drawer-menu-item[onclick="navigateTo('${section}')"]`);
-      if (activeItem) activeItem.classList.add('active');
+          // Always show app-bar in navigation
+          const appBar = document.getElementById('app-bar');
+          if (appBar) appBar.style.display = 'flex';
 
-      // Hide all main sections
-      const sections = ['program-section', 'questions-section', 'history-section', 'weights-section', 'projects-section', 'fixed-bottom', 'welcome-header'];
-      sections.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
-      });
+          // Handle navigation based on section
+          switch (section) {
+            case 'today':
+              document.getElementById('program-section').style.display = 'block';
+              showTodayButton(); // Will handle fixed bottom button
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              break;
 
-      // Always show app-bar in navigation
-      const appBar = document.getElementById('app-bar');
-      if (appBar) appBar.style.display = 'flex';
+            case 'history':
+              document.getElementById('history-section').style.display = 'block';
+              renderHistoryView();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              break;
 
-      // Handle navigation based on section
-      switch (section) {
-        case 'today':
-          document.getElementById('program-section').style.display = 'block';
-          showTodayButton(); // Will handle fixed bottom button
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          break;
+            case 'weights':
+              document.getElementById('weights-section').style.display = 'block';
+              renderWeightHistoryView();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              break;
 
-        case 'history':
-          document.getElementById('history-section').style.display = 'block';
-          renderHistoryView();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          break;
+            case 'stats':
+              alert('İstatistikler yakında eklenecek!');
+              document.getElementById('program-section').style.display = 'block';
+              document.getElementById('fixed-bottom').style.display = 'block';
+              break;
 
-        case 'weights':
-          document.getElementById('weights-section').style.display = 'block';
-          renderWeightHistoryView();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          break;
+            case 'projects':
+              document.getElementById('projects-section').style.display = 'block';
+              renderProjectsView();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              break;
+          }
+        }
 
-        case 'stats':
-          alert('İstatistikler yakında eklenecek!');
-          document.getElementById('program-section').style.display = 'block';
-          document.getElementById('fixed-bottom').style.display = 'block';
-          break;
+        // ============================================
+        // HISTORY VIEW
+        // ============================================
+        function renderHistoryView() {
+          const container = document.getElementById('history-container');
+          const history = JSON.parse(localStorage.getItem('fitplanHistory') || '{}');
+          const sortedDates = Object.keys(history).sort().reverse();
 
-        case 'projects':
-          document.getElementById('projects-section').style.display = 'block';
-          renderProjectsView();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          break;
-      }
-    }
+          if (sortedDates.length === 0) {
+            container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">Henüz geçmiş kaydı yok.<br>İlk antrenmanını tamamla!</p>';
+            return;
+          }
 
-    // ============================================
-    // HISTORY VIEW
-    // ============================================
-    function renderHistoryView() {
-      const container = document.getElementById('history-container');
-      const history = JSON.parse(localStorage.getItem('fitplanHistory') || '{}');
-      const sortedDates = Object.keys(history).sort().reverse();
+          let html = '';
+          let currentWeek = '';
 
-      if (sortedDates.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">Henüz geçmiş kaydı yok.<br>İlk antrenmanını tamamla!</p>';
-        return;
-      }
+          sortedDates.forEach(date => {
+            const entry = history[date];
+            const entryDate = new Date(date);
 
-      let html = '';
-      let currentWeek = '';
+            // Calculate week start for grouping
+            const day = entryDate.getDay();
+            const diff = entryDate.getDate() - day + (day === 0 ? -6 : 1);
+            const weekStart = new Date(entryDate.setDate(diff)).toISOString().split('T')[0];
 
-      sortedDates.forEach(date => {
-        const entry = history[date];
-        const entryDate = new Date(date);
-
-        // Calculate week start for grouping
-        const day = entryDate.getDay();
-        const diff = entryDate.getDate() - day + (day === 0 ? -6 : 1);
-        const weekStart = new Date(entryDate.setDate(diff)).toISOString().split('T')[0];
-
-        if (weekStart !== currentWeek) {
-          if (currentWeek !== '') html += '</div>'; // Close previous group
-          currentWeek = weekStart;
-          const weekLabel = new Date(weekStart).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' });
-          html += `
+            if (weekStart !== currentWeek) {
+              if (currentWeek !== '') html += '</div>'; // Close previous group
+              currentWeek = weekStart;
+              const weekLabel = new Date(weekStart).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' });
+              html += `
             <div class="history-week-group">
               <div class="history-week-label">Hafta Başlangıcı: ${weekLabel}</div>
           `;
-        }
+            }
 
-        const dateLabel = new Date(date).toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' });
+            const dateLabel = new Date(date).toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' });
 
-        html += `
+            html += `
           <div class="history-item">
             <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
               <span style="font-weight:600; font-size:15px; color:var(--text-primary);">Gün ${entry.dayNum}</span>
@@ -2391,45 +2167,45 @@
             </div>
           </div>
         `;
-      });
+          });
 
-      if (currentWeek !== '') html += '</div>'; // Close last group
-      container.innerHTML = html;
-    }
-
-    // ============================================
-    // WEIGHT HISTORY VIEW
-    // ============================================
-    function renderWeightHistoryView() {
-      const container = document.getElementById('weights-container');
-      const weights = JSON.parse(localStorage.getItem('fitplanWeights') || '{}');
-      const keys = Object.keys(weights);
-
-      if (keys.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">Henüz ağırlık kaydı yok.<br>Egzersiz kartlarına ağırlık girin.</p>';
-        return;
-      }
-
-      let html = '';
-
-      keys.forEach(key => {
-        const [dayNum, exerciseId] = key.split('_');
-        const history = weights[key].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        // Find exercise details
-        const exercise = exercises.find(e => e.id === exerciseId);
-        const name = exercise ? exercise.name : exerciseId;
-
-        // Calculate trend
-        let trendHtml = '';
-        if (history.length >= 2) {
-          const current = history[0].weight;
-          const prev = history[1].weight;
-          if (current > prev) trendHtml = `<span class="trend-up">📈 +${(current - prev).toFixed(1)}kg</span>`;
-          else if (current < prev) trendHtml = `<span class="trend-down">📉 ${(current - prev).toFixed(1)}kg</span>`;
+          if (currentWeek !== '') html += '</div>'; // Close last group
+          container.innerHTML = html;
         }
 
-        html += `
+        // ============================================
+        // WEIGHT HISTORY VIEW
+        // ============================================
+        function renderWeightHistoryView() {
+          const container = document.getElementById('weights-container');
+          const weights = JSON.parse(localStorage.getItem('fitplanWeights') || '{}');
+          const keys = Object.keys(weights);
+
+          if (keys.length === 0) {
+            container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">Henüz ağırlık kaydı yok.<br>Egzersiz kartlarına ağırlık girin.</p>';
+            return;
+          }
+
+          let html = '';
+
+          keys.forEach(key => {
+            const [dayNum, exerciseId] = key.split('_');
+            const history = weights[key].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Find exercise details
+            const exercise = exercises.find(e => e.id === exerciseId);
+            const name = exercise ? exercise.name : exerciseId;
+
+            // Calculate trend
+            let trendHtml = '';
+            if (history.length >= 2) {
+              const current = history[0].weight;
+              const prev = history[1].weight;
+              if (current > prev) trendHtml = `<span class="trend-up">📈 +${(current - prev).toFixed(1)}kg</span>`;
+              else if (current < prev) trendHtml = `<span class="trend-down">📉 ${(current - prev).toFixed(1)}kg</span>`;
+            }
+
+            html += `
           <div class="weight-item">
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <span style="font-weight:700; font-size:15px; color:var(--text-primary);">${name}</span>
@@ -2438,52 +2214,52 @@
             <div class="weight-history-list">
         `;
 
-        // Show last 5 entries
-        history.slice(0, 5).forEach(entry => {
-          const dateLabel = new Date(entry.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' });
-          html += `
+            // Show last 5 entries
+            history.slice(0, 5).forEach(entry => {
+              const dateLabel = new Date(entry.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' });
+              html += `
             <div class="weight-entry">
               <span>${dateLabel}</span>
               <span style="font-weight:600; color:var(--text-primary);">${entry.weight} kg</span>
             </div>
           `;
-        });
+            });
 
-        html += `
+            html += `
             </div>
           </div>
         `;
-      });
+          });
 
-      container.innerHTML = html;
-    }
+          container.innerHTML = html;
+        }
 
-    // ============================================
-    // PROJECTS LOGIC
-    // ============================================
-    function renderProjectsView() {
-      const container = document.getElementById('projects-container');
-      const projects = JSON.parse(localStorage.getItem('fitplanProjects') || '[]');
-      const activeProjectId = localStorage.getItem('fitplanActiveProjectId'); // null = default
+        // ============================================
+        // PROJECTS LOGIC
+        // ============================================
+        function renderProjectsView() {
+          const container = document.getElementById('projects-container');
+          const projects = JSON.parse(localStorage.getItem('fitplanProjects') || '[]');
+          const activeProjectId = localStorage.getItem('fitplanActiveProjectId'); // null = default
 
-      if (projects.length === 0) {
-        container.innerHTML = `
+          if (projects.length === 0) {
+            container.innerHTML = `
           <div style="text-align:center; padding:40px; color:var(--text-secondary)">
             <p>Henüz kayıtlı proje yok.</p>
             <p style="font-size:13px; margin-top:8px;">Mevcut programını kaydetmek için + butonuna bas.</p>
           </div>
         `;
-        return;
-      }
+            return;
+          }
 
-      let html = '';
+          let html = '';
 
-      projects.forEach(proj => {
-        const isActive = activeProjectId === proj.id;
-        const activeClass = isActive ? 'active-project' : '';
-        const badge = isActive ? '<span class="project-active-badge">AKTİF</span>' : '';
+          projects.forEach(proj => {
+            const isActive = activeProjectId === proj.id;
+            const activeClass = isActive ? 'active-project' : '';
+            const badge = isActive ? '<span class="project-active-badge">AKTİF</span>' : '';
 
-        html += `
+            html += `
           <div class="project-card ${activeClass}" onclick="activateProject('${proj.id}')">
             <div class="project-header">
               <span class="project-name">${proj.name}</span>
@@ -2499,107 +2275,107 @@
             </div>
           </div>
         `;
-      });
+          });
 
-      container.innerHTML = html;
-    }
+          container.innerHTML = html;
+        }
 
-    function openProjectModal() {
-      document.getElementById('project-modal').classList.add('active');
-    }
+        function openProjectModal() {
+          document.getElementById('project-modal').classList.add('active');
+        }
 
-    function closeProjectModal() {
-      document.getElementById('project-modal').classList.remove('active');
-    }
+        function closeProjectModal() {
+          document.getElementById('project-modal').classList.remove('active');
+        }
 
-    function saveProject() {
-      const name = document.getElementById('project-name').value;
-      const note = document.getElementById('project-note').value;
+        function saveProject() {
+          const name = document.getElementById('project-name').value;
+          const note = document.getElementById('project-note').value;
 
-      if (!name) { alert('Proje adı giriniz'); return; }
+          if (!name) { alert('Proje adı giriniz'); return; }
 
-      // Get current settings
-      const currentAnswers = JSON.parse(localStorage.getItem('fitplanUserAnswers') || '{}');
-      if (!currentAnswers.goals) { alert('Önce bir program oluşturmalısın'); return; }
+          // Get current settings
+          const currentAnswers = JSON.parse(localStorage.getItem('fitplanUserAnswers') || '{}');
+          if (!currentAnswers.goals) { alert('Önce bir program oluşturmalısın'); return; }
 
-      const newProject = {
-        id: 'proj_' + Date.now(),
-        name: name,
-        note: note,
-        goals: currentAnswers.goals,
-        days: currentAnswers.daysPerWeek,
-        createdAt: new Date().toISOString()
-      };
+          const newProject = {
+            id: 'proj_' + Date.now(),
+            name: name,
+            note: note,
+            goals: currentAnswers.goals,
+            days: currentAnswers.daysPerWeek,
+            createdAt: new Date().toISOString()
+          };
 
-      const projects = JSON.parse(localStorage.getItem('fitplanProjects') || '[]');
-      projects.push(newProject);
-      localStorage.setItem('fitplanProjects', JSON.stringify(projects));
+          const projects = JSON.parse(localStorage.getItem('fitplanProjects') || '[]');
+          projects.push(newProject);
+          localStorage.setItem('fitplanProjects', JSON.stringify(projects));
 
-      closeProjectModal();
-      renderProjectsView();
-      // Auto activate
-      activateProject(newProject.id);
-    }
+          closeProjectModal();
+          renderProjectsView();
+          // Auto activate
+          activateProject(newProject.id);
+        }
 
-    function activateProject(id) {
-      const projects = JSON.parse(localStorage.getItem('fitplanProjects') || '[]');
-      const target = projects.find(p => p.id === id);
+        function activateProject(id) {
+          const projects = JSON.parse(localStorage.getItem('fitplanProjects') || '[]');
+          const target = projects.find(p => p.id === id);
 
-      if (!target) return;
+          if (!target) return;
 
-      // Update Active ID
-      localStorage.setItem('fitplanActiveProjectId', id);
+          // Update Active ID
+          localStorage.setItem('fitplanActiveProjectId', id);
 
-      // Overwrite current program settings
-      const newSettings = {
-        goals: target.goals,
-        daysPerWeek: target.days
-      };
-      localStorage.setItem('fitplanUserAnswers', JSON.stringify(newSettings));
+          // Overwrite current program settings
+          const newSettings = {
+            goals: target.goals,
+            daysPerWeek: target.days
+          };
+          localStorage.setItem('fitplanUserAnswers', JSON.stringify(newSettings));
 
-      // Update Global State
-      selectedGoals = target.goals;
-      selectedDays = target.days;
+          // Update Global State
+          selectedGoals = target.goals;
+          selectedDays = target.days;
 
-      // Refresh UI
-      renderProjectsView();
+          // Refresh UI
+          renderProjectsView();
 
-      // Provide Feedback
-      alert(`"${target.name}" projesi yüklendi! Programın güncellendi.`);
+          // Provide Feedback
+          alert(`"${target.name}" projesi yüklendi! Programın güncellendi.`);
 
-      // Optionally go to today
-      navigateTo('today');
+          // Optionally go to today
+          navigateTo('today');
 
-      // Need to re-run showProgram to regenerate the view based on new settings
-      showProgram();
-    }
+          // Need to re-run showProgram to regenerate the view based on new settings
+          showProgram();
+        }
 
-    // Touch gesture support for drawer
-    let touchStartX = 0;
-    let touchEndX = 0;
+        // Touch gesture support for drawer
+        let touchStartX = 0;
+        let touchEndX = 0;
 
-    document.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
+        document.addEventListener('touchstart', e => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
 
-    document.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
+        document.addEventListener('touchend', e => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        });
 
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const swipeDistance = touchEndX - touchStartX;
+        function handleSwipe() {
+          const swipeThreshold = 50;
+          const swipeDistance = touchEndX - touchStartX;
 
-      // Swipe right from left edge to open
-      if (touchStartX < 30 && swipeDistance > swipeThreshold) {
-        openDrawer();
-      }
+          // Swipe right from left edge to open
+          if (touchStartX < 30 && swipeDistance > swipeThreshold) {
+            openDrawer();
+          }
 
-      // Swipe left to close
-      const drawer = document.getElementById('drawer');
-      if (drawer.classList.contains('open') && swipeDistance < -swipeThreshold) { closeDrawer(); }
-    } </script>
+          // Swipe left to close
+          const drawer = document.getElementById('drawer');
+          if (drawer.classList.contains('open') && swipeDistance < -swipeThreshold) { closeDrawer(); }
+        } </script>
 </body>
 
 </html>
