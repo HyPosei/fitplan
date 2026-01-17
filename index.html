@@ -346,6 +346,38 @@
       box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
     }
 
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      width: 90%;
+      max-width: 400px;
+      background: #181b21;
+      border: 1px solid var(--border);
+      padding: 32px;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 210;
+    }
+
     /* --- Buttons --- */
     .btn-primary {
       width: 100%;
@@ -2016,16 +2048,13 @@
 
       if (!name) { alert('Proje adı giriniz'); return; }
 
-      // Get current settings
-      const currentAnswers = JSON.parse(localStorage.getItem('fitplanUserAnswers') || '{}');
-      if (!currentAnswers.goals) { alert('Önce bir program oluşturmalısın'); return; }
-
+      // Create new blank project
       const newProject = {
         id: 'proj_' + Date.now(),
         name: name,
         note: note,
-        goals: currentAnswers.goals,
-        days: currentAnswers.daysPerWeek,
+        goals: [],
+        days: null,
         createdAt: new Date().toISOString()
       };
 
@@ -2034,8 +2063,11 @@
       localStorage.setItem('fitplanProjects', JSON.stringify(projects));
 
       closeProjectModal();
+      // Clear inputs
+      document.getElementById('project-name').value = '';
+      document.getElementById('project-note').value = '';
+
       renderProjectsView();
-      // Auto activate
       activateProject(newProject.id);
     }
 
@@ -2045,31 +2077,42 @@
 
       if (!target) return;
 
-      // Update Active ID
       localStorage.setItem('fitplanActiveProjectId', id);
 
-      // Overwrite current program settings
-      const newSettings = {
-        goals: target.goals,
-        daysPerWeek: target.days
-      };
-      localStorage.setItem('fitplanUserAnswers', JSON.stringify(newSettings));
+      if (!target.goals || target.goals.length === 0) {
+        // Empty Project -> Go to Questions
+        localStorage.removeItem('fitplanUserAnswers');
+        selectedGoals = [];
+        selectedDays = null;
 
-      // Update Global State
-      selectedGoals = target.goals;
-      selectedDays = target.days;
+        // Manual Navigation to Questions
+        closeDrawer();
+        document.getElementById('projects-section').style.display = 'none';
+        document.getElementById('program-section').style.display = 'none';
+        document.getElementById('questions-section').style.display = 'block';
+        document.getElementById('welcome-header').style.display = 'block';
 
-      // Refresh UI
-      renderProjectsView();
+        // Reset selections visually
+        document.querySelectorAll('.goal-btn').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('selected'));
 
-      // Provide Feedback
-      alert(`"${target.name}" projesi yüklendi! Programın güncellendi.`);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        alert(`"${target.name}" projesi oluşturuldu. Şimdi hedeflerini seç.`);
+      } else {
+        // Existing Project -> Load & Show Program
+        const newSettings = {
+          goals: target.goals,
+          daysPerWeek: target.days
+        };
+        localStorage.setItem('fitplanUserAnswers', JSON.stringify(newSettings));
+        selectedGoals = target.goals;
+        selectedDays = target.days;
 
-      // Optionally go to today
-      navigateTo('today');
-
-      // Need to re-run showProgram to regenerate the view based on new settings
-      showProgram();
+        renderProjectsView();
+        navigateTo('today');
+        showProgram();
+        alert(`"${target.name}" projesi yüklendi.`);
+      }
     }
 
     // Touch gesture support for drawer
