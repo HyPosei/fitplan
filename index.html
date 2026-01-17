@@ -1311,115 +1311,63 @@
     // ============================================
     const exercises = [
       // GÖĞÜS
-      {
-        id: "bench_press", name: "Barbell Bench Press", goals: ["kas", "sikilasma"], target: "Göğüs", sets: 4, reps:
-          "8-12", rest: 90, videoId: "cHwutxa3XLY", howToLink: "https://www.youtube.com/watch?v=cHwutxa3XLY", tip: "Barı
-      göğüs hizasından yukarı it" },
-      {
-          id: "incline_press", name: "Incline Bench Press", goals: ["kas"], target: "Üst Göğüs", sets: 4, reps: "8-12",
-          rest: 90, videoId: "3upIH4tyAQE", howToLink: "https://www.youtube.com/watch?v=3upIH4tyAQE", tip: "Üst göğüsü
-      hedefle" },
-      {
-            id: "dumbbell_fly", name: "Dumbbell Fly", goals: ["sikilasma", "kas"], target: "Göğüs İzolasyon", sets: 3, reps:
-              "12-15", rest: 60, videoId: "Gth_I4CEAB0", howToLink: "https://www.youtube.com/watch?v=Gth_I4CEAB0", tip: "Göğsü
-      esnet ve sıkıştır" },
-      {
-              id: "cable_crossover", name: "Cable Crossover", goals: ["sikilasma"], target: "Göğüs İç", sets: 3, reps:
-                "12-15", rest: 60, videoId: "2E1x1MvR9qo", howToLink: "https://www.youtube.com/watch?v=2E1x1MvR9qo", tip: "Sürekli
-      gerginlik altında tut" },
-      {
-                id: "chest_press_machine", name: "Chest Press Makinesi", goals: ["kas", "sikilasma"], target: "Göğüs", sets: 3,
-                reps: "10-12", rest: 60, videoId: "2wFMkurVmrQ", howToLink: "https://www.youtube.com/watch?v=2wFMkurVmrQ", tip:
-                  "Güvenli ve kontrollü hareket"
-              },
-      {
-        id: "pushup", name: "Push-Up", goals: ["kilo_verme", "sikilasma", "kas", "kol"], target: "Göğüs & Kol", sets: 3,
-        reps: "15-20", rest: 60, videoId: "RyzxRrBHn7k", howToLink: "https://www.youtube.com/watch?v=RyzxRrBHn7k", tip:
-          "Vücudun düz bir çizgi olmalı"
-      },
-      {
-        id: "dips", name: "Dips", goals: ["kas", "sikilasma", "kol"], target: "Alt Göğüs & Triceps", sets: 3, reps:
-          "8-12", rest: 90, videoId: "H9G1wL4yujU", howToLink: "https://www.youtube.com/watch?v=H9G1wL4yujU", tip: "Paralel
-      barlarda kontrollü in-çık" },
+      { id: "bench_press", name: "Barbell Bench Press", goals: ["kas", "sikilasma", "guc"], target: "Göğüs, Ön Omuz", region: "chest", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "cHwutxa3XLY", howToLink: "https://www.youtube.com/watch?v=cHwutxa3XLY", tip: "Barı göğüs hizasından yukarı it" },
+      { id: "incline_press", name: "Incline Bench Press", goals: ["kas", "guc"], target: "Üst Göğüs, Ön Omuz", region: "chest", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "3upIH4tyAQE", howToLink: "https://www.youtube.com/watch?v=3upIH4tyAQE", tip: "Üst göğüsü hedefle" },
+      { id: "dumbbell_fly", name: "Dumbbell Fly", goals: ["sikilasma", "kas"], target: "Göğüs İzolasyon", region: "chest", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "Gth_I4CEAB0", howToLink: "https://www.youtube.com/watch?v=Gth_I4CEAB0", tip: "Göğsü esnet ve sıkıştır" },
+      { id: "cable_crossover", name: "Cable Crossover", goals: ["sikilasma"], target: "Göğüs İç", region: "chest", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "2E1x1MvR9qo", howToLink: "https://www.youtube.com/watch?v=2E1x1MvR9qo", tip: "Sürekli gerginlik altında tut" },
+      { id: "chest_press_machine", name: "Chest Press Makinesi", goals: ["kas", "sikilasma"], target: "Göğüs", region: "chest", type: "machine", sets: 3, reps: "10-12", rest: 60, videoId: "2wFMkurVmrQ", howToLink: "https://www.youtube.com/watch?v=2wFMkurVmrQ", tip: "Güvenli ve kontrollü hareket" },
+      { id: "pushup", name: "Push-Up", goals: ["kilo_verme", "sikilasma", "kas", "kol"], target: "Göğüs & Kol", region: "chest", type: "body_weight", sets: 3, reps: "15-20", rest: 60, videoId: "RyzxRrBHn7k", howToLink: "https://www.youtube.com/watch?v=RyzxRrBHn7k", tip: "Vücudun düz bir çizgi olmalı" },
+      { id: "dips", name: "Dips", goals: ["kas", "sikilasma", "kol"], target: "Alt Göğüs & Triceps", region: "chest", type: "body_weight", sets: 3, reps: "8-12", rest: 90, videoId: "H9G1wL4yujU", howToLink: "https://www.youtube.com/watch?v=H9G1wL4yujU", tip: "Paralel barlarda kontrollü in-çık" },
+      { id: "decline_bench", name: "Decline Bench Press", goals: ["kas"], target: "Alt Göğüs", region: "chest", type: "free_weight", sets: 3, reps: "8-12", rest: 90, videoId: "0xRvl4Qv3ZY", howToLink: "https://www.youtube.com/watch?v=0xRvl4Qv3ZY", tip: "Alt göğüsü doldurmak için" },
+      { id: "machine_pec_deck", name: "Machine Pec Deck", goals: ["sikilasma"], target: "Göğüs İzolasyon", region: "chest", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "eGjt4lk6g34", howToLink: "https://www.youtube.com/watch?v=eGjt4lk6g34", tip: "İzole sıkıştırma hareketi" },
+      { id: "incline_dumbbell_fly", name: "Incline Dumbbell Fly", goals: ["sikilasma"], target: "Üst Göğüs", region: "chest", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "ajdFwa-qM98", howToLink: "https://www.youtube.com/watch?v=ajdFwa-qM98", tip: "Üst göğsü şekillendir" },
+      { id: "smith_bench", name: "Smith Machine Bench Press", goals: ["kas"], target: "Göğüs", region: "chest", type: "machine", sets: 4, reps: "8-12", rest: 90, videoId: "5p2J6oKJ2iw", howToLink: "https://www.youtube.com/watch?v=5p2J6oKJ2iw", tip: "Güvenli press" },
 
       // SIRT
-      {
-          id: "pullup", name: "Pull-Up", goals: ["kas", "kilo_verme", "sikilasma"], target: "Sırt & Biceps", sets: 3,
-          reps: "6-10", rest: 90, videoId: "eu3pSe55-Qg", howToLink: "https://www.youtube.com/watch?v=eu3pSe55-Qg", tip:
-            "Üst vücut çekiş gücü için temel"
-        },
-      {
-        id: "lat_pulldown", name: "Lat Pulldown", goals: ["kas", "sikilasma"], target: "Kanat Kasları", sets: 4, reps:
-          "10-12", rest: 60, videoId: "hEt8rkd7-Gk", howToLink: "https://www.youtube.com/watch?v=hEt8rkd7-Gk", tip: "Barfiks
-      alternatifi" },
-      {
-          id: "barbell_row", name: "Barbell Row", goals: ["kas", "sikilasma"], target: "Orta Sırt", sets: 4, reps: "8-12",
-          rest: 90, videoId: "-lGIRM-tbDk", howToLink: "https://www.youtube.com/watch?v=-lGIRM-tbDk", tip: "Sırt kalınlığı
-      ve güç için" },
-      {
-            id: "seated_cable_row", name: "Seated Cable Row", goals: ["sikilasma", "kas"], target: "Orta Sırt", sets: 3,
-            reps: "12-15", rest: 60, videoId: "DOlLdf20xf0", howToLink: "https://www.youtube.com/watch?v=DOlLdf20xf0", tip:
-              "Oturarak sırt çekiş hareketi"
-          },
-      {
-        id: "hyperextension", name: "Hyperextension", goals: ["sikilasma", "karin"], target: "Alt Sırt & Bel", sets: 3,
-        reps: "12-15", rest: 45, videoId: "cfdi2mTOv6Q", howToLink: "https://www.youtube.com/watch?v=cfdi2mTOv6Q", tip:
-          "Bel kaslarını güçlendir"
-      },
+      { id: "pullup", name: "Pull-Up", goals: ["kas", "kilo_verme", "sikilasma"], target: "Sırt & Biceps", region: "back", type: "body_weight", sets: 3, reps: "6-10", rest: 90, videoId: "eu3pSe55-Qg", howToLink: "https://www.youtube.com/watch?v=eu3pSe55-Qg", tip: "Üst vücut çekiş gücü" },
+      { id: "lat_pulldown", name: "Lat Pulldown", goals: ["kas", "sikilasma"], target: "Kanat Kasları", region: "back", type: "machine", sets: 4, reps: "10-12", rest: 60, videoId: "hEt8rkd7-Gk", howToLink: "https://www.youtube.com/watch?v=hEt8rkd7-Gk", tip: "Barfiks alternatifi" },
+      { id: "barbell_row", name: "Barbell Row", goals: ["kas", "sikilasma", "guc"], target: "Orta Sırt", region: "back", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "-lGIRM-tbDk", howToLink: "https://www.youtube.com/watch?v=-lGIRM-tbDk", tip: "Sırt kalınlığı ve güç" },
+      { id: "seated_cable_row", name: "Seated Cable Row", goals: ["sikilasma", "kas"], target: "Orta Sırt", region: "back", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "DOlLdf20xf0", howToLink: "https://www.youtube.com/watch?v=DOlLdf20xf0", tip: "Oturarak çekiş hareketi" },
+      { id: "hyperextension", name: "Hyperextension", goals: ["sikilasma", "karin", "guc"], target: "Alt Sırt & Bel", region: "back", type: "body_weight", sets: 3, reps: "12-15", rest: 45, videoId: "cfdi2mTOv6Q", howToLink: "https://www.youtube.com/watch?v=cfdi2mTOv6Q", tip: "Bel kaslarını güçlendir" },
+      { id: "assisted_pullup", name: "Assisted Pull-Up", goals: ["kas", "sikilasma"], target: "Sırt", region: "back", type: "machine", sets: 3, reps: "8-12", rest: 90, videoId: "Z2n58m2i4jg", howToLink: "https://www.youtube.com/watch?v=Z2n58m2i4jg", tip: "Makine destekli barfiks" },
+      { id: "single_arm_row", name: "Single Arm Dumbbell Row", goals: ["kas", "sikilasma"], target: "Kanat", region: "back", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "pYcpY20QaE8", howToLink: "https://www.youtube.com/watch?v=pYcpY20QaE8", tip: "Tek taraflı güç ve denge" },
+      { id: "wide_grip_lat", name: "Wide Grip Lat Pulldown", goals: ["sikilasma"], target: "Kanat", region: "back", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "lueEJGjTuPQ", howToLink: "https://www.youtube.com/watch?v=lueEJGjTuPQ", tip: "Sırt genişliği için" },
+      { id: "reverse_grip_lat", name: "Reverse Grip Lat Pulldown", goals: ["kas"], target: "Alt Kanat", region: "back", type: "machine", sets: 3, reps: "10-12", rest: 60, videoId: "7oQX5nVJjIg", howToLink: "https://www.youtube.com/watch?v=7oQX5nVJjIg", tip: "Alt kanat ve biceps" },
 
       // OMUZ
-      {
-        id: "overhead_press", name: "Overhead Press", goals: ["kas", "kol"], target: "Ön & Orta Omuz", sets: 4, reps:
-          "8-12", rest: 90, videoId: "13YElyAtd84", howToLink: "https://www.youtube.com/watch?v=13YElyAtd84", tip: "Temel
-      dikey itiş hareketi" },
-      {
-          id: "lateral_raise", name: "Lateral Raise", goals: ["sikilasma", "kol"], target: "Orta Omuz", sets: 3, reps:
-            "12-15", rest: 45, videoId: "weDBwj9Kuaw", howToLink: "https://www.youtube.com/watch?v=weDBwj9Kuaw", tip: "Omuz
-      genişliği kazandırır" },
-      {
-            id: "face_pull", name: "Face Pull", goals: ["sikilasma"], target: "Arka Omuz", sets: 3, reps: "15-20", rest: 45,
-            videoId: "vuDO21_zqbQ", howToLink: "https://www.youtube.com/watch?v=vuDO21_zqbQ", tip: "Postür düzeltici hareket"
-          },
+      { id: "overhead_press", name: "Overhead Press", goals: ["kas", "kol", "guc"], target: "Ön & Orta Omuz", region: "shoulder", type: "free_weight", sets: 4, reps: "8-12", rest: 90, videoId: "13YElyAtd84", howToLink: "https://www.youtube.com/watch?v=13YElyAtd84", tip: "Temel dikey itiş" },
+      { id: "lateral_raise", name: "Lateral Raise", goals: ["sikilasma", "kol"], target: "Orta Omuz", region: "shoulder", type: "free_weight", sets: 3, reps: "12-15", rest: 45, videoId: "weDBwj9Kuaw", howToLink: "https://www.youtube.com/watch?v=weDBwj9Kuaw", tip: "Omuz genişliği kazandırır" },
+      { id: "face_pull", name: "Face Pull", goals: ["sikilasma"], target: "Arka Omuz", region: "shoulder", type: "machine", sets: 3, reps: "15-20", rest: 45, videoId: "vuDO21_zqbQ", howToLink: "https://www.youtube.com/watch?v=vuDO21_zqbQ", tip: "Postür düzeltici" },
+      { id: "arnold_press", name: "Arnold Press", goals: ["kas"], target: "Ön Omuz", region: "shoulder", type: "free_weight", sets: 3, reps: "10-12", rest: 90, videoId: "6Z15_WdXmVw", howToLink: "https://www.youtube.com/watch?v=6Z15_WdXmVw", tip: "Omuz hacmi ve şekli" },
+      { id: "cable_lateral", name: "Cable Lateral Raise", goals: ["sikilasma"], target: "Orta Omuz", region: "shoulder", type: "machine", sets: 3, reps: "15-20", rest: 45, videoId: "0Z6zKqH2G9g", howToLink: "https://www.youtube.com/watch?v=0Z6zKqH2G9g", tip: "Sürekli gerginlik" },
+      { id: "rear_delt_raise", name: "Rear Delt Dumbbell Raise", goals: ["sikilasma"], target: "Arka Omuz", region: "shoulder", type: "free_weight", sets: 3, reps: "15-20", rest: 45, videoId: "eaXq7UjE5A0", howToLink: "https://www.youtube.com/watch?v=eaXq7UjE5A0", tip: "Omuz dengesi" },
 
       // KOL
-      {
-        id: "barbell_curl", name: "Barbell Curl", goals: ["kas", "kol"], target: "Biceps", sets: 3, reps: "10-12", rest:
-          60, videoId: "M3qQOkiJfoU", howToLink: "https://www.youtube.com/watch?v=M3qQOkiJfoU", tip: "Ön kol hacmi için
-      temel curl" },
-      {
-          id: "hammer_curl", name: "Hammer Curl", goals: ["kas", "kol"], target: "Biceps & Ön Kol", sets: 3, reps:
-            "10-12", rest: 60, videoId: "X98pBvg1mJ8", howToLink: "https://www.youtube.com/watch?v=X98pBvg1mJ8", tip: "Biceps
-      kalınlığı sağlar" },
-      {
-            id: "triceps_pushdown", name: "Triceps Pushdown", goals: ["kas", "sikilasma", "kol"], target: "Triceps", sets:
-              3, reps: "12-15", rest: 60, videoId: "YsirG0x9Pf4", howToLink: "https://www.youtube.com/watch?v=YsirG0x9Pf4", tip:
-              "Arka kol izolasyon hareketi"
-          },
+      { id: "barbell_curl", name: "Barbell Curl", goals: ["kas", "kol"], target: "Biceps", region: "arm", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "M3qQOkiJfoU", howToLink: "https://www.youtube.com/watch?v=M3qQOkiJfoU", tip: "Temel biceps hacmi" },
+      { id: "hammer_curl", name: "Hammer Curl", goals: ["kas", "kol"], target: "Biceps & Ön Kol", region: "arm", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "X98pBvg1mJ8", howToLink: "https://www.youtube.com/watch?v=X98pBvg1mJ8", tip: "Biceps kalınlığı" },
+      { id: "triceps_pushdown", name: "Triceps Pushdown", goals: ["kas", "sikilasma", "kol"], target: "Triceps", region: "arm", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "YsirG0x9Pf4", howToLink: "https://www.youtube.com/watch?v=YsirG0x9Pf4", tip: "Arka kol izolasyon" },
+      { id: "concentration_curl", name: "Concentration Curl", goals: ["sikilasma", "kol"], target: "Biceps", region: "arm", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "0AUGkch3tzc", howToLink: "https://www.youtube.com/watch?v=0AUGkch3tzc", tip: "Biceps tepe noktası" },
+      { id: "preacher_curl", name: "Preacher Curl Machine", goals: ["kas", "kol"], target: "Biceps", region: "arm", type: "machine", sets: 3, reps: "10-12", rest: 60, videoId: "DoCWeUBA0Gs", howToLink: "https://www.youtube.com/watch?v=DoCWeUBA0Gs", tip: "İzole biceps" },
+      { id: "overhead_triceps", name: "Overhead Triceps Ext", goals: ["kas", "kol"], target: "Triceps", region: "arm", type: "free_weight", sets: 3, reps: "10-12", rest: 60, videoId: "_gsUck-7M74", howToLink: "https://www.youtube.com/watch?v=_gsUck-7M74", tip: "Triceps uzun başı" },
+      { id: "triceps_kickback", name: "Triceps Kickback", goals: ["sikilasma", "kol"], target: "Triceps", region: "arm", type: "free_weight", sets: 3, reps: "15-20", rest: 45, videoId: "6SS6K3lAwZ8", howToLink: "https://www.youtube.com/watch?v=6SS6K3lAwZ8", tip: "Sıkılaştırma" },
 
-      // BACAK
-      {
-        id: "squat", name: "Squat", goals: ["kas", "kilo_verme", "sikilasma", "bacak"], target: "Bacak & Kalça", sets:
-          4, reps: "8-12", rest: 120, videoId: "WZRJW4UpkkE", howToLink: "https://www.youtube.com/watch?v=WZRJW4UpkkE", tip:
-          "Tüm alt vücut için en temel hareket"
-      },
-      {
-        id: "leg_press", name: "Leg Press", goals: ["kas", "bacak"], target: "Quadriceps & Kalça", sets: 4, reps:
-          "10-12", rest: 90, videoId: "2q7kXFKsIwY", howToLink: "https://www.youtube.com/watch?v=2q7kXFKsIwY", tip: "Bacak
-      hacmi için güvenli makine" },
-      {
-          id: "leg_curl", name: "Leg Curl", goals: ["sikilasma", "bacak"], target: "Hamstring", sets: 3, reps: "12-15",
-          rest: 60, videoId: "69_4qE2o-9A", howToLink: "https://www.youtube.com/watch?v=69_4qE2o-9A", tip: "Arka bacak
-      izolasyonu" },
-      {
-            id: "hip_thrust", name: "Hip Thrust", goals: ["kas", "sikilasma", "bacak"], target: "Kalça", sets: 4, reps:
-              "10-15", rest: 90, videoId: "u-lCNOsSGnc", howToLink: "https://www.youtube.com/watch?v=u-lCNOsSGnc", tip: "Kalça
-      kasları için en etkili hareket" },
-      {
-              id: "standing_calf_raise", name: "Standing Calf Raise", goals: ["kas", "bacak"], target: "Baldır", sets: 4,
-              reps: "15-20", rest: 45, videoId: "n4czfyhJZXM", howToLink: "https://www.youtube.com/watch?v=n4czfyhJZXM", tip:
-                "Baldır hacmi ve dayanıklılığı için"
-            }
-      ];
+      // BACAK & KALÇA
+      { id: "squat", name: "Squat", goals: ["kas", "kilo_verme", "sikilasma", "bacak", "guc"], target: "Bacak & Kalça", region: "leg", type: "free_weight", sets: 4, reps: "8-12", rest: 120, videoId: "WZRJW4UpkkE", howToLink: "https://www.youtube.com/watch?v=WZRJW4UpkkE", tip: "Temel alt vücut" },
+      { id: "leg_press", name: "Leg Press", goals: ["kas", "bacak"], target: "Quadriceps", region: "leg", type: "machine", sets: 4, reps: "10-12", rest: 90, videoId: "2q7kXFKsIwY", howToLink: "https://www.youtube.com/watch?v=2q7kXFKsIwY", tip: "Bacak hacmi" },
+      { id: "leg_curl", name: "Leg Curl", goals: ["sikilasma", "bacak"], target: "Hamstring", region: "leg", type: "machine", sets: 3, reps: "12-15", rest: 60, videoId: "69_4qE2o-9A", howToLink: "https://www.youtube.com/watch?v=69_4qE2o-9A", tip: "Arka bacak izolasyonu" },
+      { id: "hip_thrust", name: "Hip Thrust", goals: ["kas", "sikilasma", "bacak"], target: "Kalça", region: "leg", type: "free_weight", sets: 4, reps: "10-15", rest: 90, videoId: "u-lCNOsSGnc", howToLink: "https://www.youtube.com/watch?v=u-lCNOsSGnc", tip: "Kalça için en etkili" },
+      { id: "calf_raise", name: "Standing Calf Raise", goals: ["kas", "bacak"], target: "Baldır", region: "leg", type: "machine", sets: 4, reps: "15-20", rest: 45, videoId: "n4czfyhJZXM", howToLink: "https://www.youtube.com/watch?v=n4czfyhJZXM", tip: "Baldır hacmi" },
+      { id: "walking_lunge", name: "Walking Lunge", goals: ["sikilasma", "bacak", "kilo_verme"], target: "Bacak & Kalça", region: "leg", type: "free_weight", sets: 3, reps: "12-15", rest: 60, videoId: "wrwwXE_x-pQ", howToLink: "https://www.youtube.com/watch?v=wrwwXE_x-pQ", tip: "Dinamik bacak hareketi" },
+      { id: "split_squat", name: "Bulgarian Split Squat", goals: ["kas", "sikilasma", "bacak"], target: "Kalça & Bacak", region: "leg", type: "free_weight", sets: 3, reps: "10-12", rest: 90, videoId: "2C-uNgKwPLE", howToLink: "https://www.youtube.com/watch?v=2C-uNgKwPLE", tip: "Tek bacak kuvveti" },
+      { id: "glute_kickback", name: "Glute Kickback Machine", goals: ["sikilasma", "bacak"], target: "Kalça", region: "leg", type: "machine", sets: 3, reps: "15-20", rest: 60, videoId: "SJ1Xuz9D-ZQ", howToLink: "https://www.youtube.com/watch?v=SJ1Xuz9D-ZQ", tip: "Kalça izolasyonu" },
+      { id: "sumo_squat", name: "Sumo Squat", goals: ["sikilasma", "bacak"], target: "İç Bacak & Kalça", region: "leg", type: "free_weight", sets: 3, reps: "12-15", rest: 90, videoId: "GZbfZ033f74", howToLink: "https://www.youtube.com/watch?v=GZbfZ033f74", tip: "İç bacak odaklı" },
+
+      // KARIN / CORE
+      { id: "crunch", name: "Crunch", goals: ["sikilasma", "karin"], target: "Karın", region: "core", type: "body_weight", sets: 3, reps: "20-25", rest: 45, videoId: "Xyd_fa5zoEU", howToLink: "https://www.youtube.com/watch?v=Xyd_fa5zoEU", tip: "Mide kaslarını sıkıştır" },
+      { id: "leg_raise", name: "Leg Raise", goals: ["sikilasma", "karin"], target: "Alt Karın", region: "core", type: "body_weight", sets: 3, reps: "15-20", rest: 45, videoId: "JB2oyawG9KI", howToLink: "https://www.youtube.com/watch?v=JB2oyawG9KI", tip: "Alt karın düzleştirme" },
+      { id: "plank", name: "Plank", goals: ["sikilasma", "karin", "guc"], target: "Core & Bel", region: "core", type: "body_weight", sets: 3, reps: "45-60sn", rest: 60, videoId: "ASdvN_XEl_c", howToLink: "https://www.youtube.com/watch?v=ASdvN_XEl_c", tip: "Statik dayanıklılık" }
+    ];
+
 
     // APP STATE
     let selectedGoals = [];
@@ -1450,27 +1398,58 @@
 
     // GENERATE PROGRAM
     function generateProgram() {
-      let matchingExercises = exercises.filter(ex =>
-        ex.goals.some(g => selectedGoals.includes(g))
-      );
-      if (matchingExercises.length === 0) matchingExercises = [...exercises];
-      matchingExercises = shuffleArray(matchingExercises);
+      // 1. Filter and Score Exercises
+      let activeExercises = exercises.map(ex => {
+        let score = 0;
+        let matchCount = 0;
+
+        // Score by Goal Match
+        selectedGoals.forEach(g => {
+          if (ex.goals.includes(g)) {
+            score += 10;
+            matchCount++;
+          }
+        });
+
+        // Bonus for Compound Movements (Free Weight)
+        if (ex.type === 'free_weight') score += 2;
+
+        return { exercise: ex, score: score, matchCount: matchCount };
+      }).filter(item => item.matchCount > 0);
+
+      // Fallback if no specific matches (shouldn't happen usually)
+      if (activeExercises.length === 0) {
+        activeExercises = exercises.map(ex => ({ exercise: ex, score: 1, matchCount: 1 }));
+      }
+
+      // 2. Shuffle within Score Tiers (to keep it fresh but relevant)
+      activeExercises = shuffleArray(activeExercises).sort((a, b) => b.score - a.score);
 
       const days = [];
       const exercisesPerDay = 6;
-      let exerciseIndex = 0;
+      let availableExercises = activeExercises.map(item => item.exercise);
 
+      // 3. Distribute across days with Region Balance
       for (let d = 0; d < selectedDays; d++) {
-        const dayExercises = []; for (let i = 0; i < exercisesPerDay && exerciseIndex
-          < matchingExercises.length; i++) { dayExercises.push(matchingExercises[exerciseIndex]); exerciseIndex++; } if
-          (dayExercises.length < exercisesPerDay) {
-          exerciseIndex = 0; const remaining = exercisesPerDay -
-            dayExercises.length; for (let i = 0; i < remaining && i < matchingExercises.length; i++) {
-              if
-                (!dayExercises.find(e => e.id === matchingExercises[i].id)) {
-                dayExercises.push(matchingExercises[i]);
-              }
-            }
+        const dayExercises = [];
+        const usedRegions = new Set();
+
+        // Try to pick exercises with distinct regions per day if possible (full body feel)
+        // OR just fill efficiently
+        for (let i = 0; i < exercisesPerDay; i++) {
+          // Find next best unused exercise
+          const nextIndex = availableExercises.findIndex(ex =>
+            !dayExercises.includes(ex) // Simple duplicate check
+          );
+
+          if (nextIndex >= 0) {
+            dayExercises.push(availableExercises[nextIndex]);
+            availableExercises.splice(nextIndex, 1); // Remove used to avoid repeating in same cycle
+          } else {
+            // Reset available if run out (for high frequency days)
+            availableExercises = shuffleArray(exercises.filter(ex => ex.goals.some(g => selectedGoals.includes(g))));
+            i--; // Retry slot
+          }
         }
         days.push(dayExercises);
       }
@@ -1512,11 +1491,11 @@
         'kas': 'Kas Yapma',
         'kol': 'Kol',
         'karin': 'Karın',
-        'bacak': 'Bacak/Kalça'
+        'bacak': 'Bacak'
       };
 
       const summaryHtml = `
-        <span class="summary-badge">${selectedGoals.map(g => goalLabels[g]).join(', ')}</span>
+        <span class="summary-badge">${selectedGoals.map(g => goalLabels[g] || g).join(', ')}</span>
         <span class="summary-badge">Haftada ${selectedDays} gün</span>
         `;
       document.getElementById('program-summary').innerHTML = summaryHtml;
@@ -1572,6 +1551,9 @@
       const lastWeight = getLastWeight(dayNum, exercise.id);
       const weightInputId = `weight_${dayNum}_${exercise.id}`;
 
+      const typeLabels = { 'free_weight': 'Serbest Ağırlık', 'machine': 'Makine', 'body_weight': 'Vücut Ağırlığı' };
+      const regionLabels = { 'chest': 'Göğüs', 'back': 'Sırt', 'shoulder': 'Omuz', 'arm': 'Kol', 'leg': 'Bacak', 'core': 'Karın' };
+
       return `
         <div class="exercise-card" id="card_${dayNum}_${exercise.id}">
           <div class="exercise-header">
@@ -1583,6 +1565,7 @@
           </div>
 
           <div class="exercise-meta">
+            <span>${regionLabels[exercise.region] || exercise.region} • ${typeLabels[exercise.type] || exercise.type}</span>
             <span>Dinlenme: ${exercise.rest}sn</span>
           </div>
 
