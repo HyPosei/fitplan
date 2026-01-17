@@ -592,6 +592,10 @@
       display: flex;
     }
 
+    .goal-btn * {
+      pointer-events: none;
+    }
+
     /* Day Buttons */
     .day-grid {
       display: flex;
@@ -1358,6 +1362,50 @@
               </svg>
             </div>
             <span class="label">Bacak & Kalça</span>
+            <span class="check">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" />
+              </svg>
+            </span>
+          </button>
+          <button class="goal-btn" data-goal="kondisyon">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                stroke-linecap="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+              </svg>
+            </div>
+            <span class="label">Kondisyon</span>
+            <span class="check">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" />
+              </svg>
+            </span>
+          </button>
+          <button class="goal-btn" data-goal="esneklik">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                stroke-linecap="round">
+                <circle cx="12" cy="7" r="4" />
+                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+              </svg>
+            </div>
+            <span class="label">Esneklik</span>
+            <span class="check">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" />
+              </svg>
+            </span>
+          </button>
+          <button class="goal-btn" data-goal="dayaniklilik">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                stroke-linecap="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <span class="label">Dayanıklılık</span>
             <span class="check">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M5 12l5 5L20 7" stroke="currentColor" />
@@ -2161,7 +2209,10 @@
               'kas': 'Kas Yapma',
               'kol': 'Kol',
               'karin': 'Karın',
-              'bacak': 'Bacak/Kalça'
+              'bacak': 'Bacak/Kalça',
+              'kondisyon': 'Kondisyon',
+              'esneklik': 'Esneklik',
+              'dayaniklilik': 'Dayanıklılık'
             };
 
             const summaryHtml = `
