@@ -1083,8 +1083,25 @@
   </div>
 
   <div class="container">
-    <!-- Header -->
-    <div class="header">
+    <!-- Compact App Bar (Hidden by default) -->
+    <div class="app-bar" id="app-bar" style="display: none;">
+      <div class="app-bar-left">
+        <button class="hamburger-btn" onclick="openDrawer()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div>
+          <div class="app-bar-title">FitPlan</div>
+        </div>
+      </div>
+      <div class="app-bar-right">
+        <!-- Progress indicator could go here -->
+      </div>
+    </div>
+
+    <!-- Header (Welcome Screen) -->
+    <div class="header" id="welcome-header">
       <div class="logo">FitPlan</div>
       <h1>Spor Programın</h1>
       <p>Sana özel, basit ve etkili</p>
@@ -1543,6 +1560,9 @@
       document.getElementById('questions-section').style.display = 'none';
       document.getElementById('program-section').style.display = 'block';
       document.getElementById('fixed-bottom').style.display = 'none';
+      document.getElementById('welcome-header').style.display = 'none';
+      const appBar = document.getElementById('app-bar');
+      if (appBar) appBar.style.display = 'flex';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1682,6 +1702,8 @@
         localStorage.removeItem('fitplanWeights');
         localStorage.removeItem('fitplanTimer');
         localStorage.removeItem('fitplanWeekly');
+        localStorage.removeItem('fitplanUserAnswers');
+        localStorage.removeItem('fitplanHistory'); // Optional: keep history?
         location.reload();
       }
     }
@@ -2075,11 +2097,16 @@
       if (activeItem) activeItem.classList.add('active');
 
       // Hide all main sections
-      const sections = ['program-section', 'questions-section', 'history-section', 'fixed-bottom'];
+      // Hide all main sections
+      const sections = ['program-section', 'questions-section', 'history-section', 'weights-section', 'fixed-bottom', 'welcome-header'];
       sections.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
       });
+
+      // Always show app-bar in navigation
+      const appBar = document.getElementById('app-bar');
+      if (appBar) appBar.style.display = 'flex';
 
       // Handle navigation based on section
       switch (section) {
