@@ -4,15 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#0f172a">
-  <meta name="description" content="Kişisel spor programın">
+  <meta name="version" content="2.1.0">
+  <meta name="theme-color" content="#ec4899">
+  <meta name="description" content="Kişisel spor programın - Ağırlık takibi, ilerleme ve daha fazlası">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="FitPlan">
   <link rel="manifest"
-    href="data:application/json,{%22name%22:%22FitPlan%22,%22short_name%22:%22FitPlan%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%230f172a%22,%22theme_color%22:%22%230f172a%22}">
+    href="data:application/json,{%22name%22:%22FitPlan%22,%22short_name%22:%22FitPlan%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%23ffffff%22,%22theme_color%22:%22%23ec4899%22}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <title>FitPlan</title>
+  <title>FitPlan - Senin Programın</title>
   <style>
     * {
       margin: 0;
@@ -22,19 +23,21 @@
     }
 
     :root {
-      --bg-primary: #0f172a;
-      --bg-secondary: #1e293b;
-      --bg-card: #1e293b;
-      --bg-input: #334155;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --accent: #3b82f6;
-      --accent-hover: #2563eb;
-      --accent-glow: rgba(59, 130, 246, 0.3);
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --bg-card: #ffffff;
+      --bg-input: #f1f3f5;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --accent: #ec4899;
+      --accent-hover: #db2777;
+      --accent-glow: rgba(236, 72, 153, 0.2);
       --success: #10b981;
-      --border: #334155;
-      --border-light: #475569;
+      --border: #e5e7eb;
+      --border-light: #f3f4f6;
+      --gradient-primary: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+      --gradient-card: linear-gradient(135deg, #fdf2f8 0%, #ffffff 100%);
     }
 
     html,
@@ -86,9 +89,10 @@
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 24px;
       margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     .card-label {
@@ -293,17 +297,18 @@
       font-family: 'Inter', sans-serif;
       font-size: 16px;
       font-weight: 700;
+      background: var(--gradient-primary);
       color: white;
-      background: var(--accent);
       border: none;
-      border-radius: 12px;
+      border-radius: 16px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px var(--accent-glow);
     }
 
     .btn-primary:active {
       transform: scale(0.98);
-      background: var(--accent-hover);
+      box-shadow: 0 2px 8px var(--accent-glow);
     }
 
     .btn-primary:disabled {
@@ -408,15 +413,16 @@
     .exercise-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 20px;
       padding: 20px;
-      margin-bottom: 12px;
-      transition: all 0.2s;
+      margin-bottom: 16px;
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     .exercise-card.completed {
-      border-color: var(--success);
-      background: rgba(16, 185, 129, 0.05);
+      background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+      border-color: #fbcfe8;
     }
 
     .exercise-card:last-child {
