@@ -1569,6 +1569,76 @@
     // ============================================
     window.addEventListener('load', () => {
       loadTimer();
+
+      // Check if user has previously created a program
+      const savedAnswers = localStorage.getItem('fitplanUserAnswers');
+      if (savedAnswers) {
+        try {
+          const answers = JSON.parse(savedAnswers);
+          if (answers.daysPerWeek && answers.goals && answers.goals.length > 0) {
+            // Restore state
+            selectedDays = answers.daysPerWeek;
+            selectedGoals = answers.goals;
+
+            // Regenerate program
+            const program = generateProgram();
+
+            // Hide questions, show program
+            document.getElementById('questions-section').style.display = 'none';
+            document.getElementById('program-section').style.display = 'block';
+            document.getElementById('fixed-bottom').style.display = 'none';
+
+            // Rebuild UI
+            const goalLabels = {
+              'kilo_verme': 'Kilo Verme',
+              'sikilasma': 'Sıkılaşma',
+              'kas': 'Kas Yapma',
+              'kol': 'Kol',
+              'karin': 'Karın',
+              'bacak': 'Bacak/Kalça'
+            };
+
+            const summaryHtml = `
+              <span class="summary-badge">${selectedGoals.map(g => goalLabels[g]).join(', ')}</span>
+              <span class="summary-badge">Haftada ${selectedDays} gün</span>
+            `;
+            document.getElementById('program-summary').innerHTML = summaryHtml;
+
+            const container = document.getElementById('days-container');
+            container.innerHTML = '';
+
+            program.forEach((dayExercises, index) => {
+              const dayNum = index + 1;
+              const dayHtml = `
+                <div class="day-section">
+                  <div class="day-header ${dayNum === 1 ? 'active' : ''}" onclick="toggleDay(this)">
+                    <h3>Gün ${dayNum}</h3>
+                    <span class="count">${dayExercises.length} egzersiz</span>
+                    <span class="arrow">▼</span>
+                  </div>
+                  <div class="day-content ${dayNum === 1 ? 'active' : ''}">
+                    <div class="progress-container" data-day="${dayNum}">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                      </div>
+                      <div class="progress-text">0% tamamlandı</div>
+                    </div>
+                    ${dayExercises.map(ex => renderExerciseCard(ex, dayNum)).join('')}
+                  </div>
+                </div>
+              `;
+              container.innerHTML += dayHtml;
+            });
+
+            // Restore progress and UI state
+            loadProgress();
+            updateProgressBars();
+            showTodayButton();
+          }
+        } catch (e) {
+          console.error('Error restoring program:', e);
+        }
+      }
     });
 
     // Update progress bars whenever checkbox changes
