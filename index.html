@@ -2134,9 +2134,13 @@
         }
 
         // Calculate completion for each day
-        for (let d = 1; d <= selectedDays; d++) { weekly[weekStart].days[d] = calculateDayProgress(d); } // Calculate
-          average completion const completionValues = Object.values(weekly[weekStart].days); const
-          avgCompletion = completionValues.reduce((a, b) => a + b, 0) / completionValues.length;
+        for (let d = 1; d <= selectedDays; d++) {
+          weekly[weekStart].days[d] = calculateDayProgress(d);
+        }
+
+        // Calculate average completion
+        const completionValues = Object.values(weekly[weekStart].days);
+        const avgCompletion = completionValues.reduce((a, b) => a + b, 0) / completionValues.length;
         weekly[weekStart].totalCompletion = avgCompletion;
 
         localStorage.setItem('fitplanWeekly', JSON.stringify(weekly));
