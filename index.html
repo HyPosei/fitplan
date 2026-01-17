@@ -270,6 +270,39 @@
       margin-bottom: 8px;
     }
 
+    /* Weight View */
+    .weight-item {
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .weight-history-list {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-light);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .weight-entry {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .trend-up {
+      color: var(--success);
+    }
+
+    .trend-down {
+      color: #ef4444;
+    }
+
     /* Cards */
     .card {
       background: var(--bg-card);
@@ -1244,6 +1277,17 @@
     </div>
   </div>
 
+  <!-- Weights Section -->
+  <div id="weights-section" style="display: none;" class="container">
+    <div class="card">
+      <div class="card-title">Ağırlık Geçmişi</div>
+      <div id="weights-container">
+        <!-- Weight items will be rendered here -->
+        <p style="text-align: center; color: var(--text-secondary); padding: 20px;">Henüz ağırlık kaydı yok.</p>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ============================================
     // EXERCISE DATA
@@ -2052,9 +2096,9 @@
           break;
 
         case 'weights':
-          alert('Ağırlık geçmişi yakında eklenecek!');
-          document.getElementById('program-section').style.display = 'block';
-          document.getElementById('fixed-bottom').style.display = 'block';
+          document.getElementById('weights-section').style.display = 'block';
+          renderWeightHistoryView();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
           break;
 
         case 'stats':
@@ -2123,6 +2167,67 @@
       });
 
       if (currentWeek !== '') html += '</div>'; // Close last group
+      container.innerHTML = html;
+    }
+
+    // ============================================
+    // WEIGHT HISTORY VIEW
+    // ============================================
+    function renderWeightHistoryView() {
+      const container = document.getElementById('weights-container');
+      const weights = JSON.parse(localStorage.getItem('fitplanWeights') || '{}');
+      const keys = Object.keys(weights);
+
+      if (keys.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">Henüz ağırlık kaydı yok.<br>Egzersiz kartlarına ağırlık girin.</p>';
+        return;
+      }
+
+      let html = '';
+
+      keys.forEach(key => {
+        const [dayNum, exerciseId] = key.split('_');
+        const history = weights[key].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Find exercise details
+        const exercise = exercises.find(e => e.id === exerciseId);
+        const name = exercise ? exercise.name : exerciseId;
+
+        // Calculate trend
+        let trendHtml = '';
+        if (history.length >= 2) {
+          const current = history[0].weight;
+          const prev = history[1].weight;
+          if (current > prev) trendHtml = `<span class="trend-up">📈 +${(current - prev).toFixed(1)}kg</span>`;
+          else if (current < prev) trendHtml = `<span class="trend-down">📉 ${(current - prev).toFixed(1)}kg</span>`;
+        }
+
+        html += `
+          <div class="weight-item">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-weight:700; font-size:15px; color:var(--text-primary);">${name}</span>
+              ${trendHtml}
+            </div>
+            <div class="weight-history-list">
+        `;
+
+        // Show last 5 entries
+        history.slice(0, 5).forEach(entry => {
+          const dateLabel = new Date(entry.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' });
+          html += `
+            <div class="weight-entry">
+              <span>${dateLabel}</span>
+              <span style="font-weight:600; color:var(--text-primary);">${entry.weight} kg</span>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
       container.innerHTML = html;
     }
 
