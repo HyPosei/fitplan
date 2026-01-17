@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Kişisel spor programın">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FitPlan">
+  <link rel="manifest"
+    href="data:application/json,{%22name%22:%22FitPlan%22,%22short_name%22:%22FitPlan%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%230f172a%22,%22theme_color%22:%22%230f172a%22}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>FitPlan</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --bg-input: #334155;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-glow: rgba(59, 130, 246, 0.3);
+      --success: #10b981;
+      --border: #334155;
+      --border-light: #475569;
+    }
+
+    html,
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      padding-bottom: 120px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 32px 0 40px;
+    }
+
+    .header .logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .card-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    /* Input Fields */
+    .input-group {
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      text-align: center;
+      padding: 20px;
+      background: var(--bg-input);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      color: var(--text-primary);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .input-group input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .input-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .input-group .unit {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Goal Buttons */
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .goal-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+
+    .goal-btn:active {
+      transform: scale(0.98);
+    }
+
+    .goal-btn.selected {
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .goal-btn .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .goal-btn[data-goal="kilo_verme"] .icon {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+    }
+
+    .goal-btn[data-goal="sikilasma"] .icon {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    }
+
+    .goal-btn[data-goal="kas"] .icon {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    .goal-btn[data-goal="kol"] .icon {
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+    }
+
+    .goal-btn[data-goal="karin"] .icon {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .goal-btn[data-goal="bacak"] .icon {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+    }
+
+    .goal-btn .label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .goal-btn .check {
+      display: none;
+      margin-left: auto;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .goal-btn .check svg {
+      width: 12px;
+      height: 12px;
+      stroke: white;
+      stroke-width: 3;
+    }
+
+    .goal-btn.selected .check {
+      display: flex;
+    }
+
+    /* Day Buttons */
+    .day-grid {
+      display: flex;
+      gap: 10px;
+    }
+
+    .day-btn {
+      flex: 1;
+      padding: 20px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .day-btn:active {
+      transform: scale(0.98);
+    }
+
+    .day-btn.selected {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Fixed Bottom Button */
+    .fixed-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(to top, var(--bg-primary) 80%, transparent);
+      z-index: 100;
+    }
+
+    .fixed-bottom .btn-primary {
+      display: block;
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+      background: var(--accent-hover);
+    }
+
+    .btn-primary:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+    }
+
+    /* Program Section */
+    #program-section {
+      display: none;
+      padding-top: 20px;
+    }
+
+    .program-header {
+      margin-bottom: 24px;
+    }
+
+    .program-header h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .program-summary {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .summary-badge {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* Day Accordion */
+    .day-section {
+      margin-bottom: 12px;
+    }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .day-header.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      border-radius: 12px 12px 0 0;
+    }
+
+    .day-header h3 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .day-header .count {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .day-header.active .count {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .day-header .arrow {
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    .day-header.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    .day-content {
+      display: none;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      padding: 16px;
+      background: var(--bg-primary);
+    }
+
+    .day-content.active {
+      display: block;
+    }
+
+    /* Exercise Card */
+    .exercise-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 12px;
+      transition: all 0.2s;
+    }
+
+    .exercise-card.completed {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .exercise-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .exercise-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .exercise-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .exercise-target {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .exercise-sets {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .exercise-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .exercise-meta span {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Video Container */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--bg-input);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .video-placeholder:hover {
+      background: var(--border);
+    }
+
+    .video-placeholder .play-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .video-placeholder .play-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      margin-left: 3px;
+    }
+
+    .video-placeholder .play-text {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Buttons Row */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-input);
+      color: var(--text-primary);
+    }
+
+    .btn-youtube {
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-youtube:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Checkbox */
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--bg-input);
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 12px;
+    }
+
+    .checkbox-row input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--success);
+    }
+
+    .checkbox-row label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    /* Tip */
+    .exercise-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    .exercise-tip svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Motivational Footer */
+    .motivation-box {
+      text-align: center;
+      padding: 40px 24px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-top: 24px;
+    }
+
+    .motivation-box h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .motivation-box p {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    /* Reset Button */
+    .btn-reset {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      margin: 24px 0 40px;
+    }
+
+    .btn-reset:hover {
+      color: var(--text-secondary);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    /* Number input */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    /* Subtle Info */
+    .info-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">FitPlan</div>
+      <h1>Spor Programın</h1>
+      <p>Sana özel, basit ve etkili</p>
+    </div>
+
+    <!-- Questions Section -->
+    <div id="questions-section">
+      <!-- Height -->
+      <div class="card">
+        <div class="card-label">1 / 5</div>
+        <div class="card-title">Boyun kaç cm?</div>
+        <div class="input-group">
+          <input type="number" id="height" placeholder="170" inputmode="numeric">
+          <span class="unit">cm</span>
+        </div>
+      </div>
+
+      <!-- Weight -->
+      <div class="card">
+        <div class="card-label">2 / 5</div>
+        <div class="card-title">Kilon kaç kg?</div>
+        <div class="input-group">
+          <input type="number" id="weight" placeholder="70" inputmode="numeric">
+          <span class="unit">kg</span>
+        </div>
+      </div>
+
+      <!-- Age -->
+      <div class="card">
+        <div class="card-label">3 / 5</div>
+        <div class="card-title">Kaç yaşındasın?</div>
+        <div class="input-group">
+          <input type="number" id="age" placeholder="25" inputmode="numeric">
+          <span class="unit">yaş</span>
+        </div>
+      </div>
+
+      <!-- Goals -->
+      <div class="card">
+        <div class="card-label">4 / 5</div>
+        <div class="card-title">Ne istiyorsun?</div>
+        <p class="info-text">Birden fazla seçebilirsin</p>
+        <div class="goal-grid">
+          <button class="goal-btn" data-goal="kilo_verme">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                stroke-linecap="round">
+                <path d="M12 2v20M2 12h20" />
+              </svg>
+            </div>
+            <span class="label">Kilo Vermek</span>
+            <span class="check">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" />
+              </svg>
+            </span>
+          </button>
+          <button class="goal-btn" data-goal="sikilasma">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                stroke-linecap="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+            </div>
+            <span class="label">Sıkılaşmak</span>
+            <span class="check">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" />
+              </svg>
+            </span>
+          </button>
+          <button class="goal-btn" data-goal="kas">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                stroke-linecap="round">
+                <path d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <span class="label">Kas Yapmak</span>
+            <span class="check">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" />
+              </svg>
+            </span>
+          </button>
+          <button class="goal-btn" data-goal="kol">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                stroke-linecap="round">
+                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                <line x1="4" y1="22" x2="4" y2="15" />
+              </svg>
+            </div>
+            <span class="label">Kol</span>
+            <span class="check">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" />
+              </svg>
+            </span>
+          </button>
+          <button class="goal-btn" data-goal="karin">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                stroke-linecap="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg>
+            </div>
+            <span class="label">Karın</span>
+            <span class="check">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" />
+              </svg>
+            </span>
+          </button>
+          <button class="goal-btn" data-goal="bacak">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+                stroke-linecap="round">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z" />
+              </svg>
+            </div>
+            <span class="label">Bacak & Kalça</span>
+            <span class="check">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Days per Week -->
+      <div class="card">
+        <div class="card-label">5 / 5</div>
+        <div class="card-title">Haftada kaç gün?</div>
+        <div class="day-grid">
+          <button class="day-btn" data-days="2">2</button>
+          <button class="day-btn" data-days="3">3</button>
+          <button class="day-btn" data-days="4">4</button>
+          <button class="day-btn" data-days="5">5</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Program Section -->
+    <div id="program-section">
+      <div class="program-header">
+        <h2>Senin Programın</h2>
+        <div class="program-summary" id="program-summary"></div>
+      </div>
+      <div id="days-container"></div>
+
+      <div class="motivation-box">
+        <h3>Hazırsın!</h3>
+        <p>Bugün harika iş çıkaracaksın. Başarılar!</p>
+      </div>
+
+      <button class="btn-reset" onclick="resetApp()">Baştan Başla</button>
+    </div>
+  </div>
+
+  <!-- Fixed Bottom Button -->
+  <div class="fixed-bottom" id="fixed-bottom">
+    <button class="btn-primary" id="show-program-btn" onclick="showProgram()">
+      Programımı Göster
+    </button>
+  </div>
+
+  <script>
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const exercises = [
+      // GÖĞÜS
+      { id: "bench_press", name: "Barbell Bench Press", goals: ["kas", "sikilasma"], target: "Göğüs", sets: 4, reps: "8-12", rest: 90, videoId: "cHwutxa3XLY", howToLink: "https://www.youtube.com/watch?v=cHwutxa3XLY", tip: "Barı göğüs hizasından yukarı it" },
+      { id: "incline_press", name: "Incline Bench Press", goals: ["kas"], target: "Üst Göğüs", sets: 4, reps: "8-12", rest: 90, videoId: "3upIH4tyAQE", howToLink: "https://www.youtube.com/watch?v=3upIH4tyAQE", tip: "Üst göğüsü hedefle" },
+      { id: "dumbbell_fly", name: "Dumbbell Fly", goals: ["sikilasma", "kas"], target: "Göğüs İzolasyon", sets: 3, reps: "12-15", rest: 60, videoId: "Gth_I4CEAB0", howToLink: "https://www.youtube.com/watch?v=Gth_I4CEAB0", tip: "Göğsü esnet ve sıkıştır" },
+      { id: "cable_crossover", name: "Cable Crossover", goals: ["sikilasma"], target: "Göğüs İç", sets: 3, reps: "12-15", rest: 60, videoId: "2E1x1MvR9qo", howToLink: "https://www.youtube.com/watch?v=2E1x1MvR9qo", tip: "Sürekli gerginlik altında tut" },
+      { id: "chest_press_machine", name: "Chest Press Makinesi", goals: ["kas", "sikilasma"], target: "Göğüs", sets: 3, reps: "10-12", rest: 60, videoId: "2wFMkurVmrQ", howToLink: "https://www.youtube.com/watch?v=2wFMkurVmrQ", tip: "Güvenli ve kontrollü hareket" },
+      { id: "pushup", name: "Push-Up", goals: ["kilo_verme", "sikilasma", "kas", "kol"], target: "Göğüs & Kol", sets: 3, reps: "15-20", rest: 60, videoId: "RyzxRrBHn7k", howToLink: "https://www.youtube.com/watch?v=RyzxRrBHn7k", tip: "Vücudun düz bir çizgi olmalı" },
+      { id: "dips", name: "Dips", goals: ["kas", "sikilasma", "kol"], target: "Alt Göğüs & Triceps", sets: 3, reps: "8-12", rest: 90, videoId: "H9G1wL4yujU", howToLink: "https://www.youtube.com/watch?v=H9G1wL4yujU", tip: "Paralel barlarda kontrollü in-çık" },
+
+      // SIRT
+      { id: "pullup", name: "Pull-Up", goals: ["kas", "kilo_verme", "sikilasma"], target: "Sırt & Biceps", sets: 3, reps: "6-10", rest: 90, videoId: "eu3pSe55-Qg", howToLink: "https://www.youtube.com/watch?v=eu3pSe55-Qg", tip: "Üst vücut çekiş gücü için temel" },
+      { id: "lat_pulldown", name: "Lat Pulldown", goals: ["kas", "sikilasma"], target: "Kanat Kasları", sets: 4, reps: "10-12", rest: 60, videoId: "hEt8rkd7-Gk", howToLink: "https://www.youtube.com/watch?v=hEt8rkd7-Gk", tip: "Barfiks alternatifi" },
+      { id: "barbell_row", name: "Barbell Row", goals: ["kas", "sikilasma"], target: "Orta Sırt", sets: 4, reps: "8-12", rest: 90, videoId: "-lGIRM-tbDk", howToLink: "https://www.youtube.com/watch?v=-lGIRM-tbDk", tip: "Sırt kalınlığı ve güç için" },
+      { id: "seated_cable_row", name: "Seated Cable Row", goals: ["sikilasma", "kas"], target: "Orta Sırt", sets: 3, reps: "12-15", rest: 60, videoId: "DOlLdf20xf0", howToLink: "https://www.youtube.com/watch?v=DOlLdf20xf0", tip: "Oturarak sırt çekiş hareketi" },
+      { id: "hyperextension", name: "Hyperextension", goals: ["sikilasma", "karin"], target: "Alt Sırt & Bel", sets: 3, reps: "12-15", rest: 45, videoId: "cfdi2mTOv6Q", howToLink: "https://www.youtube.com/watch?v=cfdi2mTOv6Q", tip: "Bel kaslarını güçlendir" },
+
+      // OMUZ
+      { id: "overhead_press", name: "Overhead Press", goals: ["kas", "kol"], target: "Ön & Orta Omuz", sets: 4, reps: "8-12", rest: 90, videoId: "13YElyAtd84", howToLink: "https://www.youtube.com/watch?v=13YElyAtd84", tip: "Temel dikey itiş hareketi" },
+      { id: "lateral_raise", name: "Lateral Raise", goals: ["sikilasma", "kol"], target: "Orta Omuz", sets: 3, reps: "12-15", rest: 45, videoId: "weDBwj9Kuaw", howToLink: "https://www.youtube.com/watch?v=weDBwj9Kuaw", tip: "Omuz genişliği kazandırır" },
+      { id: "face_pull", name: "Face Pull", goals: ["sikilasma"], target: "Arka Omuz", sets: 3, reps: "15-20", rest: 45, videoId: "vuDO21_zqbQ", howToLink: "https://www.youtube.com/watch?v=vuDO21_zqbQ", tip: "Postür düzeltici hareket" },
+
+      // KOL
+      { id: "barbell_curl", name: "Barbell Curl", goals: ["kas", "kol"], target: "Biceps", sets: 3, reps: "10-12", rest: 60, videoId: "M3qQOkiJfoU", howToLink: "https://www.youtube.com/watch?v=M3qQOkiJfoU", tip: "Ön kol hacmi için temel curl" },
+      { id: "hammer_curl", name: "Hammer Curl", goals: ["kas", "kol"], target: "Biceps & Ön Kol", sets: 3, reps: "10-12", rest: 60, videoId: "X98pBvg1mJ8", howToLink: "https://www.youtube.com/watch?v=X98pBvg1mJ8", tip: "Biceps kalınlığı sağlar" },
+      { id: "triceps_pushdown", name: "Triceps Pushdown", goals: ["kas", "sikilasma", "kol"], target: "Triceps", sets: 3, reps: "12-15", rest: 60, videoId: "YsirG0x9Pf4", howToLink: "https://www.youtube.com/watch?v=YsirG0x9Pf4", tip: "Arka kol izolasyon hareketi" },
+
+      // BACAK
+      { id: "squat", name: "Squat", goals: ["kas", "kilo_verme", "sikilasma", "bacak"], target: "Bacak & Kalça", sets: 4, reps: "8-12", rest: 120, videoId: "WZRJW4UpkkE", howToLink: "https://www.youtube.com/watch?v=WZRJW4UpkkE", tip: "Tüm alt vücut için en temel hareket" },
+      { id: "leg_press", name: "Leg Press", goals: ["kas", "bacak"], target: "Quadriceps & Kalça", sets: 4, reps: "10-12", rest: 90, videoId: "2q7kXFKsIwY", howToLink: "https://www.youtube.com/watch?v=2q7kXFKsIwY", tip: "Bacak hacmi için güvenli makine" },
+      { id: "leg_curl", name: "Leg Curl", goals: ["sikilasma", "bacak"], target: "Hamstring", sets: 3, reps: "12-15", rest: 60, videoId: "69_4qE2o-9A", howToLink: "https://www.youtube.com/watch?v=69_4qE2o-9A", tip: "Arka bacak izolasyonu" },
+      { id: "hip_thrust", name: "Hip Thrust", goals: ["kas", "sikilasma", "bacak"], target: "Kalça", sets: 4, reps: "10-15", rest: 90, videoId: "u-lCNOsSGnc", howToLink: "https://www.youtube.com/watch?v=u-lCNOsSGnc", tip: "Kalça kasları için en etkili hareket" },
+      { id: "standing_calf_raise", name: "Standing Calf Raise", goals: ["kas", "bacak"], target: "Baldır", sets: 4, reps: "15-20", rest: 45, videoId: "n4czfyhJZXM", howToLink: "https://www.youtube.com/watch?v=n4czfyhJZXM", tip: "Baldır hacmi ve dayanıklılığı için" }
+    ];
+
+    // APP STATE
+    let selectedGoals = [];
+    let selectedDays = null;
+
+    // GOAL BUTTONS
+    document.querySelectorAll('.goal-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const goal = this.dataset.goal;
+        if (selectedGoals.includes(goal)) {
+          selectedGoals = selectedGoals.filter(g => g !== goal);
+          this.classList.remove('selected');
+        } else {
+          selectedGoals.push(goal);
+          this.classList.add('selected');
+        }
+      });
+    });
+
+    // DAY BUTTONS
+    document.querySelectorAll('.day-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedDays = parseInt(this.dataset.days);
+      });
+    });
+
+    // GENERATE PROGRAM
+    function generateProgram() {
+      let matchingExercises = exercises.filter(ex =>
+        ex.goals.some(g => selectedGoals.includes(g))
+      );
+      if (matchingExercises.length === 0) matchingExercises = [...exercises];
+      matchingExercises = shuffleArray(matchingExercises);
+
+      const days = [];
+      const exercisesPerDay = 6;
+      let exerciseIndex = 0;
+
+      for (let d = 0; d < selectedDays; d++) {
+        const dayExercises = [];
+        for (let i = 0; i < exercisesPerDay && exerciseIndex < matchingExercises.length; i++) {
+          dayExercises.push(matchingExercises[exerciseIndex]);
+          exerciseIndex++;
+        }
+        if (dayExercises.length < exercisesPerDay) {
+          exerciseIndex = 0;
+          const remaining = exercisesPerDay - dayExercises.length;
+          for (let i = 0; i < remaining && i < matchingExercises.length; i++) {
+            if (!dayExercises.find(e => e.id === matchingExercises[i].id)) {
+              dayExercises.push(matchingExercises[i]);
+            }
+          }
+        }
+        days.push(dayExercises);
+      }
+      return days;
+    }
+
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // SHOW PROGRAM
+    function showProgram() {
+      const height = document.getElementById('height').value;
+      const weight = document.getElementById('weight').value;
+      const age = document.getElementById('age').value;
+
+      if (!height || !weight || !age) {
+        alert('Lütfen boy, kilo ve yaşını gir');
+        return;
+      }
+      if (selectedGoals.length === 0) {
+        alert('Lütfen en az bir hedef seç');
+        return;
+      }
+      if (!selectedDays) {
+        alert('Haftada kaç gün spor yapacağını seç');
+        return;
+      }
+
+      const program = generateProgram();
+      const goalLabels = {
+        'kilo_verme': 'Kilo Verme',
+        'sikilasma': 'Sıkılaşma',
+        'kas': 'Kas Yapma',
+        'kol': 'Kol',
+        'karin': 'Karın',
+        'bacak': 'Bacak/Kalça'
+      };
+
+      const summaryHtml = `
+                <span class="summary-badge">${selectedGoals.map(g => goalLabels[g]).join(', ')}</span>
+                <span class="summary-badge">Haftada ${selectedDays} gün</span>
+            `;
+      document.getElementById('program-summary').innerHTML = summaryHtml;
+
+      const container = document.getElementById('days-container');
+      container.innerHTML = '';
+
+      program.forEach((dayExercises, index) => {
+        const dayNum = index + 1;
+        const dayHtml = `
+                    <div class="day-section">
+                        <div class="day-header ${dayNum === 1 ? 'active' : ''}" onclick="toggleDay(this)">
+                            <h3>Gün ${dayNum}</h3>
+                            <span class="count">${dayExercises.length} egzersiz</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="day-content ${dayNum === 1 ? 'active' : ''}">
+                            ${dayExercises.map(ex => renderExerciseCard(ex, dayNum)).join('')}
+                        </div>
+                    </div>
+                `;
+        container.innerHTML += dayHtml;
+      });
+
+      loadProgress();
+      document.getElementById('questions-section').style.display = 'none';
+      document.getElementById('program-section').style.display = 'block';
+      document.getElementById('fixed-bottom').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // RENDER EXERCISE CARD
+    function renderExerciseCard(exercise, dayNum) {
+      const checkboxId = `check_${dayNum}_${exercise.id}`;
+      return `
+                <div class="exercise-card" id="card_${dayNum}_${exercise.id}">
+                    <div class="exercise-header">
+                        <div>
+                            <div class="exercise-name">${exercise.name}</div>
+                            <div class="exercise-target">${exercise.target}</div>
+                        </div>
+                        <div class="exercise-sets">${exercise.sets}×${exercise.reps}</div>
+                    </div>
+                    
+                    <div class="exercise-meta">
+                        <span>Dinlenme: ${exercise.rest}sn</span>
+                    </div>
+                    
+                    <div class="video-container" id="video_${dayNum}_${exercise.id}">
+                        <div class="video-placeholder" onclick="loadVideo('${dayNum}', '${exercise.id}', '${exercise.videoId}')">
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                            </div>
+                            <div class="play-text">Videoyu İzle</div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-row">
+                        <a href="${exercise.howToLink}" target="_blank" class="btn-secondary btn-youtube">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                            YouTube'da Aç
+                        </a>
+                    </div>
+                    
+                    <div class="checkbox-row" onclick="toggleCheckbox('${checkboxId}')">
+                        <input type="checkbox" id="${checkboxId}" onclick="event.stopPropagation(); toggleComplete('${dayNum}', '${exercise.id}')">
+                        <label for="${checkboxId}">Tamamlandı</label>
+                    </div>
+                    
+                    ${exercise.tip ? `
+                        <div class="exercise-tip">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <span>${exercise.tip}</span>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+    }
+
+    // VIDEO
+    function loadVideo(dayNum, exerciseId, videoId) {
+      const container = document.getElementById(`video_${dayNum}_${exerciseId}`);
+      container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    }
+
+    // ACCORDION
+    function toggleDay(header) {
+      const wasActive = header.classList.contains('active');
+      document.querySelectorAll('.day-header').forEach(h => h.classList.remove('active'));
+      document.querySelectorAll('.day-content').forEach(c => c.classList.remove('active'));
+      if (!wasActive) {
+        header.classList.add('active');
+        header.nextElementSibling.classList.add('active');
+      }
+    }
+
+    // CHECKBOX
+    function toggleCheckbox(checkboxId) {
+      const checkbox = document.getElementById(checkboxId);
+      checkbox.checked = !checkbox.checked;
+      const parts = checkboxId.split('_');
+      const dayNum = parts[1];
+      const exerciseId = parts.slice(2).join('_');
+      toggleComplete(dayNum, exerciseId);
+    }
+
+    function toggleComplete(dayNum, exerciseId) {
+      const card = document.getElementById(`card_${dayNum}_${exerciseId}`);
+      const checkbox = document.getElementById(`check_${dayNum}_${exerciseId}`);
+      card.classList.toggle('completed', checkbox.checked);
+      saveProgress();
+    }
+
+    function saveProgress() {
+      const progress = {};
+      document.querySelectorAll('.exercise-card input[type="checkbox"]').forEach(cb => {
+        progress[cb.id] = cb.checked;
+      });
+      localStorage.setItem('fitplanProgress', JSON.stringify(progress));
+    }
+
+    function loadProgress() {
+      try {
+        const saved = localStorage.getItem('fitplanProgress');
+        if (saved) {
+          const progress = JSON.parse(saved);
+          Object.keys(progress).forEach(id => {
+            const checkbox = document.getElementById(id);
+            if (checkbox && progress[id]) {
+              checkbox.checked = true;
+              const card = checkbox.closest('.exercise-card');
+              if (card) card.classList.add('completed');
+            }
+          });
+        }
+      } catch (e) { }
+    }
+
+    function resetApp() {
+      if (confirm('Baştan başlamak istediğine emin misin?')) {
+        localStorage.removeItem('fitplanProgress');
+        location.reload();
+      }
+    }
+  </script>
+</body>
+
+</html>

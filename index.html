@@ -10,8 +10,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="FitPlan">
-  <link rel="manifest"
-    href="data:application/json,{%22name%22:%22FitPlan%22,%22short_name%22:%22FitPlan%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%23ffffff%22,%22theme_color%22:%22%23ec4899%22}">
+  <link rel="apple-touch-icon" href="./icon-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+  <link rel="manifest" href="./manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <title>FitPlan - Senin Programın</title>
   <style>
@@ -1575,6 +1577,13 @@
     // ============================================
     window.addEventListener('load', () => {
       loadTimer();
+
+      // Register Service Worker for PWA
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+          .then(registration => console.log('SW registered:', registration.scope))
+          .catch(err => console.log('SW registration failed:', err));
+      }
 
       // Check if user has previously created a program
       const savedAnswers = localStorage.getItem('fitplanUserAnswers');
