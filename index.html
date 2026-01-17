@@ -247,6 +247,29 @@
       padding: 16px 20px 8px;
     }
 
+    /* History View */
+    .history-week-group {
+      margin-bottom: 24px;
+    }
+
+    .history-week-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    .history-item {
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
     /* Cards */
     .card {
       background: var(--bg-card);
@@ -1210,44 +1233,132 @@
     </div>
   </div>
 
+  <!-- History Section -->
+  <div id="history-section" style="display: none;" class="container">
+    <div class="card">
+      <div class="card-title">Antrenman Geçmişi</div>
+      <div id="history-container">
+        <!-- History items will be rendered here -->
+        <p style="text-align: center; color: var(--text-secondary); padding: 20px;">Henüz geçmiş kaydı yok.</p>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ============================================
     // EXERCISE DATA
     // ============================================
     const exercises = [
       // GÖĞÜS
-      { id: "bench_press", name: "Barbell Bench Press", goals: ["kas", "sikilasma"], target: "Göğüs", sets: 4, reps: "8-12", rest: 90, videoId: "cHwutxa3XLY", howToLink: "https://www.youtube.com/watch?v=cHwutxa3XLY", tip: "Barı göğüs hizasından yukarı it" },
-      { id: "incline_press", name: "Incline Bench Press", goals: ["kas"], target: "Üst Göğüs", sets: 4, reps: "8-12", rest: 90, videoId: "3upIH4tyAQE", howToLink: "https://www.youtube.com/watch?v=3upIH4tyAQE", tip: "Üst göğüsü hedefle" },
-      { id: "dumbbell_fly", name: "Dumbbell Fly", goals: ["sikilasma", "kas"], target: "Göğüs İzolasyon", sets: 3, reps: "12-15", rest: 60, videoId: "Gth_I4CEAB0", howToLink: "https://www.youtube.com/watch?v=Gth_I4CEAB0", tip: "Göğsü esnet ve sıkıştır" },
-      { id: "cable_crossover", name: "Cable Crossover", goals: ["sikilasma"], target: "Göğüs İç", sets: 3, reps: "12-15", rest: 60, videoId: "2E1x1MvR9qo", howToLink: "https://www.youtube.com/watch?v=2E1x1MvR9qo", tip: "Sürekli gerginlik altında tut" },
-      { id: "chest_press_machine", name: "Chest Press Makinesi", goals: ["kas", "sikilasma"], target: "Göğüs", sets: 3, reps: "10-12", rest: 60, videoId: "2wFMkurVmrQ", howToLink: "https://www.youtube.com/watch?v=2wFMkurVmrQ", tip: "Güvenli ve kontrollü hareket" },
-      { id: "pushup", name: "Push-Up", goals: ["kilo_verme", "sikilasma", "kas", "kol"], target: "Göğüs & Kol", sets: 3, reps: "15-20", rest: 60, videoId: "RyzxRrBHn7k", howToLink: "https://www.youtube.com/watch?v=RyzxRrBHn7k", tip: "Vücudun düz bir çizgi olmalı" },
-      { id: "dips", name: "Dips", goals: ["kas", "sikilasma", "kol"], target: "Alt Göğüs & Triceps", sets: 3, reps: "8-12", rest: 90, videoId: "H9G1wL4yujU", howToLink: "https://www.youtube.com/watch?v=H9G1wL4yujU", tip: "Paralel barlarda kontrollü in-çık" },
+      {
+        id: "bench_press", name: "Barbell Bench Press", goals: ["kas", "sikilasma"], target: "Göğüs", sets: 4, reps:
+          "8-12", rest: 90, videoId: "cHwutxa3XLY", howToLink: "https://www.youtube.com/watch?v=cHwutxa3XLY", tip: "Barı
+      göğüs hizasından yukarı it" },
+      {
+          id: "incline_press", name: "Incline Bench Press", goals: ["kas"], target: "Üst Göğüs", sets: 4, reps: "8-12",
+          rest: 90, videoId: "3upIH4tyAQE", howToLink: "https://www.youtube.com/watch?v=3upIH4tyAQE", tip: "Üst göğüsü
+      hedefle" },
+      {
+            id: "dumbbell_fly", name: "Dumbbell Fly", goals: ["sikilasma", "kas"], target: "Göğüs İzolasyon", sets: 3, reps:
+              "12-15", rest: 60, videoId: "Gth_I4CEAB0", howToLink: "https://www.youtube.com/watch?v=Gth_I4CEAB0", tip: "Göğsü
+      esnet ve sıkıştır" },
+      {
+              id: "cable_crossover", name: "Cable Crossover", goals: ["sikilasma"], target: "Göğüs İç", sets: 3, reps:
+                "12-15", rest: 60, videoId: "2E1x1MvR9qo", howToLink: "https://www.youtube.com/watch?v=2E1x1MvR9qo", tip: "Sürekli
+      gerginlik altında tut" },
+      {
+                id: "chest_press_machine", name: "Chest Press Makinesi", goals: ["kas", "sikilasma"], target: "Göğüs", sets: 3,
+                reps: "10-12", rest: 60, videoId: "2wFMkurVmrQ", howToLink: "https://www.youtube.com/watch?v=2wFMkurVmrQ", tip:
+                  "Güvenli ve kontrollü hareket"
+              },
+      {
+        id: "pushup", name: "Push-Up", goals: ["kilo_verme", "sikilasma", "kas", "kol"], target: "Göğüs & Kol", sets: 3,
+        reps: "15-20", rest: 60, videoId: "RyzxRrBHn7k", howToLink: "https://www.youtube.com/watch?v=RyzxRrBHn7k", tip:
+          "Vücudun düz bir çizgi olmalı"
+      },
+      {
+        id: "dips", name: "Dips", goals: ["kas", "sikilasma", "kol"], target: "Alt Göğüs & Triceps", sets: 3, reps:
+          "8-12", rest: 90, videoId: "H9G1wL4yujU", howToLink: "https://www.youtube.com/watch?v=H9G1wL4yujU", tip: "Paralel
+      barlarda kontrollü in-çık" },
 
       // SIRT
-      { id: "pullup", name: "Pull-Up", goals: ["kas", "kilo_verme", "sikilasma"], target: "Sırt & Biceps", sets: 3, reps: "6-10", rest: 90, videoId: "eu3pSe55-Qg", howToLink: "https://www.youtube.com/watch?v=eu3pSe55-Qg", tip: "Üst vücut çekiş gücü için temel" },
-      { id: "lat_pulldown", name: "Lat Pulldown", goals: ["kas", "sikilasma"], target: "Kanat Kasları", sets: 4, reps: "10-12", rest: 60, videoId: "hEt8rkd7-Gk", howToLink: "https://www.youtube.com/watch?v=hEt8rkd7-Gk", tip: "Barfiks alternatifi" },
-      { id: "barbell_row", name: "Barbell Row", goals: ["kas", "sikilasma"], target: "Orta Sırt", sets: 4, reps: "8-12", rest: 90, videoId: "-lGIRM-tbDk", howToLink: "https://www.youtube.com/watch?v=-lGIRM-tbDk", tip: "Sırt kalınlığı ve güç için" },
-      { id: "seated_cable_row", name: "Seated Cable Row", goals: ["sikilasma", "kas"], target: "Orta Sırt", sets: 3, reps: "12-15", rest: 60, videoId: "DOlLdf20xf0", howToLink: "https://www.youtube.com/watch?v=DOlLdf20xf0", tip: "Oturarak sırt çekiş hareketi" },
-      { id: "hyperextension", name: "Hyperextension", goals: ["sikilasma", "karin"], target: "Alt Sırt & Bel", sets: 3, reps: "12-15", rest: 45, videoId: "cfdi2mTOv6Q", howToLink: "https://www.youtube.com/watch?v=cfdi2mTOv6Q", tip: "Bel kaslarını güçlendir" },
+      {
+          id: "pullup", name: "Pull-Up", goals: ["kas", "kilo_verme", "sikilasma"], target: "Sırt & Biceps", sets: 3,
+          reps: "6-10", rest: 90, videoId: "eu3pSe55-Qg", howToLink: "https://www.youtube.com/watch?v=eu3pSe55-Qg", tip:
+            "Üst vücut çekiş gücü için temel"
+        },
+      {
+        id: "lat_pulldown", name: "Lat Pulldown", goals: ["kas", "sikilasma"], target: "Kanat Kasları", sets: 4, reps:
+          "10-12", rest: 60, videoId: "hEt8rkd7-Gk", howToLink: "https://www.youtube.com/watch?v=hEt8rkd7-Gk", tip: "Barfiks
+      alternatifi" },
+      {
+          id: "barbell_row", name: "Barbell Row", goals: ["kas", "sikilasma"], target: "Orta Sırt", sets: 4, reps: "8-12",
+          rest: 90, videoId: "-lGIRM-tbDk", howToLink: "https://www.youtube.com/watch?v=-lGIRM-tbDk", tip: "Sırt kalınlığı
+      ve güç için" },
+      {
+            id: "seated_cable_row", name: "Seated Cable Row", goals: ["sikilasma", "kas"], target: "Orta Sırt", sets: 3,
+            reps: "12-15", rest: 60, videoId: "DOlLdf20xf0", howToLink: "https://www.youtube.com/watch?v=DOlLdf20xf0", tip:
+              "Oturarak sırt çekiş hareketi"
+          },
+      {
+        id: "hyperextension", name: "Hyperextension", goals: ["sikilasma", "karin"], target: "Alt Sırt & Bel", sets: 3,
+        reps: "12-15", rest: 45, videoId: "cfdi2mTOv6Q", howToLink: "https://www.youtube.com/watch?v=cfdi2mTOv6Q", tip:
+          "Bel kaslarını güçlendir"
+      },
 
       // OMUZ
-      { id: "overhead_press", name: "Overhead Press", goals: ["kas", "kol"], target: "Ön & Orta Omuz", sets: 4, reps: "8-12", rest: 90, videoId: "13YElyAtd84", howToLink: "https://www.youtube.com/watch?v=13YElyAtd84", tip: "Temel dikey itiş hareketi" },
-      { id: "lateral_raise", name: "Lateral Raise", goals: ["sikilasma", "kol"], target: "Orta Omuz", sets: 3, reps: "12-15", rest: 45, videoId: "weDBwj9Kuaw", howToLink: "https://www.youtube.com/watch?v=weDBwj9Kuaw", tip: "Omuz genişliği kazandırır" },
-      { id: "face_pull", name: "Face Pull", goals: ["sikilasma"], target: "Arka Omuz", sets: 3, reps: "15-20", rest: 45, videoId: "vuDO21_zqbQ", howToLink: "https://www.youtube.com/watch?v=vuDO21_zqbQ", tip: "Postür düzeltici hareket" },
+      {
+        id: "overhead_press", name: "Overhead Press", goals: ["kas", "kol"], target: "Ön & Orta Omuz", sets: 4, reps:
+          "8-12", rest: 90, videoId: "13YElyAtd84", howToLink: "https://www.youtube.com/watch?v=13YElyAtd84", tip: "Temel
+      dikey itiş hareketi" },
+      {
+          id: "lateral_raise", name: "Lateral Raise", goals: ["sikilasma", "kol"], target: "Orta Omuz", sets: 3, reps:
+            "12-15", rest: 45, videoId: "weDBwj9Kuaw", howToLink: "https://www.youtube.com/watch?v=weDBwj9Kuaw", tip: "Omuz
+      genişliği kazandırır" },
+      {
+            id: "face_pull", name: "Face Pull", goals: ["sikilasma"], target: "Arka Omuz", sets: 3, reps: "15-20", rest: 45,
+            videoId: "vuDO21_zqbQ", howToLink: "https://www.youtube.com/watch?v=vuDO21_zqbQ", tip: "Postür düzeltici hareket"
+          },
 
       // KOL
-      { id: "barbell_curl", name: "Barbell Curl", goals: ["kas", "kol"], target: "Biceps", sets: 3, reps: "10-12", rest: 60, videoId: "M3qQOkiJfoU", howToLink: "https://www.youtube.com/watch?v=M3qQOkiJfoU", tip: "Ön kol hacmi için temel curl" },
-      { id: "hammer_curl", name: "Hammer Curl", goals: ["kas", "kol"], target: "Biceps & Ön Kol", sets: 3, reps: "10-12", rest: 60, videoId: "X98pBvg1mJ8", howToLink: "https://www.youtube.com/watch?v=X98pBvg1mJ8", tip: "Biceps kalınlığı sağlar" },
-      { id: "triceps_pushdown", name: "Triceps Pushdown", goals: ["kas", "sikilasma", "kol"], target: "Triceps", sets: 3, reps: "12-15", rest: 60, videoId: "YsirG0x9Pf4", howToLink: "https://www.youtube.com/watch?v=YsirG0x9Pf4", tip: "Arka kol izolasyon hareketi" },
+      {
+        id: "barbell_curl", name: "Barbell Curl", goals: ["kas", "kol"], target: "Biceps", sets: 3, reps: "10-12", rest:
+          60, videoId: "M3qQOkiJfoU", howToLink: "https://www.youtube.com/watch?v=M3qQOkiJfoU", tip: "Ön kol hacmi için
+      temel curl" },
+      {
+          id: "hammer_curl", name: "Hammer Curl", goals: ["kas", "kol"], target: "Biceps & Ön Kol", sets: 3, reps:
+            "10-12", rest: 60, videoId: "X98pBvg1mJ8", howToLink: "https://www.youtube.com/watch?v=X98pBvg1mJ8", tip: "Biceps
+      kalınlığı sağlar" },
+      {
+            id: "triceps_pushdown", name: "Triceps Pushdown", goals: ["kas", "sikilasma", "kol"], target: "Triceps", sets:
+              3, reps: "12-15", rest: 60, videoId: "YsirG0x9Pf4", howToLink: "https://www.youtube.com/watch?v=YsirG0x9Pf4", tip:
+              "Arka kol izolasyon hareketi"
+          },
 
       // BACAK
-      { id: "squat", name: "Squat", goals: ["kas", "kilo_verme", "sikilasma", "bacak"], target: "Bacak & Kalça", sets: 4, reps: "8-12", rest: 120, videoId: "WZRJW4UpkkE", howToLink: "https://www.youtube.com/watch?v=WZRJW4UpkkE", tip: "Tüm alt vücut için en temel hareket" },
-      { id: "leg_press", name: "Leg Press", goals: ["kas", "bacak"], target: "Quadriceps & Kalça", sets: 4, reps: "10-12", rest: 90, videoId: "2q7kXFKsIwY", howToLink: "https://www.youtube.com/watch?v=2q7kXFKsIwY", tip: "Bacak hacmi için güvenli makine" },
-      { id: "leg_curl", name: "Leg Curl", goals: ["sikilasma", "bacak"], target: "Hamstring", sets: 3, reps: "12-15", rest: 60, videoId: "69_4qE2o-9A", howToLink: "https://www.youtube.com/watch?v=69_4qE2o-9A", tip: "Arka bacak izolasyonu" },
-      { id: "hip_thrust", name: "Hip Thrust", goals: ["kas", "sikilasma", "bacak"], target: "Kalça", sets: 4, reps: "10-15", rest: 90, videoId: "u-lCNOsSGnc", howToLink: "https://www.youtube.com/watch?v=u-lCNOsSGnc", tip: "Kalça kasları için en etkili hareket" },
-      { id: "standing_calf_raise", name: "Standing Calf Raise", goals: ["kas", "bacak"], target: "Baldır", sets: 4, reps: "15-20", rest: 45, videoId: "n4czfyhJZXM", howToLink: "https://www.youtube.com/watch?v=n4czfyhJZXM", tip: "Baldır hacmi ve dayanıklılığı için" }
-    ];
+      {
+        id: "squat", name: "Squat", goals: ["kas", "kilo_verme", "sikilasma", "bacak"], target: "Bacak & Kalça", sets:
+          4, reps: "8-12", rest: 120, videoId: "WZRJW4UpkkE", howToLink: "https://www.youtube.com/watch?v=WZRJW4UpkkE", tip:
+          "Tüm alt vücut için en temel hareket"
+      },
+      {
+        id: "leg_press", name: "Leg Press", goals: ["kas", "bacak"], target: "Quadriceps & Kalça", sets: 4, reps:
+          "10-12", rest: 90, videoId: "2q7kXFKsIwY", howToLink: "https://www.youtube.com/watch?v=2q7kXFKsIwY", tip: "Bacak
+      hacmi için güvenli makine" },
+      {
+          id: "leg_curl", name: "Leg Curl", goals: ["sikilasma", "bacak"], target: "Hamstring", sets: 3, reps: "12-15",
+          rest: 60, videoId: "69_4qE2o-9A", howToLink: "https://www.youtube.com/watch?v=69_4qE2o-9A", tip: "Arka bacak
+      izolasyonu" },
+      {
+            id: "hip_thrust", name: "Hip Thrust", goals: ["kas", "sikilasma", "bacak"], target: "Kalça", sets: 4, reps:
+              "10-15", rest: 90, videoId: "u-lCNOsSGnc", howToLink: "https://www.youtube.com/watch?v=u-lCNOsSGnc", tip: "Kalça
+      kasları için en etkili hareket" },
+      {
+              id: "standing_calf_raise", name: "Standing Calf Raise", goals: ["kas", "bacak"], target: "Baldır", sets: 4,
+              reps: "15-20", rest: 45, videoId: "n4czfyhJZXM", howToLink: "https://www.youtube.com/watch?v=n4czfyhJZXM", tip:
+                "Baldır hacmi ve dayanıklılığı için"
+            }
+      ];
 
     // APP STATE
     let selectedGoals = [];
@@ -1289,19 +1400,16 @@
       let exerciseIndex = 0;
 
       for (let d = 0; d < selectedDays; d++) {
-        const dayExercises = [];
-        for (let i = 0; i < exercisesPerDay && exerciseIndex < matchingExercises.length; i++) {
-          dayExercises.push(matchingExercises[exerciseIndex]);
-          exerciseIndex++;
-        }
-        if (dayExercises.length < exercisesPerDay) {
-          exerciseIndex = 0;
-          const remaining = exercisesPerDay - dayExercises.length;
-          for (let i = 0; i < remaining && i < matchingExercises.length; i++) {
-            if (!dayExercises.find(e => e.id === matchingExercises[i].id)) {
-              dayExercises.push(matchingExercises[i]);
+        const dayExercises = []; for (let i = 0; i < exercisesPerDay && exerciseIndex
+          < matchingExercises.length; i++) { dayExercises.push(matchingExercises[exerciseIndex]); exerciseIndex++; } if
+          (dayExercises.length < exercisesPerDay) {
+          exerciseIndex = 0; const remaining = exercisesPerDay -
+            dayExercises.length; for (let i = 0; i < remaining && i < matchingExercises.length; i++) {
+              if
+                (!dayExercises.find(e => e.id === matchingExercises[i].id)) {
+                dayExercises.push(matchingExercises[i]);
+              }
             }
-          }
         }
         days.push(dayExercises);
       }
@@ -1347,9 +1455,9 @@
       };
 
       const summaryHtml = `
-                <span class="summary-badge">${selectedGoals.map(g => goalLabels[g]).join(', ')}</span>
-                <span class="summary-badge">Haftada ${selectedDays} gün</span>
-            `;
+        <span class="summary-badge">${selectedGoals.map(g => goalLabels[g]).join(', ')}</span>
+        <span class="summary-badge">Haftada ${selectedDays} gün</span>
+        `;
       document.getElementById('program-summary').innerHTML = summaryHtml;
 
       const container = document.getElementById('days-container');
@@ -1358,23 +1466,23 @@
       program.forEach((dayExercises, index) => {
         const dayNum = index + 1;
         const dayHtml = `
-                    <div class="day-section">
-                        <div class="day-header ${dayNum === 1 ? 'active' : ''}" onclick="toggleDay(this)">
-                            <h3>Gün ${dayNum}</h3>
-                            <span class="count">${dayExercises.length} egzersiz</span>
-                            <span class="arrow">▼</span>
-                        </div>
-                        <div class="day-content ${dayNum === 1 ? 'active' : ''}">
-                            <div class="progress-container" data-day="${dayNum}">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 0%"></div>
-                                </div>
-                                <div class="progress-text">0% tamamlandı</div>
-                            </div>
-                            ${dayExercises.map(ex => renderExerciseCard(ex, dayNum)).join('')}
-                        </div>
-                    </div>
-                `;
+        <div class="day-section">
+          <div class="day-header ${dayNum === 1 ? 'active' : ''}" onclick="toggleDay(this)">
+            <h3>Gün ${dayNum}</h3>
+            <span class="count">${dayExercises.length} egzersiz</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="day-content ${dayNum === 1 ? 'active' : ''}">
+            <div class="progress-container" data-day="${dayNum}">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+              </div>
+              <div class="progress-text">0% tamamlandı</div>
+            </div>
+            ${dayExercises.map(ex => renderExerciseCard(ex, dayNum)).join('')}
+          </div>
+        </div>
+        `;
         container.innerHTML += dayHtml;
       });
 
@@ -1401,67 +1509,74 @@
       const weightInputId = `weight_${dayNum}_${exercise.id}`;
 
       return `
-                <div class="exercise-card" id="card_${dayNum}_${exercise.id}">
-                    <div class="exercise-header">
-                        <div>
-                            <div class="exercise-name">${exercise.name}</div>
-                            <div class="exercise-target">${exercise.target}</div>
-                        </div>
-                        <div class="exercise-sets">${exercise.sets}×${exercise.reps}</div>
-                    </div>
-                    
-                    <div class="exercise-meta">
-                        <span>Dinlenme: ${exercise.rest}sn</span>
-                    </div>
-                    
-                    <div class="weight-input">
-                        <label>Ağırlık:</label>
-                        <input 
-                            type="number" 
-                            id="${weightInputId}" 
-                            placeholder="${lastWeight || '0'}" 
-                            value="${lastWeight || ''}"
-                            onchange="saveWeight('${dayNum}', '${exercise.id}', this.value)"
-                            step="0.5"
-                        >
-                        <span class="unit-label">kg</span>
-                    </div>
-                    
-                    <div class="video-container" id="video_${dayNum}_${exercise.id}">
-                        <div class="video-placeholder" onclick="loadVideo('${dayNum}', '${exercise.id}', '${exercise.videoId}')">
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                            </div>
-                            <div class="play-text">Videoyu İzle</div>
-                        </div>
-                    </div>
-                    
-                    <div class="btn-row">
-                        <a href="${exercise.howToLink}" target="_blank" class="btn-secondary btn-youtube">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                            YouTube'da Aç
-                        </a>
-                    </div>
-                    
-                    <div class="checkbox-row" onclick="toggleCheckbox('${checkboxId}')">
-                        <input type="checkbox" id="${checkboxId}" onclick="event.stopPropagation(); toggleComplete('${dayNum}', '${exercise.id}')">
-                        <label for="${checkboxId}">Tamamlandı</label>
-                    </div>
-                    
-                    ${exercise.tip ? `
-                        <div class="exercise-tip">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                            <span>${exercise.tip}</span>
-                        </div>
-                    ` : ''}
-                </div>
-            `;
+        <div class="exercise-card" id="card_${dayNum}_${exercise.id}">
+          <div class="exercise-header">
+            <div>
+              <div class="exercise-name">${exercise.name}</div>
+              <div class="exercise-target">${exercise.target}</div>
+            </div>
+            <div class="exercise-sets">${exercise.sets}×${exercise.reps}</div>
+          </div>
+
+          <div class="exercise-meta">
+            <span>Dinlenme: ${exercise.rest}sn</span>
+          </div>
+
+          <div class="weight-input">
+            <label>Ağırlık:</label>
+            <input type="number" id="${weightInputId}" placeholder="${lastWeight || '0'}" value="${lastWeight || ''}"
+              onchange="saveWeight('${dayNum}', '${exercise.id}', this.value)" step="0.5">
+            <span class="unit-label">kg</span>
+          </div>
+
+          <div class="video-container" id="video_${dayNum}_${exercise.id}">
+            <div class="video-placeholder" onclick="loadVideo('${dayNum}', '${exercise.id}', '${exercise.videoId}')">
+              <div class="play-icon">
+                <svg viewBox="0 0 24 24">
+                  <polygon points="5,3 19,12 5,21" />
+                </svg>
+              </div>
+              <div class="play-text">Videoyu İzle</div>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <a href="${exercise.howToLink}" target="_blank" class="btn-secondary btn-youtube">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+              </svg>
+              YouTube'da Aç
+            </a>
+          </div>
+
+          <div class="checkbox-row" onclick="toggleCheckbox('${checkboxId}')">
+            <input type="checkbox" id="${checkboxId}"
+              onclick="event.stopPropagation(); toggleComplete('${dayNum}', '${exercise.id}')">
+            <label for="${checkboxId}">Tamamlandı</label>
+          </div>
+
+          ${exercise.tip ? `
+          <div class="exercise-tip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+            <span>${exercise.tip}</span>
+          </div>
+          ` : ''}
+        </div>
+        `;
     }
 
     // VIDEO
     function loadVideo(dayNum, exerciseId, videoId) {
       const container = document.getElementById(`video_${dayNum}_${exerciseId}`);
-      container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      container.innerHTML = `<iframe
+          src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1" title="Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>`;
     }
 
     // ACCORDION
@@ -1620,6 +1735,39 @@
     }
 
     // ============================================
+    // HISTORY PERSISTENCE
+    // ============================================
+    function saveWorkoutHistory(dayNum) {
+      try {
+        const history = JSON.parse(localStorage.getItem('fitplanHistory') || '{}');
+        const today = new Date().toISOString().split('T')[0];
+
+        // Calculate progress for the day
+        const progress = calculateDayProgress(dayNum);
+
+        // Get completed exercises
+        const prefix = `check_${dayNum}_`;
+        const checkboxes = Array.from(document.querySelectorAll(`input[id^="${prefix}"]`));
+        const completedExercises = checkboxes
+          .filter(cb => cb.checked)
+          .map(cb => cb.id.replace(prefix, ''));
+
+        // Save entry
+        history[today] = {
+          date: today,
+          dayNum: dayNum,
+          progress: progress,
+          completedExercises: completedExercises,
+          timestamp: Date.now()
+        };
+
+        localStorage.setItem('fitplanHistory', JSON.stringify(history));
+      } catch (e) {
+        console.error('Error saving history:', e);
+      }
+    }
+
+    // ============================================
     // PROGRESS CALCULATION
     // ============================================
     function calculateDayProgress(dayNum) {
@@ -1678,8 +1826,8 @@
         const button = document.createElement('button');
         button.className = 'today-btn';
         button.innerHTML = `
-          Bugünkü Antrenman: Gün ${todayDay}
-          <div class="subtitle">Başlamak için tıkla</div>
+        Bugünkü Antrenman: Gün ${todayDay}
+        <div class="subtitle">Başlamak için tıkla</div>
         `;
         button.onclick = () => scrollToDay(todayDay);
 
@@ -1692,8 +1840,8 @@
         button.className = 'today-btn';
         button.style.background = 'var(--bg-secondary)';
         button.innerHTML = `
-          Bugün Dinlenme Günü
-          <div class="subtitle">Yarın devam edelim!</div>
+        Bugün Dinlenme Günü
+        <div class="subtitle">Yarın devam edelim!</div>
         `;
         button.disabled = true;
 
@@ -1717,7 +1865,7 @@
     }
 
     // ============================================
-    // WEEKLY ADAPTATION ENGINE  
+    // WEEKLY ADAPTATION ENGINE
     // ============================================
     function saveWeeklyCompletion() {
       try {
@@ -1729,13 +1877,9 @@
         }
 
         // Calculate completion for each day
-        for (let d = 1; d <= selectedDays; d++) {
-          weekly[weekStart].days[d] = calculateDayProgress(d);
-        }
-
-        // Calculate average completion
-        const completionValues = Object.values(weekly[weekStart].days);
-        const avgCompletion = completionValues.reduce((a, b) => a + b, 0) / completionValues.length;
+        for (let d = 1; d <= selectedDays; d++) { weekly[weekStart].days[d] = calculateDayProgress(d); } // Calculate
+          average completion const completionValues = Object.values(weekly[weekStart].days); const
+          avgCompletion = completionValues.reduce((a, b) => a + b, 0) / completionValues.length;
         weekly[weekStart].totalCompletion = avgCompletion;
 
         localStorage.setItem('fitplanWeekly', JSON.stringify(weekly));
@@ -1812,9 +1956,9 @@
             };
 
             const summaryHtml = `
-              <span class="summary-badge">${selectedGoals.map(g => goalLabels[g]).join(', ')}</span>
-              <span class="summary-badge">Haftada ${selectedDays} gün</span>
-            `;
+          <span class="summary-badge">${selectedGoals.map(g => goalLabels[g]).join(', ')}</span>
+          <span class="summary-badge">Haftada ${selectedDays} gün</span>
+          `;
             document.getElementById('program-summary').innerHTML = summaryHtml;
 
             const container = document.getElementById('days-container');
@@ -1823,23 +1967,23 @@
             program.forEach((dayExercises, index) => {
               const dayNum = index + 1;
               const dayHtml = `
-                <div class="day-section">
-                  <div class="day-header ${dayNum === 1 ? 'active' : ''}" onclick="toggleDay(this)">
-                    <h3>Gün ${dayNum}</h3>
-                    <span class="count">${dayExercises.length} egzersiz</span>
-                    <span class="arrow">▼</span>
-                  </div>
-                  <div class="day-content ${dayNum === 1 ? 'active' : ''}">
-                    <div class="progress-container" data-day="${dayNum}">
-                      <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                      </div>
-                      <div class="progress-text">0% tamamlandı</div>
-                    </div>
-                    ${dayExercises.map(ex => renderExerciseCard(ex, dayNum)).join('')}
-                  </div>
+          <div class="day-section">
+            <div class="day-header ${dayNum === 1 ? 'active' : ''}" onclick="toggleDay(this)">
+              <h3>Gün ${dayNum}</h3>
+              <span class="count">${dayExercises.length} egzersiz</span>
+              <span class="arrow">▼</span>
+            </div>
+            <div class="day-content ${dayNum === 1 ? 'active' : ''}">
+              <div class="progress-container" data-day="${dayNum}">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 0%"></div>
                 </div>
-              `;
+                <div class="progress-text">0% tamamlandı</div>
+              </div>
+              ${dayExercises.map(ex => renderExerciseCard(ex, dayNum)).join('')}
+            </div>
+          </div>
+          `;
               container.innerHTML += dayHtml;
             });
 
@@ -1860,6 +2004,7 @@
       originalToggleComplete(dayNum, exerciseId);
       updateProgressBars();
       saveWeeklyCompletion();
+      saveWorkoutHistory(dayNum);
     };
 
     // ============================================
@@ -1882,27 +2027,103 @@
       document.querySelectorAll('.drawer-menu-item').forEach(item => {
         item.classList.remove('active');
       });
-      event.target.closest('.drawer-menu-item').classList.add('active');
+      const activeItem = document.querySelector(`.drawer-menu-item[onclick="navigateTo('${section}')"]`);
+      if (activeItem) activeItem.classList.add('active');
+
+      // Hide all main sections
+      const sections = ['program-section', 'questions-section', 'history-section', 'fixed-bottom'];
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
 
       // Handle navigation based on section
       switch (section) {
         case 'today':
-          // Already on main screen
+          document.getElementById('program-section').style.display = 'block';
+          showTodayButton(); // Will handle fixed bottom button
           window.scrollTo({ top: 0, behavior: 'smooth' });
           break;
+
         case 'history':
-          alert('Geçmiş özelliği yakında eklenecek!');
+          document.getElementById('history-section').style.display = 'block';
+          renderHistoryView();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
           break;
+
         case 'weights':
           alert('Ağırlık geçmişi yakında eklenecek!');
+          document.getElementById('program-section').style.display = 'block';
+          document.getElementById('fixed-bottom').style.display = 'block';
           break;
+
         case 'stats':
           alert('İstatistikler yakında eklenecek!');
+          document.getElementById('program-section').style.display = 'block';
+          document.getElementById('fixed-bottom').style.display = 'block';
           break;
+
         case 'projects':
           alert('Projelerim yakında eklenecek!');
+          document.getElementById('program-section').style.display = 'block';
+          document.getElementById('fixed-bottom').style.display = 'block';
           break;
       }
+    }
+
+    // ============================================
+    // HISTORY VIEW
+    // ============================================
+    function renderHistoryView() {
+      const container = document.getElementById('history-container');
+      const history = JSON.parse(localStorage.getItem('fitplanHistory') || '{}');
+      const sortedDates = Object.keys(history).sort().reverse();
+
+      if (sortedDates.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">Henüz geçmiş kaydı yok.<br>İlk antrenmanını tamamla!</p>';
+        return;
+      }
+
+      let html = '';
+      let currentWeek = '';
+
+      sortedDates.forEach(date => {
+        const entry = history[date];
+        const entryDate = new Date(date);
+
+        // Calculate week start for grouping
+        const day = entryDate.getDay();
+        const diff = entryDate.getDate() - day + (day === 0 ? -6 : 1);
+        const weekStart = new Date(entryDate.setDate(diff)).toISOString().split('T')[0];
+
+        if (weekStart !== currentWeek) {
+          if (currentWeek !== '') html += '</div>'; // Close previous group
+          currentWeek = weekStart;
+          const weekLabel = new Date(weekStart).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' });
+          html += `
+            <div class="history-week-group">
+              <div class="history-week-label">Hafta Başlangıcı: ${weekLabel}</div>
+          `;
+        }
+
+        const dateLabel = new Date(date).toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+        html += `
+          <div class="history-item">
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <span style="font-weight:600; font-size:15px; color:var(--text-primary);">Gün ${entry.dayNum}</span>
+              <span style="color:var(--text-secondary); font-size:13px;">${dateLabel}</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:13px; color:var(--text-secondary);">${entry.completedExercises.length} egzersiz tamamlandı</span>
+              <span style="font-weight:600; color:var(--accent); font-size:14px;">%${entry.progress}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      if (currentWeek !== '') html += '</div>'; // Close last group
+      container.innerHTML = html;
     }
 
     // Touch gesture support for drawer
@@ -1929,11 +2150,8 @@
 
       // Swipe left to close
       const drawer = document.getElementById('drawer');
-      if (drawer.classList.contains('open') && swipeDistance < -swipeThreshold) {
-        closeDrawer();
-      }
-    }
-  </script>
+      if (drawer.classList.contains('open') && swipeDistance < -swipeThreshold) { closeDrawer(); }
+    } </script>
 </body>
 
 </html>
